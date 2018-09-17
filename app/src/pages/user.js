@@ -25,11 +25,11 @@ class App extends PureComponent{
     this.props.dispatch({
       type: 'global/getUser',
       payload: {}
-    })
+    });
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div className={styles.normal}>
         <div className={styles.welcome} />

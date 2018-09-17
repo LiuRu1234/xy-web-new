@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 8</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="大组件" transform="translate(-260.000000, -197.000000)">
+            <g id="Group-8" transform="translate(260.000000, 197.000000)">
+                <rect id="Rectangle-2" stroke="#0345C7" stroke-width="2" opacity="0.680763134" style="mix-blend-mode: lighten;" x="1" y="1" width="58" height="58" rx="12"></rect>
+                <g id="Fill-1-Clipped-Copy" transform="translate(13.000000, 15.000000)" fill="#0345C7" fill-rule="nonzero">
+                    <path d="M5.68434189e-14,30 L15.6926353,30 L15.6926353,24.5466332 L5.23158823,24.5466332 L5.23158823,17.7277638 L15.6926353,17.7277638 L15.6926353,12.2743968 L5.23158823,12.2743968 L5.23158823,5.4555276 L15.6926353,5.4555276 L15.6926353,0.00216060042 L5.68434189e-14,0.00216060042 L5.68434189e-14,30 Z M18.3073648,30 L23.538953,30 L23.538953,5.4555276 L28.7684118,5.4555276 L28.7684118,24.5466332 L26.1536825,24.5466332 L26.1536825,30 L34,30 L34,-1.77635684e-14 L18.3073648,-1.77635684e-14 L18.3073648,30 Z" id="Fill-1"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

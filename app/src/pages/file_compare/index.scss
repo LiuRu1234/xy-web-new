@@ -1,0 +1,171 @@
+.file-compare-container{
+    position: relative;
+    height: 100vh;
+    background: #111215;
+    min-width: 400px;
+
+    ul,li,p{
+        margin:0;
+        padding:0;
+    }
+
+    .fm-header{
+        display: flex;
+        align-items: center;
+        background: #202330;
+        height: 50px;
+        padding: 0 20px;
+
+        .fm-back{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            p{
+                line-height: 50px;
+                height: 50px;
+                color: #fff;
+            }
+        }
+    }
+
+    .fm-section{
+        padding-top: 40px;
+        box-sizing: border-box;
+        background: #202330;
+
+        li{
+            float:left;
+            width: 50%;
+        }
+        .fm-volume{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70px;
+            width: 100%;
+
+            .fm-volume-block{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width:70px;
+                height:70px;
+                background: #545F7C;
+                border-radius: 35px;
+                cursor: pointer;
+            }
+        }
+
+        .fm-create{
+            padding:0 20px;
+            box-sizing: border-box;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #d1d1d1;
+            font-size: 18px;
+            line-height:30px;
+        }
+
+        .fm-name{
+            margin-bottom:20px;
+            padding:0 20px;
+            box-sizing: border-box;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 16px;
+            line-height:30px;
+            color: #aeafaf;
+            height:30px;
+        }
+        
+        .fm-video{
+            width:100%;
+            height: 580px;
+            background: #111215;
+        }
+    }
+
+    .fm-footer{
+        margin-top:1px;
+        width: 100%;
+        height: 60px;
+        background: #1F232D;
+
+        .fmf-progress{
+            width: 100%;
+            height: 10px;
+            background: #b6b6b6;
+            border-radius:5px;
+            padding:0;
+
+            span{
+                display:block;
+                // width:100px;
+                height:10px;
+                border-radius:5px;
+                background: #0345C7;
+            }
+        }
+
+        .fmf-controller{
+            display: flex;
+            height: 50px;
+
+            .tooltip-body{
+                background: transparent;
+            }
+
+            .tooltip-pannel{
+                background: rgba(0,0,0,0.7);
+                box-shadow: none;
+            }
+
+            .tooltip-arrow-bottom{
+                background: transparent;
+                box-shadow: none;
+                width: 0; 
+                height: 0; 
+                bottom:-5px;
+                border-top: 10px solid rgba(0,0,0,0.7); 
+                border-right: 10px solid transparent;
+                transform: rotate(-135deg);
+                margin-left: -5px;
+            }
+
+            .tooltip-pannel{
+                margin-top:10px;
+            }
+
+            .fmf-controller-btn{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 45px;
+                cursor: pointer;
+                height: 50px;
+                position: relative;
+            }
+
+            .other-controller-btn{
+                position: relative;
+                display: inline-block;
+                padding:0 10px;
+                color:#fff;
+                text-align: center;
+                line-height:50px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .other-controller-body{
+        display: flex;
+        height: 100%;
+        // padding: 10px 0;
+    }
+}

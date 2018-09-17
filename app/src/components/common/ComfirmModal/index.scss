@@ -1,0 +1,66 @@
+
+.comfirm-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgba(0,0,0,0.4);
+
+    .comfirm-body{
+        width: 361px;
+        background: #25282E;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 15px;
+        animation: comfirm-show 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        box-shadow: 0 0 50px 1px rgba(0, 0, 0, 0.8);
+
+        .comfirm-section{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+
+            button{
+                width: 90px;
+                border-radius: 3px;
+                color:#fff;
+                font-size: 12px;
+            }
+
+            .comfirm-cancel{
+                margin-right: 10px;
+                background: transparent;
+                border: 1px solid #505459;
+            }
+
+            .comfirm-sure{
+                background: #C54945;
+                border: 1px solid #C54945;
+            }
+        }
+
+        .confirm-content{
+            color: #fff;
+            text-align: center;
+            word-wrap: break-word;
+        }
+    }
+
+}
+
+@keyframes comfirm-show {
+    from {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+}

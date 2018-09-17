@@ -1,0 +1,128 @@
+.project-use-container{
+    ul {
+        padding: 30px;
+
+        li{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            float: left;
+            width:60px;
+            margin-right: 50px;
+            cursor: pointer;
+
+            img{
+                width:auto;
+                height: 57px;
+            }
+
+            p{
+                margin-top:10px;
+                color:#fff;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.modal-container {
+    .use-section{
+        width: 400px;
+        height: 270px;
+        background: #fff;
+    }
+
+    .use-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        padding: 10px;
+    }
+
+    .use-body-close{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width:30px;
+        height:30px;
+        cursor: pointer;
+        z-index:1;
+
+        img{
+            height:15px;
+            height:15px;
+        }
+    }
+
+    .xcx-header{
+        width: 100%; 
+        text-align: center;
+        font-size: 14px;
+        color: #4A4A4A;
+        letter-spacing: -0.24px;
+        line-height:30px;
+    }
+
+    .xcx-img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+
+        img{
+            height: 142px;
+            width:142px;
+        }
+      
+    }
+
+    .xcx-btn{
+        background: #0345C7;
+        box-shadow: 1px 2px 6px 0 #5A87F9;
+        border-radius: 4px;
+        color: #fff;
+        width: 160px;
+        height:50px;
+        border:0;
+        font-size: 15px;
+        font-weight: 100;
+        cursor: pointer;
+    }
+}
+
+.pr-modal-footer{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+
+    button{
+        background: #0345C7;
+        border: 1px solid #979797;
+        box-shadow: 1px 2px 7px 0 #5A87F9;
+        border-radius: 8px;
+        color:#fff;
+        height: 55px;
+        font-weight: 100px;
+        font-size: 17px;
+        width:100%;
+    }
+}
+
+.pr-form{
+    padding:0;
+
+    & > li {
+        margin-bottom: 20px;
+
+        p{
+            font-size: 16px;
+            margin-bottom:5px;
+        }
+    }
+}

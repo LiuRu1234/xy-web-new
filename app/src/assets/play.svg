@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="18px" viewBox="0 0 15 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>播放</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="播放" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M1.47892799e-15,1.30863502 L1.47892799e-15,16.6012813 C1.47892799e-15,17.8944095 0.888066597,18.3441932 1.94264568,17.7257406 L14.2090657,10.1918634 C15.2636448,9.5171878 15.2636448,8.44895148 14.2090657,7.83049887 L1.94264568,0.296621666 C1.60962071,0.0717298177 1.33209988,0.0155068358 1.05457909,0.0155068358 C0.444033286,-0.0969391017 0,0.409067577 1.47892799e-15,1.30863502 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

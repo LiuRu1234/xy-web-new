@@ -1,0 +1,395 @@
+/*水平居中垂直的modal*/
+.vertical-center-modal {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.vertical-center-modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0;
+}
+
+.vertical-center-modal .ant-modal {
+    display: inline-block;
+    vertical-align: middle;
+    top: 0;
+    text-align: left;
+}
+
+/*登录*/
+.signInModal .title{
+    width: 252px;
+    margin: 40px auto 0;
+    color: #4A4A4A;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 17.6px;
+}
+.signInModal .title2{
+    font-size: 18px;
+    color: #4A4A4A;
+    letter-spacing: 3.6px;
+    text-align: center;
+    margin: 20px auto;
+}
+.signInModal .signIn_logo{
+    width: 255px;
+    height: 64px;
+    margin: 30px auto 0;
+    // background: url("../img/signin_logo.png") no-repeat top center;
+    background-size: contain;
+}
+/*微信登录*/
+.signInModal .wxCode{
+    width: 240px;
+    height: 240px;
+    /*padding: 4px;*/
+    /*background: #0a26ea;*/
+    margin: 24px auto;
+    /*background: url("../img/xinyue_logo.png") no-repeat top center;*/
+    /*background-size: contain;*/
+}
+.signInModal .wxCode p{
+    text-align: center;
+    line-height: 240px;
+    font-size: 16px;
+}
+.signInModal .wxCode img{
+    width: 240px;
+    height: 240px;
+}
+
+/*头部切换*/
+.signInModal .signIn_header{
+    width: 200px;
+    height: 28.3px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 12px;
+    color: #4A4A4A;
+    letter-spacing: 0.61px;
+    text-align: right;
+    /*display: none;*/
+}
+.signIn_header .tran_tips{
+    width: 160px;
+    height: 26px;
+    position: absolute;
+    right: 24px;
+    top: 0;
+    background-size: contain;
+}
+.signIn_header .tran_pic{
+    width: 37px;
+    height: 37px;
+    width: 42px;
+    height: 42px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    background-size: contain;
+}
+/*点击进入密码登录*/
+.signIn_header .toPassword_tips{
+    // background: url("../img/password_tips.png") no-repeat top center;
+    background-size: contain;
+}
+.signIn_header .toPassword_pic{
+    // background: url("../img/password.jpg") no-repeat top center;
+}
+.signIn_header .toScan_tips{
+    // background: url("../img/wx_tips.png") no-repeat top center;
+    background-size: contain;
+}
+.signIn_header .toScan_pic{
+    // background: url("../img/wx.jpg") no-repeat top center;
+}
+
+/*扫一扫文字提示*/
+.signInModal .wxCode_scan{
+    width: 240px;
+    margin: 0 auto 22px;
+    font-size: 16px;
+    color: #9B9B9B;
+    letter-spacing: 0.81px;
+}
+.signInModal .wxCode_scan .scan{
+    width: 28px;
+    height: 28px;
+    float: left;
+    // background: url("../img/scan.png") no-repeat top center;
+    background-size: contain;
+}
+.signInModal .wxCode_scan span{
+    margin-left: 10px;
+}
+
+.signInModal .signIn_footer{
+    width: 114px;
+    height: auto;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.signInModal .signIn_footer span{
+    font-size: 12px;
+    color: #4A4A4A;
+    letter-spacing: 0.61px;
+    text-align: right;
+    cursor: pointer;
+}
+.signInModal .signIn_footer .toPassword,.toRegister{
+    cursor: pointer;
+}
+.signInModal .signIn_footer .backSignin{
+    float: right;
+    cursor: pointer;
+}
+
+/*密码登录*/
+.signin_input{
+    width: 320px;
+    margin: 0 auto;
+}
+.signin_input .input_box{
+    width: 100%;
+    height: 55px;
+    margin-bottom: 24px;
+    position: relative;
+}
+.signin_input .input_icon{
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    margin-top: -11px;
+}
+.signin_input .input_fe{
+    width: 1px;
+    height: 28px;
+    background: #DDDDDD;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    margin-top: -14px;
+}
+.signin_input .input_box .name_icon{
+    // background: url("../img/name.svg") no-repeat center;
+    background-size: contain;
+}
+.signin_input .input_box .email_icon{
+    // background: url("../img/email.svg") no-repeat center;
+    background-size: contain;
+}
+.signin_input .input_box .password_icon{
+    // background: url("../img/password.svg") no-repeat center;
+    background-size: contain;
+}
+.signin_input .input_box .phone_icon{
+    // background: url("../img/phone.svg") no-repeat center;
+    background-size: contain;
+}
+
+.signin_input input{
+    width: 100%;
+    height: 55px;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #9B9B9B;
+    letter-spacing: 0.66px;
+    display: block;
+
+    padding-left: 63px;
+}
+.tips{
+    width: 320px;
+    height: 20px;
+    margin: 0 auto;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 20px;
+}
+.tips .tips_register{
+    color: #2C2BEA;
+    float: left;
+    cursor: pointer;
+}
+.tips .tips_right{
+    float: right;
+    color: #9B9B9B;
+    display: flex;
+    justify-content: flex-end;
+}
+.tips .codeSignin{
+    cursor: pointer;
+    user-select: none;
+}
+.tips .forget_password{
+    cursor: pointer;
+    user-select: none;
+}
+.signIn_btn{
+    width: 320px;
+    height: 54px;
+    margin: 52px auto 12px;
+    /*background: #2D3DF1;*/
+    background: #003df1;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+}
+.signIn_btn span{
+    font-size: 18px;
+    color: #FFFFFF;
+    letter-spacing: -0.36px;
+    line-height: 54px;
+}
+/*验证码*/
+.code-box input{
+    padding-left: 15px!important;
+}
+.code-box .input_fe2{
+    width: 1px;
+    height: 28px;
+    background: #DDDDDD;
+    position: absolute;
+    right: 100px;
+    top: 50%;
+    margin-top: -14px;
+}
+.code-box .code-img{
+    width: 90px;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    margin-top: -17px;
+}
+.code-box .code-img img{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+/*toast样式修改*/
+.ant-message{
+    color: #fff;
+    line-height: 2;
+}
+.ant-message .anticon {
+    font-size: 22px;
+    top: 4px;
+}
+.ant-message-notice-content{
+    border-radius: 24px;
+    background: rgba(0,0,0,0.8);
+    padding: 10px 20px;
+}
+/*找回密码*/
+.findPassword .findPassword_text{
+    font-size: 15px;
+    color: #4A4A4A;
+    letter-spacing: 0;
+    line-height: 40px;
+}
+.findPassword .findPasswordCode{
+    margin: 30px auto 40px!important;
+}
+.findPassword .signIn_header{
+    cursor: pointer;
+}
+.findPassword .signin_input{
+    margin-top: 30px;
+}
+#findPassword{
+    padding-top: 0;
+    margin-top: 40px!important;
+}
+/*modal关闭按钮*/
+.signInModalTips .ant-btn-primary{
+    display: none;
+}
+.ant-modal-footer .ant-btn{
+    border: none;
+    color: rgb(35,99,254);
+}
+
+
+.signin_input{
+    padding-top: 55px;
+}
+.signin_input .input_box:last-child{
+    margin-bottom: 10px;
+}
+/*找回密码提示文字*/
+.findPassword .findPassword_tips{
+    font-size: 15px;
+    color: #4A4A4A;
+    letter-spacing: 0;
+    margin-top: 2px;
+}
+.findPassword .back_signin{
+    cursor: pointer;
+}
+#validate img{
+    cursor: pointer;
+}
+
+/*手机验证码*/
+.signin_input .input_box2{
+    width: 320px;
+    height: 55px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.signin_input .input_box2 input{
+    width: 220px;
+    height: 55px;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #9B9B9B;
+    letter-spacing: 0.66px;
+    display: block;
+    padding-left: 16px;
+}
+.signin_input .input_box2 .sendCode{
+    width: 90px;
+    height: 55px;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #2D3DF1;
+    letter-spacing: 0.66px;
+    text-align: center;
+    line-height: 55px;
+    cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+    .signin_input{
+        width: 240px;
+    }
+    .tips{
+        width: 240px;
+    }
+    .signIn_btn{
+        width: 240px;
+    }
+    .signin_input .input_box2{
+        width: 240px;
+    }
+    .signin_input .input_box2 input{
+        width: 155px;
+    }
+    .signin_input .input_box2 .sendCode{
+        width: 80px;
+    }
+}

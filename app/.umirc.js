@@ -1,13 +1,15 @@
 
 // ref: https://umijs.org/config/
+var path = require('path');
+
 export default {
-  // history: 'hash',
+  history: 'hash',
   "plugins": [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
-      antd: false,
+      antd: true,
       dva: true,
-      dynamicImport: false,
+      dynamicImport: true,
       title: 'app',
       dll: false,
       pwa: false,
@@ -27,11 +29,23 @@ export default {
   ],
   "proxy": {
     "/api": {
-      "target": "http://jsonplaceholder.typicode.com/",
+      "target": "http://www.uxinyue.com:81/api",
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
     }
   },
   "sass": {},
-  // "disableCSSModules": true,
+  "alias": {
+      '@CPC': path.resolve(__dirname, 'src/components/pageComponents/'),
+      '@CC':  path.resolve(__dirname, 'src/components/common/'),
+      '@CCP':  path.resolve(__dirname, 'src/components/commonPannel/'),
+      '@assets': path.resolve(__dirname, 'src/assets/'),
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@services': path.resolve(__dirname, 'src/services/'),
+      '@layouts': path.resolve(__dirname, 'src/layouts/'),
+      '@config': path.resolve(__dirname, 'src/config/')
+  },
+  "disableCSSModules": true,
+  "outputPath": "../../xinyue2/public/testapp",
+  "publicPath": "./",
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>个人设置</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="个人设置" fill="#828CA6" fill-rule="nonzero">
+            <path d="M10.5,12.7916667 C6.95625001,12.7916667 0,14.4979167 0,18.0416667 L0,21 L21,21 L21,18.0416667 C21,14.4979167 14.04375,12.7916667 10.5,12.7916667 Z M10.5,10.5 C13.3875,10.5 15.75,8.1375 15.75,5.25 C15.75,2.3625 13.3875,0 10.5,0 C7.61250001,0 5.25000001,2.3625 5.25000001,5.25 C5.25000001,8.1375 7.61252778,10.5 10.5,10.5 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="18px" viewBox="0 0 15 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>标记</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="标记" fill="#9B9B9B" fill-rule="nonzero">
+            <path d="M0,0 L0,17.9974286 L0.109890103,17.928 L1.85814185,16.7361428 C3.70504495,15.4774286 5.55194804,14.2187143 7.39635365,12.9574286 C7.46628372,12.9098571 7.51373627,12.9111428 7.58116884,12.9587143 C7.96203796,13.2222857 8.34665334,13.482 8.73001998,13.7417143 L13.5227273,16.9971428 L15,18 L15,0 L0,0 Z M11.2475025,8.991 L3.75124875,8.991 L3.75124875,7.71942857 L11.2475025,7.71942857 L11.2475025,8.991 Z M11.2487512,5.12742857 L3.75124875,5.12742857 L3.75124875,3.85842857 L11.2487512,3.85842857 L11.2487512,5.12742857 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

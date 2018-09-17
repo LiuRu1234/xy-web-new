@@ -1,5 +1,6 @@
 import styles from './index.scss';
 import { connect } from 'dva';
+import router from 'umi/router';
 import React, { PureComponent } from 'react';
 
 // function App(props) {
@@ -25,11 +26,11 @@ class App extends PureComponent{
     this.props.dispatch({
       type: 'global/getUser',
       payload: {}
-    })
+    });
+    router.push('/project');
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className={styles.normal}>
         <div className={styles.welcome} />
