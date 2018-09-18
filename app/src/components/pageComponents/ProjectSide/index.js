@@ -53,10 +53,18 @@ class ProjectSide extends PureComponent {
 			payload: true
 		});
 		
-		this.props.dispatch(routerRedux.push({
-            pathname: '/project',
-            query: { d: 0, p: project.id},
-		}));
+		// this.props.dispatch(routerRedux.push({
+        //     pathname: '/project',
+        //     query: { d: 0, p: project.id},
+		// }));
+
+		this.props.dispatch({
+			type: 'project/toProject',
+			payload: {
+				project_id: project.id
+			}
+		});
+		
 
 		if (tabIndex == 1) {
 			dispatch({

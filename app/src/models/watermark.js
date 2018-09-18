@@ -90,7 +90,7 @@ export default {
 				message.warning('您还没选择水印图片');
 				return;
 			}
-
+			
 			const json = yield call(post, '/watermark/set', {
 				...getTokenLocalstorage(), 
 				...watermark.waterparam,

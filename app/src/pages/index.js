@@ -27,7 +27,7 @@ class App extends PureComponent{
       type: 'global/getUser',
       payload: {}
     });
-    router.push('/project');
+    // router.push('/project');
   }
 
   render() {

@@ -1,6 +1,6 @@
 import {LOGIN_ID, TOKEN, EXP_EMAIL} from '../config/constants';
 import { routerRedux } from 'dva/router';
-import {post, get, getTokenLocalstorage, getQuery, sortBy, search} from '../utils/utils';
+import {post, get, getTokenLocalstorage, getQuery, sortBy, search, savePidDid, getPidDid} from '../utils/utils';
 import {message, notification, Icon} from 'antd';
 
 let projectSetting = {
@@ -220,6 +220,7 @@ export default {
 		},
 	},
 	effects: {
+		// 判断登录
 		*isLogined({ payload: {}}, { call, put, select, take }) {
 			const loginId = localStorage.getItem(LOGIN_ID);
 			const token = localStorage.getItem(TOKEN);
@@ -253,69 +254,135 @@ export default {
 		// 获取项目列表
 		*fetchProjects({ payload: {}}, { call, put, select }) {
 			const localLogin = getTokenLocalstorage();
-			let project_id = getQuery('p');
-			let doc_id =  getQuery('d');
-			let project = yield select(state => state.project);
-			let newProject = project.projectsList.filter(item => item.id == project_id);
-			if (project_id && project.projectsList.length > 0 && newProject.length > 0) {
-				let projectActive = project.projectsList.filter(item => {return item.id == project_id;})[0].id;
-				
-				yield put({ type: 'saveDocActive', payload: doc_id});
-				yield put({ type: 'saveProjectActive', payload: projectActive});
-				yield put({ type: 'fetchFiles', payload: {project_id, doc_id}});
-				yield put({ type: 'fetchMember', payload: {project_id}});
-				yield put({ type: 'global/savePageLoading', payload: false});
-			} else {
-				let json = yield call(get, '/project', localLogin);
-				if (json.data.status == 1) {
-					let list = json.data.data.list;
-					if (list.length == 0) return;
-					yield put({ type: 'saveProjectsList', payload: list});
-					let project = yield select(state => state.project);
-					if (!project.projectActive) {
-						if (!project_id || project_id == '') {
-							let projectActive = list.filter(item => item.type == 'admin')[0].id;
-							yield put({ type: 'saveProjectActive', payload: projectActive});
-							yield put(routerRedux.push({
-								pathname: '/project',
-								query: { p: projectActive, d:0 },
-							}));
-						} else {
-							yield put({ type: 'saveProjectActive', payload: project_id});
-							yield put(routerRedux.push({
-								pathname: '/project',
-								query: { p: project_id, d: doc_id },
-							}));
-						}
-						if (project.tabIndex == 1) {
-							yield put({type: 'link/fetchLink', payload: {}});
-						}
-					} else {
-						let project = yield select(state => state.project);
-						if (project.projectsList.length != 0) {
-							let currentProject = project.projectsList.filter(item => project.projectActive == item.id);
-							yield put({ type: 'fetchFiles', payload: {project_id: currentProject[0].id, doc_id: 0}});
-							// if (isCurrentProject.length == 0) {
-							// 	yield put(routerRedux.push({
-							// 		pathname: '/project',
-							// 		query: { p: project.projectsList[0].id, d: 0 },
-							// 	}));
-							// 	return;
-							// } 
-						} else {
-							yield put(routerRedux.push({
-								pathname: '/project',
-								query: { p: project.projectActive, d: project.docActive },
-							}));
-						}
-						
-					}
-				
-				} else { 
-					message.error(json.data.msg);
+			let json = yield call(get, '/project', localLogin);
+
+			if (json.data.status == 1) {
+				yield put({ type: 'saveProjectsList', payload: json.data.data.list});
+
+				let {project_id, doc_id} = getPidDid();
+			
+				if (project_id == 0) {
+					savePidDid(json.data.data.list[0].id, doc_id);
+					yield put({ type: 'saveDocActive', payload: 0});
+					yield put({ type: 'saveProjectActive', payload: json.data.data.list[0].id});
+				} else {
+					yield put({ type: 'saveDocActive', payload: doc_id});
+					yield put({ type: 'saveProjectActive', payload: project_id});
 				}
+				yield put({ type: 'fetchFiles', payload: {project_id, doc_id}});
+		 		yield put({ type: 'fetchMember', payload: {project_id}});
+			} else {
+				message.error(json.data.msg);
 			}
+
 		},
+
+		// 项目点击处理
+		*toProject({ payload: {project_id}}, { call, put, select }) {
+			savePidDid(project_id, 0);
+			yield put({ type: 'saveDocActive', payload: 0});
+			yield put({ type: 'saveProjectActive', payload: project_id});
+			yield put({ type: 'fetchFiles', payload: {project_id, doc_id: 0}});
+			yield put({ type: 'fetchMember', payload: {project_id}});
+			yield put({ type: 'global/savePageLoading', payload: false });
+		},
+
+		// 文件夹点击处理
+		*toDoc({ payload: {project_id, doc_id}}, { call, put, select }) {
+			savePidDid(project_id, doc_id);
+			yield put({ type: 'global/savePageLoading', payload: true });
+			yield put({ type: 'saveDocActive', payload: doc_id});
+			yield put({ type: 'saveProjectActive', payload: project_id});
+			yield put({ type: 'fetchFiles', payload: {project_id, doc_id}});
+			yield put({ type: 'fetchMember', payload: {project_id}});
+			yield put({ type: 'global/savePageLoading', payload: false });
+		},
+
+		// 获取项目列表
+		// *fetchProjects({ payload: {}}, { call, put, select }) {
+		// 	const localLogin = getTokenLocalstorage();
+		// 	// let project_id = getQuery('p');
+		// 	// let doc_id =  getQuery('d');
+
+		// 	let project_id = 0;
+		// 	let doc_id = 0;
+		// 	let project = yield select(state => state.project);
+			
+		// 	let newProject = project.projectsList.filter(item => item.id == project_id);
+		// 	if (project_id && project.projectsList.length > 0 && newProject.length > 0) {
+		// 		let projectActive = project.projectsList.filter(item => {return item.id == project_id;})[0].id;
+		// 		let pd = getPidDid();
+		// 		if (pd.pid == 0) {
+		// 			savePidDid(projectActive, doc_id);
+		// 			yield put({ type: 'saveDocActive', payload: 0});
+		// 			yield put({ type: 'saveProjectActive', payload: projectActive});
+		// 			project_id = projectActive;
+		// 			doc_id = 0;
+		// 		} else {
+		// 			yield put({ type: 'saveDocActive', payload: pd.did});
+		// 			yield put({ type: 'saveProjectActive', payload: pd.pid});
+		// 			project_id = pd.pid;
+		// 			doc_id = pd.did;
+		// 		}
+		// console.log(1111)
+		// 		yield put({ type: 'fetchFiles', payload: {project_id, doc_id}});
+		// 		yield put({ type: 'fetchMember', payload: {project_id}});
+		// 		yield put({ type: 'global/savePageLoading', payload: false});
+		// 	} else {
+		// 		console.log(2222)
+		// 		let json = yield call(get, '/project', localLogin);
+		// 		if (json.data.status == 1) {
+		// 			let list = json.data.data.list;
+		// 			if (list.length == 0) return;
+		// 			yield put({ type: 'saveProjectsList', payload: list});
+		// 			let project = yield select(state => state.project);
+		// 			if (!project.projectActive) {
+		// 				if (!project_id || project_id == 0) {
+		// 					let projectActive = list.filter(item => item.type == 'admin')[0].id;
+		// 					yield put({ type: 'saveProjectActive', payload: projectActive});
+		// 					console.log(333)
+		// 					// yield put(routerRedux.push({
+		// 					// 	pathname: '/project',
+		// 					// 	query: { p: projectActive, d:0 },
+		// 					// }));
+		// 					yield put({ type: 'fetchFiles', payload: {project_id, doc_id}});
+		// 				} else {
+		// 					console.log(455)
+		// 					yield put({ type: 'saveProjectActive', payload: project_id});
+		// 					// yield put(routerRedux.push({
+		// 					// 	pathname: '/project',
+		// 					// 	query: { p: project_id, d: doc_id },
+		// 					// }));
+		// 				}
+		// 				if (project.tabIndex == 1) {
+		// 					yield put({type: 'link/fetchLink', payload: {}});
+		// 				}
+		// 			} else {
+		// 				let project = yield select(state => state.project);
+		// 				if (project.projectsList.length != 0) {
+		// 					let currentProject = project.projectsList.filter(item => project.projectActive == item.id);
+		// 					yield put({ type: 'fetchFiles', payload: {project_id: currentProject[0].id, doc_id: 0}});
+		// 					// if (isCurrentProject.length == 0) {
+		// 					// 	yield put(routerRedux.push({
+		// 					// 		pathname: '/project',
+		// 					// 		query: { p: project.projectsList[0].id, d: 0 },
+		// 					// 	}));
+		// 					// 	return;
+		// 					// } 
+		// 				} else {
+		// 					yield put(routerRedux.push({
+		// 						pathname: '/project',
+		// 						query: { p: project.projectActive, d: project.docActive },
+		// 					}));
+		// 				}
+						
+		// 			}
+				
+		// 		} else { 
+		// 			message.error(json.data.msg);
+		// 		}
+		// 	}
+		// },
 
 		// 获取项目文件列表
 		*fetchFiles({ payload: {project_id, doc_id}}, { call, put, select }) {

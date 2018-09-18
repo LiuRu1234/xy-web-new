@@ -52,11 +52,19 @@ class FileGrid extends PureComponent {
 
     toDoc = (id) => {
         if (!this.props.allowToFile) return;
+
+        this.props.dispatch({
+            type: 'project/toDoc',
+            payload: {
+                project_id: this.props.projectActive,
+                doc_id: id
+            }
+        });
         
-        this.props.dispatch(routerRedux.push({
-            pathname: '/project',
-            query: { d: id, p: this.props.projectActive},
-        }));
+        // this.props.dispatch(routerRedux.push({
+        //     pathname: '/project',
+        //     query: { d: id, p: this.props.projectActive},
+        // }));
     }
 
     isOtherFile(file) {

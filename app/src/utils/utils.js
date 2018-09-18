@@ -6,6 +6,24 @@ import { XY_API } from '@config/constants';
 import { notification } from 'antd';
 import {LOGIN_ID, TOKEN} from '../config/constants';
 
+
+/**
+ * 存储当前的项目id，文件夹id
+ */
+ export function savePidDid(pid, did) {
+   localStorage.setItem('_xy_pid', pid);
+   localStorage.setItem('_xy_did', did);
+ }
+
+ /**
+  * 获取当前项目ID，文件夹id
+  */
+ export function getPidDid() {
+  const project_id = localStorage.getItem('_xy_pid') || 0;
+  const doc_id = localStorage.getItem('_xy_did') || 0;
+  return { project_id, doc_id: parseInt(doc_id) };
+}
+
 /**
  * 请求数据序列化
  * @param  {object} [values]  参数对象
