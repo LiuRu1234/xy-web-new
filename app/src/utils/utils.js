@@ -25,6 +25,21 @@ import {LOGIN_ID, TOKEN} from '../config/constants';
 }
 
 /**
+ * 存储当前文件id
+ */
+export function saveFid(fid) {
+  localStorage.setItem('_xy_fid', fid);
+}
+
+/**
+ * 获取当前文件id
+ */
+export function getFid() {
+  const file_id = localStorage.getItem('_xy_fid') || 0;
+  return file_id;
+}
+
+/**
  * 请求数据序列化
  * @param  {object} [values]  参数对象
  * @return {string}          返回序列化参数
@@ -41,22 +56,22 @@ export function serialize(values){
  * 获取url参数 （hash url）
  * @param {string} name  将要获取的参数名称
  */
-// export function getQuery(name){
-//   let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-//   let hash = window.location.hash;
-//   let search = hash.substr(hash.indexOf('?'));
-//   let r = search.substr(1).match(reg);
-//   if (r != null) {
-//     return unescape(r[2]);
-//   }
-//   return null;
-// }
-
-export function getQuery(name) {
-  var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-  var r = window.location.search.substr(1).match(reg);
-  if(r!=null)return  unescape(r[2]); return null;
+export function getQuery(name){
+  let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+  let hash = window.location.hash;
+  let search = hash.substr(hash.indexOf('?'));
+  let r = search.substr(1).match(reg);
+  if (r != null) {
+    return unescape(r[2]);
+  }
+  return null;
 }
+
+// export function getQuery(name) {
+//   var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+//   var r = window.location.search.substr(1).match(reg);
+//   if(r!=null)return  unescape(r[2]); return null;
+// }
 
 /**
  * post请求

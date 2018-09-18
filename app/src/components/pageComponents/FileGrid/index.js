@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Row, Col, Progress, Tooltip, Icon, Input, message} from 'antd';
 import Image from '@CC/Image';
 import { FileMorePannel, FolderMorePannel } from '@CCP/TooltipPannel';
-import {size2Str, trigger, isIE} from '../../../utils/utils';
+import {size2Str, trigger, isIE, saveFid} from '@utils/utils';
 import { routerRedux } from 'dva/router';
 import CheckSVG from '../CheckSVG';
 // import FileGridClone from './FileGridClone';
@@ -44,10 +44,16 @@ class FileGrid extends PureComponent {
 
     toFile = (id) => {
         if (!this.props.allowToFile) return;
+        saveFid(id);
+
         this.props.dispatch(routerRedux.push({
             pathname: '/file',
-            query: { f: id, p: this.props.projectActive},
+            query: {},
         }));
+        // this.props.dispatch(routerRedux.push({
+        //     pathname: '/file',
+        //     query: { f: id, p: this.props.projectActive},
+        // }));
     }
 
     toDoc = (id) => {

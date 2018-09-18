@@ -294,7 +294,7 @@ export default {
 			yield put({ type: 'saveDocActive', payload: doc_id});
 			yield put({ type: 'saveProjectActive', payload: project_id});
 			yield put({ type: 'fetchFiles', payload: {project_id, doc_id}});
-			yield put({ type: 'fetchMember', payload: {project_id}});
+			// yield put({ type: 'fetchMember', payload: {project_id}});
 			yield put({ type: 'global/savePageLoading', payload: false });
 		},
 

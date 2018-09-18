@@ -1,5 +1,5 @@
-import {LOGIN_ID, TOKEN} from '../config/constants';
-import {post, get, getTokenLocalstorage, getQuery} from '../utils/utils';
+import {LOGIN_ID, TOKEN} from '@config/constants';
+import {post, get, getTokenLocalstorage, getQuery, saveFid, getFid, getPidDid} from '@utils/utils';
 import {message} from 'antd';
 import { routerRedux } from 'dva/router';
 
@@ -131,15 +131,15 @@ export default {
 				yield put({type: 'saveIsFilesShare', payload: true});
 				yield put({type: 'fetchShareList', payload: {code, password: ''}});
 			} else {
-				let doc_id = getQuery('f');
-				if(!doc_id) {
+				let file_id = getFid();
+				if(!file_id) {
 					yield put(routerRedux.push({
 						pathname: '/project',
 					}));
 					return;
 				}
-				let project_id = getQuery('p');
-				yield put({type: 'fetchFileInfo', payload:{project_id, doc_id}});
+				let {project_id, doc_id} = getPidDid();
+				yield put({type: 'fetchFileInfo', payload:{project_id, doc_id: file_id}});
 				yield put({type: 'comment/fetchComments', payload: {}});
 				yield put({type: 'project/fetchProjects2', payload: {}});
 			}

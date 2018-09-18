@@ -1,7 +1,7 @@
-import {LOGIN_ID, TOKEN} from '../config/constants';
+import {LOGIN_ID, TOKEN} from '@config/constants';
 import { routerRedux } from 'dva/router';
-import {post, get, getTokenLocalstorage, getQuery} from '../utils/utils';
-import {PRE_PAGE} from '../config/constants';
+import {post, get, getTokenLocalstorage, getQuery, getFid, getPidDid} from '@utils/utils';
+import {PRE_PAGE} from '@config/constants';
 import {message} from 'antd';
 
 export default {
@@ -10,8 +10,8 @@ export default {
 		commenTabIndex: 0,				//评论区tab切换
 		commentClosed: false,			//是否收起评论区
 		callbackBlockShow: false,		//是否显示回复区
-    comments: [],					//评论列表
-    commentsTotal: 0,       //评论总数量
+		comments: [],					//评论列表
+		commentsTotal: 0,       //评论总数量
 		commentPage: 1,					//评论页码
 		commentSort: 1,					//评论排序
 		commentShowCompleted: 0,		//评论是否已完成
@@ -119,12 +119,15 @@ export default {
 	effects: {
 		*fetchComments({ payload: {}}, { call, put, select, take }) {
 			let comment = yield select(state => state.comment);
-			let doc_id = getQuery('f');
-			let project_id = getQuery('p');
+			// let doc_id = getFid('f');
+			// let project_id = getQuery('p');
+
+			let {project_id, doc_id} = getPidDid();
+			let file_id = getFid();
 
 			let param = {
 				...getTokenLocalstorage(),
-				doc_id,
+				doc_id: file_id,
 				project_id,
 				page: comment.commentPage,
 				sort: comment.commentSort,

@@ -41,10 +41,17 @@ class ProjectBody extends PureComponent {
 	}
 
 	toDoc(doc) {
-		this.props.dispatch(routerRedux.push({
-			pathname: '/project',
-			query: { p: this.props.projectActive, d: doc.id },
-		}));
+		this.props.dispatch({
+            type: 'project/toDoc',
+            payload: {
+                project_id: this.props.projectActive,
+                doc_id: doc.id
+            }
+        });
+		// this.props.dispatch(routerRedux.push({
+		// 	pathname: '/project',
+		// 	query: { p: this.props.projectActive, d: doc.id },
+		// }));
 	}
 
 	showProjectSet = () => {
