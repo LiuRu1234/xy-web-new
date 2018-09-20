@@ -132,8 +132,20 @@ class ProjectHeader extends PureComponent {
 		} 
 	}
 
+	showPriceModal() {
+		this.props.dispatch({
+            type: 'price/savePriceModalShow',
+            payload: true
+		});
+		
+		this.props.dispatch({
+            type: 'price/saveStep',
+            payload: 0
+        });
+	}
+
 	render() {
-		const { tabIndex, projectLinkModalShow, members, projectActive, projectsList, isSharing } = this.props;
+		const { tabIndex, projectLinkModalShow, members, projectActive, projectsList, isSharing, userInfo } = this.props;
 
 		let currentProject= null;
 		if (projectsList.length > 0 && projectActive) {
@@ -141,7 +153,13 @@ class ProjectHeader extends PureComponent {
 		}
 
 		return (
-		<div className="project-header-container">
+			// style={{height: '154px'}}
+		<div className="project-header-container" style={{height: userInfo.end_day <= 7 ? '154px': '' }}>
+			{userInfo.end_day <= 7 ? 
+			<p className="project-header-tip"> 
+				<span>您的账户会员即将到期，请前去<a href="javascript:;" onClick={() => this.showPriceModal()}>升级</a>避免影响正常使用</span>
+				<Image name="vip-tip.jpg"></Image>
+			</p> : null}
 			<div className="ph-one clearfix" style={{filter: isSharing ? 'blur(3px)' : '' }}>
 				<div className="ph-one-left clearfix">
 					<div className="ph-one-img">

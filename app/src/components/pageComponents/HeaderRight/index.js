@@ -1,13 +1,20 @@
 import React, { PureComponent } from 'react';
 import Image from '@CC/Image';
+import ModalTwo from '@CC/ModalTwo';
 import { UserPannel, UserNoticePannel }from '@CCP/TooltipPannel';
 import { Tooltip, message } from 'antd';
-import HelperView from '@CPC/HelperView';
+import Dialog from 'rc-dialog';
+import HelperView from '../HelperView';
+import PriceModal from '../PriceModal';
 import './index.scss';
 
 class HeaderRight extends PureComponent{
     constructor(props){
         super(props);
+    }
+
+    componentDidMount() {
+        this.fetchPrice();
     }
 
     toggleMoreNotice() {
@@ -29,10 +36,47 @@ class HeaderRight extends PureComponent{
         });
     }
 
+    payContinue = () => {
+        const {userInfo, priceArgs} = this.props;
+
+        this.props.dispatch({
+            type: 'price/saveStep',
+            payload: 1
+        });
+        this.props.dispatch({
+            type: 'price/savePriceModalShow',
+            payload: true
+        });
+        let currentPrice = priceArgs.filter((item, k) => {
+            return userInfo.product_id == item.id;
+        })[0];
+
+        this.props.dispatch({
+            type: 'price/fetchWxPay',
+            payload: {
+                price_id: userInfo.product_id
+            }
+        });
+
+        this.props.dispatch({
+            type: 'price/saveCurrentPrice',
+            payload: currentPrice
+        });
+    }
+
+
+    fetchPrice = () => {
+        this.props.dispatch({
+            type: 'price/fetchPrices',
+            payload: {}
+        });
+    }
+
     render() {
-        const {helpShow} = this.props;
+        const {helpShow, userInfo} = this.props;
         return (
             <div className="header-right-container">
+   
                 <div className="header-right-do">
                     <Tooltip placement="bottom" title="帮助">
                         <div className="header-right-question" onClick={this.showHelp}>
@@ -45,7 +89,9 @@ class HeaderRight extends PureComponent{
                 <div className="header-right-user">
                     <UserPannel {...this.props}/>
                 </div>
-                {helpShow ? <HelperView {...this.props}/> : null}
+                {userInfo.product_id == 1 ? null : <button className="price-later2" onClick={this.payContinue}>立即续费</button> }
+                {helpShow ? <HelperView {...this.props} /> : null}
+                <PriceModal {...this.props}></PriceModal>
             </div>    
         );
     }

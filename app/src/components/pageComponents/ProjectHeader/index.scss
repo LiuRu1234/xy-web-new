@@ -22,6 +22,28 @@
         width:29px;
         background: #0345C7;
         border-radius: 50%;
+        z-index:0;
+    }
+
+    .project-header-tip{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #D0021B;
+        height: 40px;
+
+        span{
+            color: #fff;
+
+            a{
+                text-decoration: underline;
+                color: #fff;
+            }
+        }
+
+        img{
+            margin-left: 15px;
+        }
     }
 
     .ph-one{

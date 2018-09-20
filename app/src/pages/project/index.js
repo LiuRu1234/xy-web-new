@@ -30,7 +30,8 @@ function mapStateToProps(state) {
     ...state.application,
     ...state.global,
     ...state.watermark,
-    ...state.invite
+	...state.invite,
+	...state.price
   };
 }
 
@@ -201,7 +202,8 @@ class ProjectContainer extends PureComponent {
 			noticeModalShow,
 			systemMessage,
 			quitProjectModalShow,
-			phoneAuthModalShow
+			phoneAuthModalShow,
+			userInfo
 		} = this.props;
 
 		let deleteContent = (content, title) => {
@@ -224,7 +226,7 @@ class ProjectContainer extends PureComponent {
 
 
 		let normalTemp =
-			<div className="project-container">
+			<div className="project-container" style={{paddingTop: userInfo.end_day <= 7 ? '154px': '' }}>
 				<ProjectHeader {...this.props}/>
 				<ProjectSlide {...this.props}/>
 				<ProjectBody {...this.props}/>

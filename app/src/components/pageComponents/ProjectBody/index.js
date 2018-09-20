@@ -255,7 +255,8 @@ class ProjectBody extends PureComponent {
 			projectsList,
 			projectActive, 
 			isSharing,
-			selectFiles
+			selectFiles,
+			userInfo
 			} = this.props;
 		const {fileBodyClient} = this.state;
 
@@ -308,7 +309,7 @@ class ProjectBody extends PureComponent {
 						
 					</div>
 				</header> : null}
-				<section className="pb-body" style={{height: tabIndex == 0 ? 'calc(100vh - 64px - 50px - 50px)' : ''}}>
+				<section className="pb-body" style={{height: tabIndex == 0 ? 'calc(100vh - 64px - 50px - 50px - ' + (userInfo.end_day <= 7 ? '54px': '0px')  + ')' : ''}}>
 					{tabIndex == 0 ?
 					<div className="pb-file-list" ref={node => this.filebodyNode = node} id="pb-body">
 						{lookType == 'grid' ? 

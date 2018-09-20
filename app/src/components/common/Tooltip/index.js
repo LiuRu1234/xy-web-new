@@ -2,7 +2,6 @@
 * 有时候多个触发点，可以通过在 btnTitle 添加 tooltip-cover-btn 这个 class 解决
 */
 
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
@@ -24,7 +23,7 @@ class Tooltip extends PureComponent {
             visible: false
         });
 
-        this.props.onHide();
+        this.props.onHide && this.props.onHide();
     }
 
 

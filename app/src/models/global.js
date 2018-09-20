@@ -124,8 +124,15 @@ export default {
 					}
 					yield put({type: 'saveNotices', payload: notices});
 
+					let iconImg = newNotice[i].type == 'system' ?
+					<span className="notification-img system">
+						<img src={require('../assets/laba.svg')}>
+						</img>
+					</span> :
+					<img src={newNotice[i].avatar} className="notification-img"></img>;
+
 					let icon = newNotice[i].avatar != '' ? 
-					<img src={newNotice[i].avatar} className="notification-img"></img>:
+					iconImg :
 					<span className="notification-icon-span">{newNotice[i].realname[0]}</span>;
 
 					let alertNT = localStorage.getItem(ALERT_NOTICE_TIME);  //弹框只弹一次判断

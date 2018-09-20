@@ -1,0 +1,40 @@
+.modal-rwo-body{
+    width: 950px;
+    background: #fff;
+}
+
+.modal-two-header{
+    position: relative;
+    width: 100%;
+    border-top: 5px solid #0031E8;
+    padding: 20px 0;
+
+    .title{
+        background: transparent;
+        img{
+            position: relative;
+            top: -3px;
+            margin-right: 5px;
+        }
+    }
+
+    p{
+        font-size: 24px;
+        color: #545D72;
+        line-height: 30px;
+        text-align: center;
+        margin:0;
+    }
+
+    span{
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+}
+
+.modal-two-section{
+    position: relative;
+    padding: 0 40px 25px;
+}

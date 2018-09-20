@@ -600,7 +600,44 @@ export class UserPannel extends PureComponent{
     loginOut() {
         localStorage.setItem('LOGIN_ID', '');
         localStorage.setItem('TOKEN', '');
-        window.location = '//www.uxinyue.com';
+        window.location = '//' + window.location.host;
+    }
+
+    showPriceModal = () => {
+        this.props.dispatch({
+            type: 'price/savePriceModalShow',
+            payload: true
+        });
+        this.props.dispatch({
+            type: 'price/saveStep',
+            payload: 0
+        });
+    }
+
+    payContinue = () => {
+        const {userInfo, priceArgs} = this.props;
+
+        this.props.dispatch({
+            type: 'price/saveStep',
+            payload: 1
+        });
+        this.props.dispatch({
+            type: 'price/savePriceModalShow',
+            payload: true
+        });
+        let currentPrice = priceArgs.filter((item, k) => {
+            return userInfo.product_id == item.id;
+        })[0];
+        this.props.dispatch({
+            type: 'price/fetchWxPay',
+            payload: {
+                price_id: userInfo.product_id
+            }
+        });
+        this.props.dispatch({
+            type: 'price/saveCurrentPrice',
+            payload: currentPrice
+        });
     }
 
     renderBtn() {
@@ -612,6 +649,11 @@ export class UserPannel extends PureComponent{
                         {userInfo.avatar != '' ? <img src={userInfo.avatar} alt=""/> : <span style={{background: userInfo.avatar_background_color}}>{userInfo.realname[0]}</span>}
                     </div>
                     <div className="header-right-username">{JSON.stringify(userInfo) == '{}' ? '' : userInfo.realname}</div>
+                    {userInfo.product_id == 1 ? null :
+                    <div className="h-vip">
+                        <Image name="vip.jpg"></Image>
+                        <p className="vip-lv">{userInfo.vip_name}</p>
+                    </div>}
                     <IconBlock iconName="down.svg"></IconBlock>   
                 </div>
             </div>  
@@ -626,8 +668,21 @@ export class UserPannel extends PureComponent{
             <div className="user-body">
                 <header className="user-body-header">
                     {userInfo.avatar == '' ? <span className="ubh-avatar" style={{background: userInfo.avatar_background_color}}>{userInfo.realname[0]}</span> : <img src={userInfo.avatar} alt=""/>}
-                    <p>{userInfo.realname}</p>
+              
+                    <p>{userInfo.realname}
+                        {userInfo.product_id == 1 ? null : 
+                         <span className="h-vip2">
+                            <Image name="vip.jpg"></Image>
+                            <p className="vip-lv">{userInfo.vip_name}</p>
+                        </span>}
+                    </p>
+                  
                     <p>{userInfo.email}</p>
+                   
+                    {userInfo.product_id == 1 ? null :
+                    <p>
+                        <button className="price-later" onClick={this.payContinue}>立即续费</button>
+                    </p> }
                 </header>
                 <section className="user-body-section">
                     <ul>
@@ -658,6 +713,15 @@ export class UserPannel extends PureComponent{
                                 </div>
                             </a>
                         </li>
+                        <li>    
+                            <a href='javascript:;' onClick={this.showPriceModal}>
+                                <div className="user-li">
+                                    <IconBlock iconName="user-tx.svg" direction="left"></IconBlock>
+                                    <p>账户升级</p>
+                                    <p>选择价格方案</p>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </section>
                 <footer className="user-body-footer" onClick={this.loginOut}>
@@ -670,12 +734,13 @@ export class UserPannel extends PureComponent{
     render() {
         return (
             <TooltipPannel
-                    btnTitle={() => this.renderBtn()}
-                    width={250}
-                    // height={100}
-                    onClick={() => this.setState({personOpened: true})}
-                    onHide={() => this.setState({personOpened: false})}
-                    renderTemplate={() => this.renderBody()}
+                btnTitle={() => this.renderBtn()}
+                width={250}
+                // height={100}
+                contentClickIsHide={true}
+                // onClick={() => this.setState({personOpened: true})}
+                // onHide={() => this.setState({personOpened: false})}
+                renderTemplate={() => this.renderBody()}
             />
         );
     }

@@ -171,6 +171,20 @@ export function getLocalTime(nS) {
 }
 
 /**
+ * 将时间戳转为年月日
+ * @param {number} nS        时间戳
+ * @return {string}          返回的时间字符串
+ */
+export function timeInt2Str(ns) {
+  var now = new Date(ns * 1000);  
+  var yy = now.getFullYear();      //年
+  var mm = now.getMonth() + 1;     //月
+  var dd = now.getDate();          //日
+  return `${yy}年${mm}月${dd}日`;
+}
+
+
+/**
  * 范围随机取整数
  * @param {number} lowerValue        最小值
  * @param {number} upperValue        最大值
@@ -179,6 +193,7 @@ export function getLocalTime(nS) {
 function randomFrom(lowerValue,upperValue) {
  return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
 }
+
 
 /**
  * 范围随机不取整数，保留两位
