@@ -3,6 +3,7 @@ import Image from '@CC/Image';
 import ModalTwo from '@CC/ModalTwo';
 import Dialog from 'rc-dialog';
 import {getLocalTime, timeInt2Str} from '@utils/utils';
+import {message} from 'antd';
 import './index.scss';
 
 export default class PriceModal extends PureComponent{
@@ -29,7 +30,12 @@ export default class PriceModal extends PureComponent{
         });
     }
 
-    toNext = (price_id) => {
+    toNext = (price_id, usage_state) => {
+        if (usage_state == -1) {
+            message.warning('您的用量已经超过该套餐',2);
+            return;
+        }
+
         if (price_id == 1) {
             this.props.dispatch({
                 type: 'price/savePriceModalShow',
@@ -177,7 +183,7 @@ export default class PriceModal extends PureComponent{
                                             );
                                         })}
                                     </p>
-                                    <button className="price-step1-button" onClick={() => this.toNext(item.id)}>立即使用</button>
+                                    <button className="price-step1-button" onClick={() => this.toNext(item.id, item.usage_state)}>立即使用</button>
                                 </li>
                             );
                         })}
