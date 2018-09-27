@@ -31,7 +31,7 @@ export default class PriceModal extends PureComponent{
     }
 
     toNext = (price_id, usage_state) => {
-        if (usage_state == -1) {
+        if (usage_state < 1) {
             message.warning('您的用量已经超过该套餐',2);
             return;
         }

@@ -13,10 +13,6 @@ class HeaderRight extends PureComponent{
         super(props);
     }
 
-    componentDidMount() {
-        this.fetchPrice();
-    }
-
     toggleMoreNotice() {
         let moreNoticeShow = !this.props.moreNoticeShow;
         this.props.dispatch({
@@ -61,14 +57,6 @@ class HeaderRight extends PureComponent{
         this.props.dispatch({
             type: 'price/saveCurrentPrice',
             payload: currentPrice
-        });
-    }
-
-
-    fetchPrice = () => {
-        this.props.dispatch({
-            type: 'price/fetchPrices',
-            payload: {}
         });
     }
 

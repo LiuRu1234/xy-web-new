@@ -609,6 +609,10 @@ export class UserPannel extends PureComponent{
             payload: true
         });
         this.props.dispatch({
+            type: 'price/fetchPrices',
+            payload: {}
+        });
+        this.props.dispatch({
             type: 'price/saveStep',
             payload: 0
         });
