@@ -115,7 +115,7 @@ export default {
             const localLogin = getTokenLocalstorage();
             let price = yield select(state => state.price);
             if (price.orderId == 0) return;
-            let json = yield call(get, '/orderstatus', {...localLogin, order_id: price.orderId});
+            let json = yield call(get, 'orderstatus', {...localLogin, order_id: price.orderId});
             if (json.data.status == 1) {
                 if (json.data.data.status == 1) {
                     yield put({type: 'savePaySuccess', payload: true});

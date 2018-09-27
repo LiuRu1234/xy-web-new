@@ -31,7 +31,8 @@ let initObj = {
 		width: 16,
 		height: 9,
 		text: '16:9'
-	} ,
+	},
+	videoPreviewLeft: 0
 };
 
 export default {
@@ -103,6 +104,10 @@ export default {
 	reducers: {
 		saveVideoWH(state, { payload: videoWH}) {
 			return { ...state, videoWH };
+		},
+
+		saveVideoPreviewLeft(state, { payload: videoPreviewLeft}) {
+			return { ...state, videoPreviewLeft };
 		},
 
 		saveCurrentSY(state, { payload: currentSY}) {

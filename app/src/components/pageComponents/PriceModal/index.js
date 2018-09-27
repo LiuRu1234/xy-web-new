@@ -141,8 +141,6 @@ export default class PriceModal extends PureComponent{
             isWarning
         } = this.props;
 
-        console.log(this.props, 'fetchPaySuccess');
-
         return (
             <div>
 

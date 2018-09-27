@@ -10,13 +10,15 @@ import {
 	PlayerRatioPannel,
 	PlayerVolumePannel
 } from '@CCP/TooltipPannel';
+import './index.scss';
 
 
 class PlayerControl extends PureComponent{
 	constructor(props){
 		super(props);
 		this.state = {
-			width: 0
+			width: 0,
+			pbDown: false
 		};
 	}
 
@@ -30,6 +32,9 @@ class PlayerControl extends PureComponent{
 			// this.props.listenEvent();
 
 		}, 300);
+
+		document.addEventListener('mousemove', this.progressBtnMove);
+		document.addEventListener('mouseup', this.progressBtnEnd);
 	}
 
     playerPlayOrPause = () => {
@@ -53,6 +58,13 @@ class PlayerControl extends PureComponent{
 
 		let pg =  progressBody.getBoundingClientRect();
 		let progressWidth = e.clientX - pg.left;
+		this.setProgress(progressWidth);
+	}
+
+	setProgress(progressWidth) {
+		const {dispatch, progressBody, filePlayer, filePlayerTime, ctx3, videoWH} = this.props;
+
+		let pg =  progressBody.getBoundingClientRect();
 		let progress = progressWidth / pg.width; 
 		let currentTime = progress * filePlayerTime;
 		filePlayer.currentTime = currentTime;
@@ -63,6 +75,7 @@ class PlayerControl extends PureComponent{
 			type: 'playerControl/saveProgressWidth',
 			payload: progressWidth,
 		});
+		
 
 		dispatch({
 			type: 'playerControl/saveProgress',
@@ -103,6 +116,55 @@ class PlayerControl extends PureComponent{
 		});
 	}
 
+	// 进度条滑点拖拽 start
+	progressBtnDown = (e) => {
+		this.setState({
+			pbDown: true
+		});
+	}
+
+	progressBtnMove = (e) => {
+		if (this.state.pbDown == undefined || !this.state.pbDown) return;
+		const { progressBody } = this.props;
+		let pg = progressBody.getBoundingClientRect();
+		let progressWidth = e.clientX - pg.left;
+		this.setProgress(progressWidth);
+	}
+
+	progressBtnEnd = (e) => {
+		if (!this.state.pbDown) return;
+		this.setState({
+			pbDown: false
+		});
+	}
+	// 进度条滑点拖拽 end
+
+	progressOver = (e) => {
+		const {dispatch, progressBody } = this.props;
+		let pg = progressBody.getBoundingClientRect();
+		let hoverLeft = e.clientX - pg.left;
+		let everyProgressWidth = pg.width / 49;
+		let everyProgressWidthLast = pg.width % 49;
+		let videoPreviewIndex = Math.floor((hoverLeft / pg.width * 120 * 49) / 120);
+		let videoPreviewLeft = -(120 * videoPreviewIndex + 60) + videoPreviewIndex * everyProgressWidth;
+
+		dispatch({
+			type: 'playerControl/saveVideoPreviewLeft',
+			payload: videoPreviewLeft
+		});
+	}
+
+	progressOverMove = (e) => {
+		this.progressOver(e);
+	}
+
+	seekVideo = (k) => {
+		const { progressBody } = this.props;
+		let pg = progressBody.getBoundingClientRect();
+		let progressWidth = k / 50 * pg.width;
+		this.setProgress(progressWidth);
+	}
+
 	renderComments() {
 		const {comments, filePlayerTime, progressBody} = this.props;
 
@@ -118,6 +180,53 @@ class PlayerControl extends PureComponent{
 		});
 	}
 
+	renderProgressController() {
+		const {progressWidth, fileInfo, videoPreviewLeft} = this.props;
+
+		let hoverStyle1 = {
+			height: '12px',
+			borderRadius: '6px'
+		};
+
+		let hoverStyle2 = {
+			borderRadius: '6px',
+			width: progressWidth + 'px'
+		};
+
+		if (!this.state.pbDown) {
+			hoverStyle1 = {};
+			hoverStyle2 = {width: progressWidth + 'px'};
+		}
+
+		return (
+			<div className="video-progress">
+				<div className="fps-control-progress" 
+					ref={node => this.saveProgressBody(node)} 
+					onClick={(e) => this.setPlayTime(e)}
+					onMouseDown={this.progressBtnDown}
+					onMouseEnter={this.progressOver}		
+					onMouseMove={this.progressOverMove}	
+					style={hoverStyle1}
+					>
+					<div className="video-progress-body" style={hoverStyle2}></div>
+					<div className="video-progress-btn" 
+					style={{left: progressWidth + 'px'}}
+					></div>
+				</div>
+				{fileInfo.file_type == 'video' ?
+				<ul className="video-progress-preview clearfix" style={{left: videoPreviewLeft + 'px'}}>
+					{Array(50).fill(1).map((item, k) => {
+						return (
+							<li key={k} onClick={() => this.seekVideo(k)}>
+								<img src={fileInfo.preview} alt="" style={{top: (-67.5 * (1 + k)) + 'px'}}/>
+							</li>
+						);
+					})}
+				</ul> : null}
+			</div>
+		);
+	}
+
   	render() {
 		const {paused, isFilesShare, shareWater, progressWidth, playerLoop, comments, drawTypeActive, fileInfo, commentDrawObj} = this.props;
 
@@ -126,9 +235,7 @@ class PlayerControl extends PureComponent{
 				{/* 进度条 */}
 				{/*  && commentDrawObj.length == 0  */}
 				{drawTypeActive == ''? 
-				<div className="fps-control-progress" ref={node => this.saveProgressBody(node)} onClick={(e) => this.setPlayTime(e)}>
-					<div style={{width: progressWidth + 'px'}}></div>
-				</div> : 
+				this.renderProgressController(): 
 				<div className="fps-control-progress">
 					<div style={{width: progressWidth + 'px'}}></div>
 				</div>}

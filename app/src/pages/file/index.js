@@ -28,7 +28,8 @@ function mapStateToProps(state) {
       ...state.link,
       ...state.global,
       ...state.watermark,
-      ...state.invite
+	  ...state.invite,
+	  ...state.price
     };
 }
 
