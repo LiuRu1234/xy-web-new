@@ -52,6 +52,11 @@ class ProjectSide extends PureComponent {
 			type: 'global/savePageLoading',
 			payload: true
 		});
+
+		this.props.dispatch({
+			type: 'price/handleWarning',
+			payload: {}
+        });
 		
 		// this.props.dispatch(routerRedux.push({
         //     pathname: '/project',

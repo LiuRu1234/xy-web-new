@@ -109,6 +109,16 @@ export default {
 					let json = yield call(get, '/user/info', getTokenLocalstorage());
 					if (json.data.status == 1) {
 						yield put({type: 'user/saveUser', payload: json.data.data});	
+						if (json.data.data.usage_state == -1 ){
+							yield put({
+								type: 'price/saveWarningModalShow',
+								payload: true
+							});
+							yield put({
+								type: 'price/saveIsWarning',
+								payload: true
+							});
+						} 
 						if (json.data.data.phone == '') {
 							yield put({type: 'global/savePhoneAuthModalShow', payload: true});
 							yield put({ type: 'global/savePageLoading', payload: false });

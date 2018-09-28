@@ -232,6 +232,16 @@ export default {
 				let json = yield call(get, '/user/info', {login_id: loginId, token});
 				if (json.data.status == 1) {
 					yield put({type: 'user/saveUser', payload: json.data.data});
+					if (json.data.data.usage_state == -1 ){
+						yield put({
+							type: 'price/saveWarningModalShow',
+							payload: true
+						});
+						yield put({
+							type: 'price/saveIsWarning',
+							payload: true
+						});
+					} 
 					if (json.data.data.phone == '') {
 						yield put({type: 'global/savePhoneAuthModalShow', payload: true});
 						yield put({ type: 'global/savePageLoading', payload: false });
@@ -586,12 +596,13 @@ export default {
 		// 新建文件夹
 		*createFolder({ payload: {}}, { call, put, select }) {
 			let project = yield select(state => state.project);
-
+			let {project_id, doc_id} = getPidDid();
+			
 			const json = yield call(post, '/doc', {
 				...getTokenLocalstorage(),
 				name: '新建文件夹',
-				top_id: project.docActive,
-				project_id: project.projectActive,
+				top_id: doc_id,
+				project_id: project_id,
 			});
 
 			if (json.data.status == 1) {

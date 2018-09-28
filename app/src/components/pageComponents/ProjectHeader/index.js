@@ -145,7 +145,7 @@ class ProjectHeader extends PureComponent {
 	}
 
 	render() {
-		const { tabIndex, projectLinkModalShow, members, projectActive, projectsList, isSharing, userInfo } = this.props;
+		const { tabIndex, projectLinkModalShow, members, projectActive, projectsList, isSharing, userInfo, isWarning } = this.props;
 
 		let currentProject= null;
 		if (projectsList.length > 0 && projectActive) {
@@ -154,11 +154,21 @@ class ProjectHeader extends PureComponent {
 
 		return (
 			// style={{height: '154px'}}
-		<div className="project-header-container" style={{height: userInfo.end_day <= 7 ? '154px': '' }}>
-			{userInfo.end_day <= 7 ? 
+		<div className="project-header-container" style={{height: (userInfo.end_day <= 7 || isWarning) ? '154px': '' }}>
+			{(userInfo.end_day <= 7 || isWarning) ? 
 			<p className="project-header-tip"> 
-				<span>您的账户会员即将到期，请前去<a href="javascript:;" onClick={() => this.showPriceModal()}>升级</a>避免影响正常使用</span>
+				{isWarning ? 
+				<span>您的账户目前等级为免费用户，目前用量以超过限制，请您及时
+					<a href="javascript:;" onClick={() => this.showPriceModal()}>升级</a>
+					账号用量或者进行用量删减，以避免账户使用受限。
+				</span>:
+				<span>
+					您的账户会员即将到期，请前去
+					<a href="javascript:;" onClick={() => this.showPriceModal()}>升级</a>
+					避免影响正常使用
+				</span>}
 				<Image name="vip-tip.jpg"></Image>
+				<span className="project-header-contact">如有问题，请联系：400-650-0116</span>
 			</p> : null}
 			<div className="ph-one clearfix" style={{filter: isSharing ? 'blur(3px)' : '' }}>
 				<div className="ph-one-left clearfix">

@@ -154,8 +154,8 @@ export default class PriceModal extends PureComponent{
 
         return (
             <div>
-
                 {/* isWarning */}
+                {/* priceModalShow && step == 0 */}
                 <ModalTwo visible={priceModalShow && step == 0}
                     title="选择购买方案"
                     onClose={() => this.togglePriceModal(false)}
@@ -166,7 +166,7 @@ export default class PriceModal extends PureComponent{
                         <p className={priceType == 2 ? 'active' : ''} onClick={() => this.changePriceType(2)}>季</p>
                     </div> */}
 
-                     {/* <div className="ticket-activity">
+                    {/* <div className="ticket-activity">
                         <p>领取最高300元代金券，购买新月服务更省钱。</p>
                         <p onClick={() => this.toggleTicketShow(true)}>马上领取</p>
                     </div>
@@ -202,11 +202,12 @@ export default class PriceModal extends PureComponent{
                     </ul>
                 </ModalTwo>
 
+                {/* isWarning */}
                 {currentPrice && priceModalShow && step == 1 ?
                 <ModalTwo visible={priceModalShow && step == 1}
                     title="确定已购买方案"
                     onClose={() => {this.togglePriceModal(false);this.clearPayInterval(); }}
-                    closeHide={isWarning}
+                    closeHide={false}
                 >
                     <div className="price-info">
                         <h2>{currentPrice.name}</h2>
@@ -260,12 +261,12 @@ export default class PriceModal extends PureComponent{
                     </div> */}
                 </ModalTwo> : null}
 
-
+                    {/* isWarning */}
                 <ModalTwo visible={priceModalShow && step == 2 && !fail}
                     title="您已完成购买!"
                     titleIcon="price-ok.jpg"
                     onClose={() => this.togglePriceModal(false)}
-                    closeHide={isWarning}
+                    closeHide={false}
                 >
                     <div className="pay-complete">
                         {/* <p className="pay-title">您已完成购买!</p> */}
@@ -275,11 +276,12 @@ export default class PriceModal extends PureComponent{
                     </div>
                 </ModalTwo>
 
+                    {/* isWarning */}
                  <ModalTwo visible={priceModalShow && fail && step == 2}
                     title="抱歉!购买失败"
                     titleIcon="price-fail.jpg"
                     onClose={() => this.togglePriceModal(false)}
-                    closeHide={isWarning}
+                    closeHide={false}
                 >
                     <div className="pay-complete">
                         <a href="" className="look-order">查看订单</a>
@@ -294,12 +296,21 @@ export default class PriceModal extends PureComponent{
                     className="modal-vip-tip"
 					wrapClassName="modal-vip-container"
 					>
+                    <div className="warning-close" onClick={() => {
+                        this.props.dispatch({
+                            type: 'price/saveWarningModalShow',
+                            payload: false
+                        });
+                    }}>
+                        <Image name="warning-close.svg"></Image>
+                    </div>
                     <div className="vip-header">
                         <Image name="vip-warning.jpg"></Image>
                     </div>
                     <div className="vip-text-warning">
                         <h2>您的账户用量已超出限制!</h2>
-                        <h4>您的账户目前登记为lv.{userInfo.vip_name}，目前用量已超过限制，请您即使联系客服升级账户以避免使用受限。</h4>
+                        <h4>您的账户目前等级为{userInfo.vip_name == 0 ? '免费用户' : 'lv.' + userInfo.vip_name}，目前用量已超过限制，请您即使联系客服升级账户以避免使用受限。</h4>
+                        <p className="vip-warning-contact">如有问题，请联系：400-650-0116</p>
                     </div>
 
                     <div className="vip-modal-footer">

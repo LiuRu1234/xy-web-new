@@ -131,6 +131,17 @@ export default {
             } else {
                 message.error(json.data.msg);
             }
+        },
+        
+        // 判断是否超量并处理
+        *handleWarning({ payload: {}}, { call, put, select }){
+            let price = yield select(state => state.price);
+            let user = yield select(state => state.user);
+            if (user.userInfo.usage_state == -1) {
+                yield put({type: 'saveWarningModalShow', payload: true});
+            } else {
+                yield put({type: 'saveWarningModalShow', payload: false});
+            }
         }
     }
 

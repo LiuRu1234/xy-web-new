@@ -46,6 +46,11 @@ class FileGrid extends PureComponent {
         if (!this.props.allowToFile) return;
         saveFid(id);
 
+        this.props.dispatch({
+			type: 'price/handleWarning',
+			payload: {}
+        });
+
         this.props.dispatch(routerRedux.push({
             pathname: '/file',
             query: {},
@@ -58,6 +63,11 @@ class FileGrid extends PureComponent {
 
     toDoc = (id) => {
         if (!this.props.allowToFile) return;
+
+        this.props.dispatch({
+			type: 'price/handleWarning',
+			payload: {}
+        });
 
         this.props.dispatch({
             type: 'project/toDoc',

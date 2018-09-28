@@ -29,7 +29,7 @@ export default {
   ],
   "proxy": {
     "/api": {
-      "target": "http://www.uxinyue.com:81/api",
+      "target": "https://www.uxinyue.com/api",
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
     }

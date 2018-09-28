@@ -174,11 +174,11 @@ class ProjectContainer extends PureComponent {
 		} else {
 			content =
 			<div className="notice-info-content">
-				您的账号通过系统升级为{systemMessage.content.vip_name}<br/>
-				1.新的套餐为{systemMessage.content.storage_max}；<br/>
+				您的账号通过系统升级为{systemMessage.content.vip_name}, 新的套餐为:<br/>
+				1.{systemMessage.content.storage_max}G；<br/>
 				2.{systemMessage.content.project_max}个项目数；<br/>
 				3.{systemMessage.content.member_max}个人员数；<br/>
-				4.有效期为{systemMessage.content.storage_max}天。
+				4.有效期为{systemMessage.content.time_at}天。
 			</div>;
 		}
 
@@ -203,7 +203,8 @@ class ProjectContainer extends PureComponent {
 			systemMessage,
 			quitProjectModalShow,
 			phoneAuthModalShow,
-			userInfo
+			userInfo,
+			isWarning
 		} = this.props;
 
 		let deleteContent = (content, title) => {
@@ -224,9 +225,9 @@ class ProjectContainer extends PureComponent {
 
 		let currentProject = projectsList.filter((item, k) => item.id == projectActive)[0];
 
-
 		let normalTemp =
-			<div className="project-container" style={{paddingTop: userInfo.end_day <= 7 ? '154px': '' }}>
+		//  style={{paddingTop: "154px"}}
+			<div className="project-container" style={{paddingTop: (userInfo.end_day <= 7 || isWarning) ? '154px': '' }}>
 				<ProjectHeader {...this.props}/>
 				<ProjectSlide {...this.props}/>
 				<ProjectBody {...this.props}/>
@@ -252,8 +253,6 @@ class ProjectContainer extends PureComponent {
 				onSure={this.deleteFile}
 				onClose={this.hideDeleteFile}
 				/>
-
-				<PriceTip></PriceTip>
 
 				<Loading visible={pageLoading}/>
 

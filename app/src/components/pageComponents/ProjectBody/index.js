@@ -42,16 +42,22 @@ class ProjectBody extends PureComponent {
 
 	toDoc(doc) {
 		this.props.dispatch({
+			type: 'price/handleWarning',
+			payload: {}
+		});
+		
+		// this.props.dispatch(routerRedux.push({
+		// 	pathname: '/project',
+		// 	query: { p: this.props.projectActive, d: doc.id },
+		// }));
+
+		this.props.dispatch({
             type: 'project/toDoc',
             payload: {
                 project_id: this.props.projectActive,
                 doc_id: doc.id
             }
         });
-		// this.props.dispatch(routerRedux.push({
-		// 	pathname: '/project',
-		// 	query: { p: this.props.projectActive, d: doc.id },
-		// }));
 	}
 
 	showProjectSet = () => {
@@ -233,6 +239,11 @@ class ProjectBody extends PureComponent {
 
 	createFolder = () => {
 		this.props.dispatch({
+			type: 'price/handleWarning',
+			payload: {}
+		});
+		
+		this.props.dispatch({
 			type: 'project/createFolder',
 			payload: {}	 
 		});
@@ -256,7 +267,8 @@ class ProjectBody extends PureComponent {
 			projectActive, 
 			isSharing,
 			selectFiles,
-			userInfo
+			userInfo,
+			isWarning
 			} = this.props;
 		const {fileBodyClient} = this.state;
 
@@ -309,7 +321,8 @@ class ProjectBody extends PureComponent {
 						
 					</div>
 				</header> : null}
-				<section className="pb-body" style={{height: tabIndex == 0 ? 'calc(100vh - 64px - 50px - 50px - ' + (userInfo.end_day <= 7 ? '54px': '0px')  + ')' : ''}}>
+				{/* -40px */}
+				<section className="pb-body" style={{height: tabIndex == 0 ? 'calc(100vh - 64px - 50px - 50px - ' + ((userInfo.end_day <= 7 || isWarning) ? '54px': '0px')  + ')' : ''}}>
 					{tabIndex == 0 ?
 					<div className="pb-file-list" ref={node => this.filebodyNode = node} id="pb-body">
 						{lookType == 'grid' ? 

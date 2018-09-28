@@ -145,6 +145,12 @@ class FileLi extends PureComponent {
 
     toFile = (id) => {
         if (!this.props.allowToFile) return;
+
+        this.props.dispatch({
+			type: 'price/handleWarning',
+			payload: {}
+        });
+
         this.props.dispatch(routerRedux.push({
             pathname: '/file',
             query: { f: id, p: this.props.projectActive},
@@ -153,6 +159,11 @@ class FileLi extends PureComponent {
 
     toDoc = (id) => {
         if (!this.props.allowToFile) return;
+
+        this.props.dispatch({
+			type: 'price/handleWarning',
+			payload: {}
+        });
         
         this.props.dispatch(routerRedux.push({
             pathname: '/project',
