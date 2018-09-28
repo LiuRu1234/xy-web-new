@@ -155,20 +155,22 @@ export default class PriceModal extends PureComponent{
         return (
             <div>
 
+                {/* isWarning */}
                 <ModalTwo visible={priceModalShow && step == 0}
                     title="选择购买方案"
                     onClose={() => this.togglePriceModal(false)}
-                    closeHide={isWarning}
+                    closeHide={false}
                 >
                     {/* <div className="price-type">
                         <p className={priceType == 1 ? 'active' : ''} onClick={() => this.changePriceType(1)}>月</p>
                         <p className={priceType == 2 ? 'active' : ''} onClick={() => this.changePriceType(2)}>季</p>
                     </div> */}
-                     <div className="ticket-activity">
+
+                     {/* <div className="ticket-activity">
                         <p>领取最高300元代金券，购买新月服务更省钱。</p>
                         <p onClick={() => this.toggleTicketShow(true)}>马上领取</p>
                     </div>
-                    <TicketModal visible={this.state.ticketModalShow} toggleTicketShow={(show) => this.toggleTicketShow(show)}/>
+                    <TicketModal visible={this.state.ticketModalShow} toggleTicketShow={(show) => this.toggleTicketShow(show)}/> */}
                 
                     <ul className="price-step1">
                         {priceArgs.map((item,k) => {
