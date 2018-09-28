@@ -13,7 +13,8 @@ export default class PriceModal extends PureComponent{
         fail: false,
         show: false,
         successModalShow: false,
-        warningModalShow: false
+        warningModalShow: false,
+        ticketModalShow: false
     }  
 
     constructor(props){
@@ -120,7 +121,6 @@ export default class PriceModal extends PureComponent{
     }
 
     refreshUser() {
-        
         this.props.dispatch({
             type: 'price/saveSuccessModalShow',
             payload: false
@@ -131,6 +131,11 @@ export default class PriceModal extends PureComponent{
         });
     }
     
+    toggleTicketShow(ticketModalShow) {
+		this.setState({
+			ticketModalShow
+		});
+	}
 
     render() {
         const {
@@ -159,6 +164,11 @@ export default class PriceModal extends PureComponent{
                         <p className={priceType == 1 ? 'active' : ''} onClick={() => this.changePriceType(1)}>月</p>
                         <p className={priceType == 2 ? 'active' : ''} onClick={() => this.changePriceType(2)}>季</p>
                     </div> */}
+                     <div className="ticket-activity">
+                        <p>领取最高300元代金券，购买新月服务更省钱。</p>
+                        <p onClick={() => this.toggleTicketShow(true)}>马上领取</p>
+                    </div>
+                    <TicketModal visible={this.state.ticketModalShow} toggleTicketShow={(show) => this.toggleTicketShow(show)}/>
                 
                     <ul className="price-step1">
                         {priceArgs.map((item,k) => {

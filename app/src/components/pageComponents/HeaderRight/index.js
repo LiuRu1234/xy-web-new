@@ -13,6 +13,17 @@ class HeaderRight extends PureComponent{
         super(props);
     }
 
+    componentDidMount() {
+        this.fetchPrice();
+    }
+
+    fetchPrice = () => {
+        this.props.dispatch({
+            type: 'price/fetchPrices',
+            payload: {}
+        });
+    }
+
     toggleMoreNotice() {
         let moreNoticeShow = !this.props.moreNoticeShow;
         this.props.dispatch({
