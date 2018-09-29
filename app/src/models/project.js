@@ -18,6 +18,19 @@ let projectSetting = {
 	color: '#FF635D',
 };
 
+// 判断当前是否有项目
+const handleProjectIsEmpty = (list) => {
+	if (list.length > 0){
+		let myProject = list.filter(item => item.type == 'admin');
+		let memberProject = list.filter(item => item.type == 'member');
+		savePidDid(myProject.length > 0 ? myProject[0].id : memberProject[0].id, 0);
+		return myProject.length > 0 ? myProject[0].id : memberProject[0].id;
+	} else {
+		savePidDid(0, 0);
+		location.href = '#/project';
+		return null;
+	}
+};
 
 export default {
 	namespace: 'project',
@@ -267,14 +280,19 @@ export default {
 			let json = yield call(get, '/project', localLogin);
 
 			if (json.data.status == 1) {
-				yield put({ type: 'saveProjectsList', payload: json.data.data.list});
+				let list = json.data.data.list;
+				yield put({ type: 'saveProjectsList', payload: list});
+
+				//判断是否不存在项目
+				let projectActive = handleProjectIsEmpty(list);
+				if (!projectActive) return;
 
 				let {project_id, doc_id} = getPidDid();
-			
+
 				if (project_id == 0) {
-					savePidDid(json.data.data.list[0].id, doc_id);
+					savePidDid(projectActive, doc_id);
 					yield put({ type: 'saveDocActive', payload: 0});
-					yield put({ type: 'saveProjectActive', payload: json.data.data.list[0].id});
+					yield put({ type: 'saveProjectActive', payload: projectActive});
 				} else {
 					yield put({ type: 'saveDocActive', payload: doc_id});
 					yield put({ type: 'saveProjectActive', payload: project_id});
@@ -543,12 +561,23 @@ export default {
 				message.success('删除成功');
 				yield put({type: 'fetchProject2', payload: {}});
 				if (project_id == project.projectActive) {
-					let projectActive = project.projectsList.filter(item => item.type == 'admin')[0].id;
+
+					let list = project.projectsList.filter(item => item.id != project_id);
+					let projectActive = handleProjectIsEmpty(list);
+					yield put({type: 'saveProjectsList', payload: list});
+					if (!projectActive) {
+						yield put({type: 'saveBreadFiles', payload: {breadcrumb: [], fileList: []}});
+						return;
+					}
+
+					// let projectActive = project.projectsList.filter(item => item.type == 'admin')[0].id;
 					yield put({ type: 'saveProjectActive', payload: projectActive});
-					yield put(routerRedux.push({
-						pathname: '/project',
-						query: { p: projectActive, d:0 },
-					}));
+					yield put({ type: 'fetchFiles', payload: {project_id:projectActive, doc_id: 0}});
+					
+					// yield put(routerRedux.push({
+					// 	pathname: '/project',
+					// 	query: { p: projectActive, d:0 },
+					// }));
 				}
 			} else {
 				message.error(json.data.msg);
@@ -754,13 +783,20 @@ export default {
 
 			if (json.data.status == 1) {
 				message.success(json.data.msg);
-				yield put({type: 'fetchProjects2', payload: {}});
-				if (project_id == project.projectActive) {
-					yield put(routerRedux.push({
-						pathname: '/project',
-						query: { p: project.projectsList[0].id, d:0 },
-					}));
+
+				let list = project.projectsList.filter(item => item.id != project_id);
+				yield put({type: 'saveProjectsList', payload: list});
+
+				if ( project.projectActive != project_id) return;
+
+				let projectActive = handleProjectIsEmpty(list);
+				if (!projectActive) {
+					yield put({type: 'saveBreadFiles', payload: {breadcrumb: [], fileList: []}});
+					return;
 				}
+				yield put({ type: 'saveProjectActive', payload: projectActive});
+				yield put({ type: 'fetchFiles', payload: {project_id:projectActive, doc_id: 0}});
+
 				
 			} else {
 				message.error(json.data.msg);
