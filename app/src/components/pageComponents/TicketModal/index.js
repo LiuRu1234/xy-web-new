@@ -16,7 +16,7 @@ export default class TicketModal extends Component {
                             <p className="tikect-body-p1"><sub>¥</sub>50</p>
                             <p className="tikect-body-p2">
                                 <span>新阅代金券</span><br/>
-                                <span>2018年12月31日到期</span>
+                                <span>2018年11月30日到期</span>
                             </p>
                         </div>
                         <div className="ticket-code">

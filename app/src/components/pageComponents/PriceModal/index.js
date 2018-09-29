@@ -341,7 +341,7 @@ export default class PriceModal extends PureComponent{
                             <li>1.套餐容量为{successObj.vip.storage_max / Math.pow(1024, 3)}GB</li>
                             <li>2.项目数为{successObj.vip.project_max}个</li>
                             <li>3.人员数为{successObj.vip.member_max}</li>
-                            <li>4.有效期{successObj.vip.time_at}天</li>
+                            <li>4.有效期{successObj.vip.time_at * 30}天</li>
                         </ul>
                     </div> : null}
 
