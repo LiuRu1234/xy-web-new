@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import Image from '@CC/Image';
 import ModalTwo from '@CC/ModalTwo';
 import Dialog from 'rc-dialog';
+import TicketModal from '@CPC/TicketModal';
 import {getLocalTime, timeInt2Str} from '@utils/utils';
 import {message} from 'antd';
 import './index.scss';
@@ -168,11 +169,11 @@ export default class PriceModal extends PureComponent{
                         <p className={priceType == 2 ? 'active' : ''} onClick={() => this.changePriceType(2)}>季</p>
                     </div> */}
 
-                    {/* <div className="ticket-activity">
+                    <div className="ticket-activity">
                         <p>领取最高300元代金券，购买新月服务更省钱。</p>
                         <p onClick={() => this.toggleTicketShow(true)}>马上领取</p>
                     </div>
-                    <TicketModal visible={this.state.ticketModalShow} toggleTicketShow={(show) => this.toggleTicketShow(show)}/> */}
+                    <TicketModal visible={this.state.ticketModalShow} toggleTicketShow={(show) => this.toggleTicketShow(show)}/>
                 
                     <ul className="price-step1">
                         {priceArgs.map((item,k) => {
