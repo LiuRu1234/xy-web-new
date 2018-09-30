@@ -149,7 +149,9 @@ export default class PriceModal extends PureComponent{
             fail,
             successObj,
             userInfo,
-            isWarning
+            isWarning,
+            rebateMoney,
+            useCount
         } = this.props;
 
         return (
@@ -243,8 +245,8 @@ export default class PriceModal extends PureComponent{
 
                         <div className="price-code-right">
                             <p className="price-code-p1">
-                                <span>¥{currentPrice.price}元</span>
-                                {/* <span>（已优惠119元）</span> */}
+                                <span>¥{rebateMoney == 0 ? currentPrice.price : currentPrice.price - rebateMoney}元</span>
+                                <span>（已优惠{rebateMoney}元）</span>
                             </p>
 
                             <p className="price-code-p2">
@@ -269,6 +271,7 @@ export default class PriceModal extends PureComponent{
                     closeHide={false}
                 >
                     <div className="pay-complete">
+                        {useCount != 0 ? <p className="pay-ticket">已使用{useCount}张优惠券</p> : null}
                         {/* <p className="pay-title">您已完成购买!</p> */}
                         <a href="/account/#/myorder" className="look-order">查看订单</a>
                         <p className="look-p">如需要开具发票，请前往 <a href="/account/#/myaccount">我的账户</a>中选择发票</p>

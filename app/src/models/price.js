@@ -17,6 +17,8 @@ export default {
         successObj: null,
         orderId: 0,
         isWarning: false,  //判断是否从警告框升级过来的
+        rebateMoney: 0,
+        useCount: 0
     },
 
     reducers: {
@@ -30,6 +32,14 @@ export default {
                 paySuccess: false,
                 isWarning: false
             }};
+        },
+
+        saveRebateMoney(state, { payload: rebateMoney}) {
+            return { ...state, rebateMoney };
+        },
+
+        saveUseCount(state, { payload: useCount}) {
+            return { ...state, useCount };
         },
 
         saveSuccessObj(state, { payload: successObj}) {
@@ -106,6 +116,8 @@ export default {
                 yield put({ type: 'saveCodeUrl', payload: json.data.data.code_url});
                 yield put({ type: 'saveCurrentPrice', payload: currentPrice[0]});
                 yield put({ type: 'saveOrderId', payload: json.data.data.order_id});
+                yield put({ type: 'saveRebateMoney', payload: json.data.data.rebate_money});
+                yield put({ type: 'saveUseCount', payload: json.data.data.use_count});
             } else {
                 message.error(json.data.msg);
             }
