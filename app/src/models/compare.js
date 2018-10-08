@@ -1,4 +1,4 @@
-import {post, get, getTokenLocalstorage, getQuery} from '../utils/utils';
+import {post, get, getTokenLocalstorage, getQuery} from '@utils/utils';
 import {message} from 'antd';
 
 export default {

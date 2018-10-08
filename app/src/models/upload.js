@@ -1,5 +1,5 @@
-import {LOGIN_ID, TOKEN} from '../config/constants';
-import {post, get, getTokenLocalstorage, getQuery, Base64} from '../utils/utils';
+import {LOGIN_ID, TOKEN} from '@config/constants';
+import {post, get, getTokenLocalstorage, getQuery, Base64} from '@utils/utils';
 import {message, notification, Icon} from 'antd';
 
 export default {

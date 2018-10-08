@@ -2,8 +2,8 @@
 // 消息以及其他全局数据
 import {notification, message} from 'antd';
 import { routerRedux } from 'dva/router';
-import {openNotification, getTokenLocalstorage, get, post, getQuery, savePidDid, getPidDid, saveFid} from '../utils/utils';
-import {PRE_PAGE, NOTICE_TIME, EXP_PHONE, ALERT_NOTICE_TIME, COMMENT_RECORD_PREFIXER} from '../config/constants';
+import {openNotification, getTokenLocalstorage, get, post, getQuery, savePidDid, getPidDid, saveFid} from '@utils/utils';
+import {PRE_PAGE, NOTICE_TIME, EXP_PHONE, ALERT_NOTICE_TIME, COMMENT_RECORD_PREFIXER} from '@config/constants';
 
 export default {
 	namespace: 'global',

@@ -1,6 +1,6 @@
-import {LOGIN_ID, TOKEN} from '../config/constants';
+import {LOGIN_ID, TOKEN} from '@config/constants';
 import { routerRedux } from 'dva/router';
-import {post, get, getTokenLocalstorage, getQuery, ts2Ti} from '../utils/utils';
+import {post, get, getTokenLocalstorage, getQuery, ts2Ti} from '@utils/utils';
 import {message, notification, Icon} from 'antd';
 
 let linkShare = {

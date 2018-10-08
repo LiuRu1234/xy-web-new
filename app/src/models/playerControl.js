@@ -1,5 +1,5 @@
-import DrawUtil from '../utils/draw-util';
-import {getTokenLocalstorage, post, get} from '../utils/utils';
+import DrawUtil from '@utils/draw-util';
+import {getTokenLocalstorage, post, get} from '@utils/utils';
 import {message} from 'antd';
 let initObj = {
 	progress: 0,
