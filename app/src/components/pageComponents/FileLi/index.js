@@ -8,7 +8,9 @@ import { routerRedux } from 'dva/router';
 import { FileMorePannel, FolderMorePannel } from '@CCP/TooltipPannel';
 import {getLocalTime, size2Str, trigger, isIE} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
+import LazyLoad from 'react-lazy-load';
 import './index.scss';
+
 
 class FileLi extends PureComponent {
 	constructor(props) {
@@ -309,6 +311,7 @@ class FileLi extends PureComponent {
                                     <div className="file-select-cover" onClick={() => this.selectShareFiles(item)}>
                                         {selectFiles.indexOf(item.id) > -1 ? <CheckSVG /> :<div className="file-select-block"></div>}
                                     </div> : null}
+                                    <LazyLoad height={64} offsetVertical={300}>
                                     <Row className="file-li-complete" onClick={() => this.toFile(item.new_id)}>
                                         <Col span={8}  className="file-li-des">
                                             <div className="file-li-img">
@@ -350,6 +353,7 @@ class FileLi extends PureComponent {
                                         </Col>
                                         
                                     </Row>
+                                    </LazyLoad>
                                 </li>
                             );
                          } else {
@@ -360,6 +364,7 @@ class FileLi extends PureComponent {
                                     <div className="file-select-cover" onClick={() => this.selectShareFiles(item)}>
                                         {selectFiles.indexOf(item.id) > -1 ? <CheckSVG /> :<div className="file-select-block"></div>}
                                     </div> : null}
+                                    <LazyLoad height={64} offsetVertical={300}>
                                     <Row className="file-li-complete" onClick={() => this.toDoc(item.id)} >
                                         <Col span={8}  className="file-li-des">
                                             <div className="file-li-img">
@@ -402,6 +407,7 @@ class FileLi extends PureComponent {
                                         </Col>
                                         
                                     </Row>
+                                    </LazyLoad>
                                 </li>
                              );
                          }

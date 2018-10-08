@@ -24,6 +24,10 @@
             // overflow: hidden;
             margin-bottom: 13px;
 
+            .pl-show{
+                animation: opacity-ani 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            }
+
             &:hover{
                 .pl-link-li{
 

@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import {Row, Col, Progress, Tooltip, Icon, Input, message} from 'antd';
 import Image from '@CC/Image';
 import { FileMorePannel, FolderMorePannel } from '@CCP/TooltipPannel';
-import {size2Str, trigger, isIE, saveFid} from '@utils/utils';
+import {size2Str, trigger, isIE, saveFid, getPidDid} from '@utils/utils';
 import { routerRedux } from 'dva/router';
 import CheckSVG from '../CheckSVG';
 // import FileGridClone from './FileGridClone';
 import UploadOSS from '@utils/uploadOSS';
+import LazyLoad from 'react-lazy-load';
 import './index.scss';
-import { getPidDid } from '../../../utils/utils';
+
 
 const FILE_WIDTH = 240;
 
@@ -565,7 +566,9 @@ class FileGrid extends PureComponent {
                         }
 
                         return (
+                      
                         <Col span={ColNum} className="file-grid" key={k}>
+                          <LazyLoad height={204} offsetVertical={300}>
                             <div className="file-grid-body" style={{border: this.state.dragEnterId == item.id ? '1px solid #fff' : ''}}>
                                 {isSharing ? 
                                 <div className="file-select-cover"  draggable="true" onClick={() => this.selectShareFiles(item)}>
@@ -594,7 +597,7 @@ class FileGrid extends PureComponent {
                                     {this.isOtherFile2(item)? 
                                     <div className="file-pre">
                                         {item.review > 0 ? <div className="file-status" style={{color: statusColor}}>{statusText}</div> : null}
-                                        <div className="ext-block" style={{background: "url('ext.png')"}}>{item.ext}</div> 
+                                        <div className="ext-block">{item.ext}</div> 
                                         <FileMorePannel {...this.props} data={item} type='grid'setDraging={this.setDraging} setToolTipShow={this.setToolTipShow}/>       
                                         {item.versions.length > 0 ? <div className="version-tag"><p>{item.versions.length + 1}</p></div> : null}
                                         <div className="video-preview-cover" 
@@ -668,12 +671,14 @@ class FileGrid extends PureComponent {
                                     </div>
                                 </div>
                             </div>
+                            </LazyLoad>
                         </Col>
                         );
                     } else {
                         {/* 文件夹 */}
                         return (
                             <Col span={ColNum} className="file-grid" key={k} > 
+                                <LazyLoad height={204} offsetVertical={300}>
                                 <div className="file-grid-body"  
                                 style={{
                                     border: this.state.dragEnterId == item.id ? '1px solid #fff' : '',
@@ -748,6 +753,7 @@ class FileGrid extends PureComponent {
                                         </div>
                                     </div>
                                 </div>
+                                </LazyLoad>
                             </Col>
                         );
                     }

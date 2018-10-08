@@ -474,7 +474,7 @@ class FilePlayer extends PureComponent{
 						height: videoWH.h + 'px'
 						}}
 					>
-					<div style={{background: "url('ext_big.png') no-repeat"}} className="fps-body-center">
+					<div className="fps-body-center">
 						{fileInfo && fileInfo.ext}
 					</div>
 				</div>;
