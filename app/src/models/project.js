@@ -1,6 +1,6 @@
-import {LOGIN_ID, TOKEN, EXP_EMAIL} from '../config/constants';
+import {LOGIN_ID, TOKEN, EXP_EMAIL} from '@config/constants';
 import { routerRedux } from 'dva/router';
-import {post, get, getTokenLocalstorage, sortBy, search, savePidDid, getPidDid} from '../utils/utils';
+import {post, get, getTokenLocalstorage, sortBy, search, savePidDid, getPidDid, saveUser} from '@utils/utils';
 import {message, notification, Icon} from 'antd';
 
 let projectSetting = {
@@ -253,8 +253,9 @@ export default {
 			if (JSON.stringify(user.userInfo) == '{}') {
 				let json = yield call(get, '/user/info', {login_id: loginId, token});
 				if (json.data.status == 1) {
-					yield put({type: 'user/saveUser', payload: json.data.data});
-					if (json.data.data.usage_state == -1 ){
+					let data = json.data.data;
+					yield put({type: 'user/saveUser', payload: data});
+					if (data.usage_state == -1 ){
 						yield put({
 							type: 'price/saveWarningModalShow',
 							payload: true
@@ -264,11 +265,12 @@ export default {
 							payload: true
 						});
 					} 
-					if (json.data.data.phone == '') {
+					if (data.phone == '') {
 						yield put({type: 'global/savePhoneAuthModalShow', payload: true});
 						yield put({ type: 'global/savePageLoading', payload: false });
 						return;
 					}		
+					saveUser(data.realname, data.avatar, data.avatar_background_color);
 				} else {
 					if(process.env.NODE_ENV === 'production') {
 						window.location = '//' + window.location.host;

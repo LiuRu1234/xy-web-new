@@ -46,6 +46,7 @@ export default {
       '@config': path.resolve(__dirname, 'src/config/')
   },
   "disableCSSModules": true,
-  "outputPath": "../../xinyue2/public/testapp",
+  // "outputPath": "../../xinyue2/public/testapp",
+  "outputPath": "./dist",
   "publicPath": "./",
 }

@@ -40,6 +40,26 @@ export function getFid() {
 }
 
 /**
+ * 存储本地用户信息头像，名称等
+ */
+export function saveUser(realname, avatar, avatarBg) {
+  localStorage.setItem('_xy_realname', realname);
+  localStorage.setItem('_xy_avatar', avatar);
+  localStorage.setItem('_xy_avatarBg', avatarBg);
+}
+
+/**
+ * 获取本地用户信息头像，名称等
+ */
+export function getUser() {
+  const realname = localStorage.getItem('_xy_realname') || '';
+  const avatar = localStorage.getItem('_xy_avatar') || '';
+  const avatarBg = localStorage.getItem('_xy_avatarBg') || '';
+  return {realname, avatar, avatarBg};
+}
+
+
+/**
  * 请求数据序列化
  * @param  {object} [values]  参数对象
  * @return {string}          返回序列化参数

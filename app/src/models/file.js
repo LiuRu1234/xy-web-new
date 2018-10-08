@@ -1,5 +1,5 @@
 import {LOGIN_ID, TOKEN} from '@config/constants';
-import {post, get, getTokenLocalstorage, getQuery, saveFid, getFid, getPidDid} from '@utils/utils';
+import {post, get, getTokenLocalstorage, getQuery, saveFid, getFid, getPidDid, getUser} from '@utils/utils';
 import {message} from 'antd';
 import { routerRedux } from 'dva/router';
 
@@ -104,6 +104,7 @@ export default {
 		*isLogined({ payload: {}}, { call, put, select, take }) {
 			let code = getQuery('r');
 			let user = yield select(state => state.user);
+			
 			if (!code) {
 				if (JSON.stringify(user.userInfo) == '{}') {
 					let json = yield call(get, '/user/info', getTokenLocalstorage());
@@ -134,8 +135,9 @@ export default {
 						return;
 					}
 				}
+			} else {
+				yield put({type: 'user/saveUser', payload: {...user.userInfo, ...getUser()}});
 			}
-			
 		
 			if (code) {
 				yield put({type: 'saveIsFilesShare', payload: true});
