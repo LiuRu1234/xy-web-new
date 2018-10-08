@@ -57,11 +57,6 @@ class ProjectSide extends PureComponent {
 			type: 'price/handleWarning',
 			payload: {}
         });
-		
-		// this.props.dispatch(routerRedux.push({
-        //     pathname: '/project',
-        //     query: { d: 0, p: project.id},
-		// }));
 
 		this.props.dispatch({
 			type: 'project/toProject',

@@ -18,22 +18,6 @@ class FileLi extends PureComponent {
         };
     }
 
-    // toFile = (id) => {
-    //     if (!this.props.allowToFile) return;
-    //     this.props.dispatch(routerRedux.push({
-    //         pathname: '/file',
-    //         query: { f: id, p: this.props.projectActive},
-    //     }));
-    // }
-
-    toDoc = (id) => {
-        if (!this.props.allowToFile) return;
-        this.props.dispatch(routerRedux.push({
-            pathname: '/project',
-            query: { d: id, p: this.props.projectActive},
-        }));
-    }
-
     saveUploadNode = (uploadInput) => {
 		this.props.dispatch({
 			type: 'project/saveUploadInput2',
@@ -145,7 +129,7 @@ class FileLi extends PureComponent {
 
     toFile = (id) => {
         if (!this.props.allowToFile) return;
-
+        saveFid(id);
         this.props.dispatch({
 			type: 'price/handleWarning',
 			payload: {}
@@ -153,7 +137,7 @@ class FileLi extends PureComponent {
 
         this.props.dispatch(routerRedux.push({
             pathname: '/file',
-            query: { f: id, p: this.props.projectActive},
+            query: {},
         }));
     }
 
@@ -165,10 +149,14 @@ class FileLi extends PureComponent {
 			payload: {}
         });
         
-        this.props.dispatch(routerRedux.push({
-            pathname: '/project',
-            query: { d: id, p: this.props.projectActive},
-        }));
+        this.props.dispatch({
+            type: 'project/toDoc',
+            payload: {
+                project_id: this.props.projectActive,
+                doc_id: id
+            }
+        });
+
     }
 
     componentWillUnmount() {

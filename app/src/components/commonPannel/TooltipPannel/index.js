@@ -1248,10 +1248,6 @@ export class FileVersionsPannel extends PureComponent{
 
     toFile = (file) => {
         const {dispatch, commentPage, commentSort, commentShowCompleted, commentQuery, projectActive} = this.props;
-        // this.props.dispatch(routerRedux.push({
-        //     pathname: '/file',
-        //     query: { f: file.id, p: this.props.projectActive},
-        // }));
 
         this.props.dispatch({
             type: 'playerControl/initControl',

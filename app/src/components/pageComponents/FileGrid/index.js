@@ -9,6 +9,7 @@ import CheckSVG from '../CheckSVG';
 // import FileGridClone from './FileGridClone';
 import UploadOSS from '@utils/uploadOSS';
 import './index.scss';
+import { getPidDid } from '../../../utils/utils';
 
 const FILE_WIDTH = 240;
 
@@ -44,16 +45,17 @@ class FileGrid extends PureComponent {
 
     toFile = (id) => {
         if (!this.props.allowToFile) return;
-
+        saveFid(id);
         this.props.dispatch({
 			type: 'price/handleWarning',
 			payload: {}
         });
-        
+
         this.props.dispatch(routerRedux.push({
             pathname: '/file',
-            query: { f: id, p: this.props.projectActive},
+            query: {},
         }));
+
     }
 
     toDoc = (id) => {
@@ -62,12 +64,21 @@ class FileGrid extends PureComponent {
         this.props.dispatch({
 			type: 'price/handleWarning',
 			payload: {}
-		});
+        });
         
-        this.props.dispatch(routerRedux.push({
-            pathname: '/project',
-            query: { d: id, p: this.props.projectActive},
-        }));
+        this.props.dispatch({
+            type: 'project/toDoc',
+            payload: {
+                project_id: this.props.projectActive,
+                doc_id: id
+            }
+        });
+
+        
+        // this.props.dispatch(routerRedux.push({
+        //     pathname: '/project',
+        //     query: { d: id, p: this.props.projectActive},
+        // }));
     }
 
     isOtherFile(file) {

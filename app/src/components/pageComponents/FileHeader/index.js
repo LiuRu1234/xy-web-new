@@ -14,8 +14,7 @@ class FileHeader extends PureComponent{
 
 	backProject = () => {
 		this.props.dispatch(routerRedux.push({
-            pathname: '/project',
-            query: { p: this.props.projectActive, d: this.props.docActive},
+            pathname: '/project'
         }));
 	}
 

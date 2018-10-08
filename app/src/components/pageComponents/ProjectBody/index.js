@@ -45,11 +45,6 @@ class ProjectBody extends PureComponent {
 			type: 'price/handleWarning',
 			payload: {}
 		});
-		
-		// this.props.dispatch(routerRedux.push({
-		// 	pathname: '/project',
-		// 	query: { p: this.props.projectActive, d: doc.id },
-		// }));
 
 		this.props.dispatch({
             type: 'project/toDoc',

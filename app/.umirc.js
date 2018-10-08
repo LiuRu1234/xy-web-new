@@ -29,7 +29,7 @@ export default {
   ],
   "proxy": {
     "/api": {
-      "target": "http://10.255.1.23:7777/api",
+      "target": "http://www.uxinyue.com:81/api",
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
     }
