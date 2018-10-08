@@ -158,7 +158,7 @@ class ProjectHeader extends PureComponent {
 			{(userInfo.end_day <= 7 || isWarning) ? 
 			<p className="project-header-tip"> 
 				{isWarning ? 
-				<span>您的账户目前等级为免费用户，目前用量以超过限制，请您及时
+				<span>您的账户目前等级为免费用户，目前用量已超过限制，请您及时
 					<a href="javascript:;" onClick={() => this.showPriceModal()}>升级</a>
 					账号用量或者进行用量删减，以避免账户使用受限。
 				</span>:

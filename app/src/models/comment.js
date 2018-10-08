@@ -300,6 +300,14 @@ export default {
 				}
 				yield put({type: 'saveIsPageCommentLoading', payload: false});
 				comments = [...comments, ...json.data.data.list];
+				comments = comments.map(item => {
+					item.record = null;
+					if (item.content.indexOf(COMMENT_RECORD_PREFIXER) > -1) {
+						item.record = JSON.parse(JSON.parse(item.content)[COMMENT_RECORD_PREFIXER]);
+						item.content = '';
+					}
+					return item;
+				});
 				yield put({ type: 'saveComments', payload: comments });
 			} else {
 				message.error(json.data.msg);

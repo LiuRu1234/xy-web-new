@@ -15,7 +15,7 @@ class FileComment extends PureComponent{
 		this.state = {
 			deleteModalShow: false,
 			deleteModalTitle: '',
-      commentId: ''
+      		commentId: ''
 		};
 	}
 
@@ -76,10 +76,84 @@ class FileComment extends PureComponent{
 	}
 
 	changeCommentActive = (item) => {
+
 		this.props.dispatch({
 			type: 'playerControl/changeCommentActive',
 			payload: item
 		});
+
+		if(item.record) {
+			this.handleCommentRecordPlay(item.record, item.id);
+		} else {
+			this.commentRecord.src = '';
+			this.commentRecord.pause();
+		}
+	}
+
+
+	handleCommentRecordPlay = (record, id) => {
+		let clearTimer = () => {
+			clearInterval(this.audioCommentTimer);
+			this.audioCommentTimer = null;
+			this.props.dispatch({
+				type: 'comment/saveCommentPlayTimer',
+				payload: 0
+			});
+
+			this.props.dispatch({
+				type: 'comment/saveCommentPlaying',
+				payload: false
+			});
+
+			this.props.dispatch({
+				type: 'comment/saveCommentPlayId',
+				payload: 0
+			});
+		};
+
+		if (id == this.props.commentPlayId) {
+			clearTimer();
+			this.commentRecord.src = '';
+			this.commentRecord.pause();
+			return;
+		}
+
+		clearInterval(this.audioCommentTimer);
+		this.audioCommentTimer = null;
+		this.props.dispatch({
+			type: 'comment/saveCommentPlayId',
+			payload: id
+		});
+		this.props.dispatch({
+			type: 'comment/saveCommentPlaying',
+			payload: true
+		});
+
+		this.commentRecord.src = record.path;
+		this.commentRecord.play();
+
+		let commentPlayTimer = parseInt(record.duration);
+		this.props.dispatch({
+			type: 'comment/saveCommentPlayTimer',
+			payload: commentPlayTimer
+		});
+        this.audioCommentTimer = setInterval(() => {
+			commentPlayTimer--;
+			
+            if (commentPlayTimer <= 0) {
+				clearTimer();
+                return;
+			} else {
+				this.props.dispatch({
+					type: 'comment/saveCommentPlayTimer',
+					payload: commentPlayTimer
+				});
+			}
+        }, 1000);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.audioCommentTimer);
 	}
 
 	showDeleteModal = (comment) => {
@@ -237,6 +311,12 @@ class FileComment extends PureComponent{
 		// this.commentListNode.addEventListener('scroll', (e) => {
 		// 	console.log(e);
 		// });
+		this.audioCommentTimer = null;
+		this.commentRecord = document.getElementById("comment-record");
+
+		this.commentRecord.addEventListener('ended', () => {
+			// clearInterval(this.audioCommentTimer)
+		});
 	}
 
 	changeFileInfoEditing = () => {
@@ -260,7 +340,24 @@ class FileComment extends PureComponent{
 		});
 	}
 
-	renderCallback(item, k) {
+	// 以一分钟为单位计算长度
+	getRecordWidth(duration, isComment) {
+		let d = Math.ceil(duration / 10) / 6 * 275;
+		return d;
+	}
+
+	renderCallback = (item, k) => {
+		const {
+			commentPlayId,
+			commentPlaying,
+			commentPlayTimer
+		} = this.props;
+
+		item.record = null;
+		if (item.content.indexOf(COMMENT_RECORD_PREFIXER) > -1) {
+			item.record = JSON.parse(JSON.parse(item.content)[COMMENT_RECORD_PREFIXER]);
+		}
+
 		return (
 			<div className="fc-callback-li" key={k}>
 				<div className="fc-callback-li-tx">
@@ -270,9 +367,17 @@ class FileComment extends PureComponent{
 					<header className="fc-callback-header">
 						<p>{item.realname}</p>
 					</header>
-					<section className="fc-callback-section">
+					{item.record ? 
+					<p className="record-content" 
+					onClick={() => this.handleCommentRecordPlay(item.record, item.id)}
+					style={{width: this.getRecordWidth(item.record.duration) + 'px'}}
+					>
+						{ commentPlayId == item.id && commentPlaying ? <Image name="audio.gif" style={{height: '20px', marginLeft: '-5px'}}/> : <Image name="audio-static.jpg" /> }
+						<span>{commentPlayId == item.id && commentPlaying ? commentPlayTimer + '"' :  item.record.duration + '"'}</span>
+					</p> : 
+					<section className="fc-callback-section" >
 						{item.content}
-					</section>
+					</section>}
 					<footer className="fc-callback-footer">
 						<p>{beforeTime(item.created_at)}</p>
 						<p onClick={() => this.callbackPerson(item.realname)}>回复</p>
@@ -299,10 +404,11 @@ class FileComment extends PureComponent{
 			isCommentPageAll,
 			isPageCommentLoading,
 			commentShowCompleted,
-			fileInfoEditing
+			fileInfoEditing,
+			commentPlayId,
+			commentPlayTimer,
+			commentPlaying
 		} = this.props;
-
-		// console.log(comments, 'comments');
 
 		// is-share 判断是否为分享的样式
 		let isCommentClosedClass = commentClosed ? 'file-comment-container file-comment-closed' : 'file-comment-container';
@@ -310,6 +416,9 @@ class FileComment extends PureComponent{
 
 		return (
 		<div className={isCommentClosedClass}>
+			<audio src="someaudio.wav" id="comment-record">
+			您的浏览器不支持 audio 标签。
+			</audio>
 			{!commentClosed ?
 			<Tooltip placement="left" title="关闭评论" onClick={() => this.toggleCommentPannel(true)}>
 				<div className="comment-close-btn">
@@ -393,7 +502,11 @@ class FileComment extends PureComponent{
 												</div>
 											</header>
 											<section className="cl-content">
-												{item.content}
+												{item.record ? 
+												<p className="record-content" style={{width: this.getRecordWidth(item.record.duration) + 'px'}}>
+													{ commentPlayId == item.id && commentPlaying ? <Image name="audio.gif" style={{height: '20px', marginLeft: '-5px'}}/> : <Image name="audio-static.jpg" /> }
+													<span>{commentPlayId == item.id && commentPlaying ? commentPlayTimer + '"':  item.record.duration + '"'}</span>
+												</p> : item.content}
 											</section>
 											<footer className="cl-footer">
 												<p className="cl-delete" onClick={e => {e.stopPropagation();this.showDeleteModal(item);}}>删除</p>
@@ -462,6 +575,7 @@ class FileComment extends PureComponent{
 							{callbackComment ?
 							<div className="fc-callback-list">
 								{ callbackComment.replies.map((item, k) => {
+
 									if (!showAllCallback && k <= 4){
 										return this.renderCallback(item, k);
 									}

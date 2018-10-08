@@ -44,21 +44,16 @@ class FileGrid extends PureComponent {
 
     toFile = (id) => {
         if (!this.props.allowToFile) return;
-        saveFid(id);
 
         this.props.dispatch({
 			type: 'price/handleWarning',
 			payload: {}
         });
-
+        
         this.props.dispatch(routerRedux.push({
             pathname: '/file',
-            query: {},
+            query: { f: id, p: this.props.projectActive},
         }));
-        // this.props.dispatch(routerRedux.push({
-        //     pathname: '/file',
-        //     query: { f: id, p: this.props.projectActive},
-        // }));
     }
 
     toDoc = (id) => {
@@ -67,20 +62,12 @@ class FileGrid extends PureComponent {
         this.props.dispatch({
 			type: 'price/handleWarning',
 			payload: {}
-        });
-
-        this.props.dispatch({
-            type: 'project/toDoc',
-            payload: {
-                project_id: this.props.projectActive,
-                doc_id: id
-            }
-        });
+		});
         
-        // this.props.dispatch(routerRedux.push({
-        //     pathname: '/project',
-        //     query: { d: id, p: this.props.projectActive},
-        // }));
+        this.props.dispatch(routerRedux.push({
+            pathname: '/project',
+            query: { d: id, p: this.props.projectActive},
+        }));
     }
 
     isOtherFile(file) {
@@ -212,6 +199,7 @@ class FileGrid extends PureComponent {
 
     saveChangeNameId = (e, file) => {
         e.stopPropagation();
+        this.changeName = file.name;
         this.props.dispatch({
             type: 'project/saveChangeNameFileId',
             payload: file.id
@@ -223,6 +211,14 @@ class FileGrid extends PureComponent {
             type: 'project/changeFileName',
             payload: e.target.value
         });
+        this.changeName ='';
+        this.changeNameKeyup = false;
+    }
+
+    saveFileName = (e) => {
+        if (e.keyCode == 13) return;
+        this.changeNameKeyup = true;
+        this.changeName = e.target.value;
     }
 
     getPositionInPreview = (e) => {
@@ -339,6 +335,9 @@ class FileGrid extends PureComponent {
             payload: null
         });
 
+        this.changeNameKeyup = false;
+        this.changeName = '';
+
         // this.props.dispatch({
         //     type: 'project/saveBreadFiles',
         //     payload: {breadcrumb: [], fileList: []}
@@ -346,15 +345,27 @@ class FileGrid extends PureComponent {
     }
     componentDidMount() {
         const _self = this;
+        _self.changeName = '';
+        _self.changeNameKeyup = false;
         document.body.addEventListener('click', function(e) {
-            if (e.target.className == 'change-name-input' || (e.target.tagName == 'INPUT' && e.target.className.indexOf('change-name') > -1)) {
+            if (e.target.className == 'change-name-input' || (e.target.tagName == 'INPUT' && e.target.className .indexOf('change-name') > -1)) {
                 return;
             }
+            if (!_self.changeNameKeyup) {
+                return;
+            }
+
+            _self.props.dispatch({
+                type: 'project/changeFileName',
+                payload: _self.changeName
+            });
 
             _self.props.dispatch({
                 type: 'project/saveChangeNameFileId',
                 payload: null
             });
+
+            _self.changeNameKeyup = false;
         });
     }
 
@@ -616,6 +627,7 @@ class FileGrid extends PureComponent {
                                                     onClick={e => e.stopPropagation()} 
                                                     onPressEnter={this.changeFileName} 
                                                     onMouseDown={e => e.stopPropagation()}
+                                                    onKeyUp={this.saveFileName}
                                                     className='change-name'
                                                     /> 
                                                 </div>:
@@ -735,5 +747,6 @@ class FileGrid extends PureComponent {
         );
     }
 }
+
 
 export default FileGrid;

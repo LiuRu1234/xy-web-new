@@ -3,7 +3,7 @@
 import {notification, message} from 'antd';
 import { routerRedux } from 'dva/router';
 import {openNotification, getTokenLocalstorage, get, post, getQuery} from '../utils/utils';
-import {PRE_PAGE, NOTICE_TIME, EXP_PHONE, ALERT_NOTICE_TIME} from '../config/constants';
+import {PRE_PAGE, NOTICE_TIME, EXP_PHONE, ALERT_NOTICE_TIME, COMMENT_RECORD_PREFIXER} from '../config/constants';
 
 export default {
 	namespace: 'global',
@@ -256,28 +256,45 @@ export default {
 			let project_id = yield select(state => state.project.projectActive);
 			let fileInfo = yield select(state => state.file.fileInfo);
 			let userInfo = yield select(state => state.user.userInfo);
-			let currentCommentNotice = commentNoticeArgs.filter(item => item.file_id == fileInfo.id && item.user_id != userInfo.user_id);
+			let currentCommentNotice = commentNoticeArgs.filter(item => {
+				// return item.file_id == fileInfo.id && item.user_id == userInfo.user_id //这里本来是自己评论的不再更新
+				return item.file_id == fileInfo.id;
+			});
 			if (currentCommentNotice.length == 0) return;
 			let comment = yield select(state => state.comment);
-			let param = {
-				...getTokenLocalstorage(),
-				doc_id: fileInfo.id,
-				project_id,
-				page: 1,
-				sort: 1,
-				show_completed: 0,
-				query: '',
-				pre_page: PRE_PAGE
-			};
-			let json = yield call(get, '/comment', param);
-			if (json.data.status == 1) {
-				let time = parseInt(localStorage.getItem(NOTICE_TIME));
-				let newComment = json.data.data.list.filter((item) => {return  item.created_at > time;});
-				let comments = [...newComment, ...comment.comments];
-				yield put({ type: 'comment/saveComments', payload: comments });
+
+			if (currentCommentNotice[0].type == 'comment') {
+				let param = {
+					...getTokenLocalstorage(),
+					doc_id: fileInfo.id,
+					project_id,
+					page: 1,
+					sort: 1,
+					show_completed: 0,
+					query: '',
+					pre_page: PRE_PAGE
+				};
+				let json = yield call(get, '/comment', param);
+				if (json.data.status == 1) {
+					let time = parseInt(localStorage.getItem(NOTICE_TIME));
+					let newComment = json.data.data.list.filter((item) => {return  item.created_at > time;});
+					let comments = [...newComment, ...comment.comments];
+					comments = comments.map(item => {
+						item.record = null;
+						if (item.content.indexOf(COMMENT_RECORD_PREFIXER) > -1) {
+							item.record = JSON.parse(JSON.parse(item.content)[COMMENT_RECORD_PREFIXER]);
+							item.content = '';
+						}
+						return item;
+					});
+					yield put({ type: 'comment/saveComments', payload: comments });
+				} else {
+					message.error(json.data.msg);
+				}
 			} else {
-				message.error(json.data.msg);
+				//删除评论需要修改删除评论消息接口
 			}
+			
 		},
 
 		// 添加版本消息处理

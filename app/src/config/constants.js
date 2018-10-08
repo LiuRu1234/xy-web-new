@@ -18,6 +18,7 @@ export const ALERT_NOTICE_TIME = '_xy_alert_notice_update_time_2018';
 
 export const CURRENT_LOCATION = '_xy_current_location';
 
+export const COMMENT_RECORD_PREFIXER = '<_XY_WXRECORD>';
 // 判断是否是移动端
 let isMobile = '';
 if (/Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent)) {
