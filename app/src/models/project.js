@@ -1,6 +1,6 @@
 import {LOGIN_ID, TOKEN, EXP_EMAIL} from '../config/constants';
 import { routerRedux } from 'dva/router';
-import {post, get, getTokenLocalstorage, getQuery, sortBy, search, savePidDid, getPidDid} from '../utils/utils';
+import {post, get, getTokenLocalstorage, sortBy, search, savePidDid, getPidDid} from '../utils/utils';
 import {message, notification, Icon} from 'antd';
 
 let projectSetting = {
@@ -18,13 +18,18 @@ let projectSetting = {
 	color: '#FF635D',
 };
 
-// 判断当前是否有项目
+// 判断当前是否已经在查看的项目
 const handleProjectIsEmpty = (list) => {
 	if (list.length > 0){
 		let myProject = list.filter(item => item.type == 'admin');
 		let memberProject = list.filter(item => item.type == 'member');
-		if (getPidDid().project_id && getPidDid().project_id != '') {
-			return getPidDid().project_id;
+		let {project_id, doc_id} = getPidDid();
+		// 检查是否该项目是否已经删除
+		let currentProject = list.find((item) => {
+			return item == project_id;
+		});
+		if (project_id && project_id != '' && !!currentProject) {
+			return project_id;
 		} else {
 			savePidDid(myProject.length > 0 ? myProject[0].id : memberProject[0].id, 0);
 			return myProject.length > 0 ? myProject[0].id : memberProject[0].id;
@@ -338,7 +343,7 @@ export default {
 				let breadcrumb = json.data.data.breadcrumb;
 				let fileList = json.data.data.list;
 				yield put({ type: 'saveBreadFiles', payload: {breadcrumb, fileList}});
-				yield put({ type: 'saveDocActive', payload: getQuery('d')});
+				yield put({ type: 'saveDocActive', payload: getPidDid().doc_id});
 				yield put({ type: 'sortFile', payload: {}});
 			} else {
 				message.error(json.data.msg);

@@ -334,6 +334,8 @@
     .file-player-section {
         width: 100%;
         min-height: 300px; // transition: all 0.45s linear;
+        overflow: hidden;
+        
         .fps-body {
             display: flex;
             justify-content: center;
