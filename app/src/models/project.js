@@ -299,7 +299,7 @@ export default {
 				if (!projectActive) return;
 
 				let {project_id, doc_id} = getPidDid();
-				console.log(project_id, doc_id, 'project_id');
+
 				if (project_id == 0) {
 					savePidDid(projectActive, doc_id);
 					yield put({ type: 'saveDocActive', payload: 0});

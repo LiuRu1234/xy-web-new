@@ -1,24 +1,28 @@
 import React, { PureComponent } from 'react';
-// import {Linker} from '../../dev/Link';
-import Image from '@CC/Image';
+import { routerRedux } from 'dva/router';
+import withRouter from 'umi/withRouter';
+import { connect } from 'dva';
 import {Tooltip} from 'antd';
+
+import Image from '@CC/Image';
+import Loading from '@CC/Loading';
+
 import {
 	PlayerTimePannel,
 	PlayerVolumePannel2,
 	PlayerTimePannel2
 } from '@CCP/TooltipPannel';
+
 import {beforeTime} from '@utils/utils';
-import Loading from '@CC/Loading';
-import { routerRedux } from 'dva/router';
-import withRouter from 'umi/withRouter';
-import { connect } from 'dva';
+
 import './index.scss';
 
 function mapStateToProps(state) {
     return {
       ...state.compare,
       ...state.project,
-      ...state.global
+	  ...state.global,
+	  ...state.loading
     };
   }
   
@@ -59,7 +63,7 @@ class FileCompareContainer extends PureComponent {
 			this.setState({
 				videoWH: this.setVideoWH()
 			});
-		});
+		}, 50);
 
 		window.addEventListener('resize', () => {
 			this.setState({
@@ -251,7 +255,7 @@ class FileCompareContainer extends PureComponent {
 
 	render() {
 		const {videoWH, playerLoop, isPause, progress, progressWidth, volume1, timeMode, duration, fileInfo} = this.state;
-		const {fileInfoOne, fileInfoTwo, mutedId, pageLoading} = this.props;
+		const {fileInfoOne, fileInfoTwo, mutedId, pageLoading, effects} = this.props;
 
 		let progressTime = progress * duration;
 		if (!fileInfoOne || !fileInfoTwo) return null;
@@ -348,7 +352,11 @@ class FileCompareContainer extends PureComponent {
 					</div>
 				</footer>
 				{/* <Linker /> */}
-				<Loading visible={pageLoading}/>
+				
+				<Loading visible={
+					effects['compare/fetchFile'] ||  
+					effects['compare/fetchFileInfo']
+				}/>
 			</div>
 		);
 	}

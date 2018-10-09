@@ -571,7 +571,7 @@ class FileGrid extends PureComponent {
                         return (
                       
                         <Col span={ColNum} className="file-grid" key={k}>
-                          <LazyLoad height={204} offsetVertical={300}>
+                          
                             <div className="file-grid-body" style={{border: this.state.dragEnterId == item.id ? '1px solid #fff' : ''}}>
                                 {isSharing ? 
                                 <div className="file-select-cover"  draggable="true" onClick={() => this.selectShareFiles(item)}>
@@ -580,6 +580,8 @@ class FileGrid extends PureComponent {
                                     <div className="file-select-block">
                                     </div>}
                                 </div> : null}
+
+                                <LazyLoad height={204} offsetVertical={300}>
                                 
                                 <div
                                 onDragStart= {(e) => {this.getFile(e, item);}}
@@ -673,15 +675,15 @@ class FileGrid extends PureComponent {
 
                                     </div>
                                 </div>
+                                </LazyLoad>
                             </div>
-                            </LazyLoad>
                         </Col>
                         );
                     } else {
                         {/* 文件夹 */}
                         return (
                             <Col span={ColNum} className="file-grid" key={k} > 
-                                <LazyLoad height={204} offsetVertical={300}>
+                               
                                 <div className="file-grid-body"  
                                 style={{
                                     border: this.state.dragEnterId == item.id ? '1px solid #fff' : '',
@@ -693,6 +695,7 @@ class FileGrid extends PureComponent {
                                         <div className="file-select-block">
                                         </div>}
                                     </div> : null}
+                                    <LazyLoad height={204} offsetVertical={300}>
                                     <div className="file-grid-content"
                                         onClick={() => this.toDoc(item.id)} 
                                         onDragEnter= {(e) => {this.getCurrentBaseVersion(e, item);}}
@@ -755,8 +758,8 @@ class FileGrid extends PureComponent {
                                             </div>
                                         </div>
                                     </div>
+                                    </LazyLoad>
                                 </div>
-                                </LazyLoad>
                             </Col>
                         );
                     }
