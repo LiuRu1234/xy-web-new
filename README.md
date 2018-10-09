@@ -3,7 +3,7 @@
 
 ## 全部
 * 开发新的tooltip
-* 使用dva-loading
+* ☑️ 使用dva-loading
 * ☑️ 页面出现交互优化
 * ☑️ 代码注释
 * ☑️ 组件懒加载
