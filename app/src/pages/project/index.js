@@ -259,12 +259,12 @@ class ProjectContainer extends PureComponent {
 				onClose={this.hideDeleteFile}
 				/>
 
-				<Loading visible={(effects && (
+				<Loading visible={
 					effects['project/fetchProjects'] ||  
 					effects['project/fetchFiles'] || 
 					effects['project/fetchMember'] || 
-					effects['project/isLogined']))
-				 }/>
+					effects['project/isLogined']
+				}/>
 
 				{systemMessage ?
 				<NoticeModal visible={noticeModalShow}

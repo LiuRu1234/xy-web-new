@@ -29,7 +29,8 @@ function mapStateToProps(state) {
       ...state.global,
       ...state.watermark,
 	  ...state.invite,
-	  ...state.price
+	  ...state.price,
+	  ...state.loading
     };
 }
 
@@ -105,55 +106,6 @@ class FileContainer extends PureComponent {
 		clearInterval(this.t);
 	}
 
-	// listenEvent = () => {
-	// 	const {filePlayer, dispatch, progressBody} = this.props;
-
-	// 	if (!filePlayer) {return;}
-	// 	filePlayer.pause();
-	// 	dispatch({
-    //         type: 'playerControl/saveProgressWidth',
-    //         payload: 0,
-	// 	});
-
-	// 	setTimeout(() => {
-	// 		filePlayer.addEventListener("timeupdate", (e) => {
-	// 			dispatch({
-	// 				type: 'playerControl/saveProgressTime',
-	// 				payload: e.target.currentTime,
-	// 			});
-	// 			let progress = e.target.currentTime / e.target.duration;
-	// 			let width = progress * progressBody.getBoundingClientRect().width;
-
-	// 			dispatch({
-	// 				type: 'playerControl/saveProgressWidth',
-	// 				payload: width,
-	// 			});
-	
-	// 			dispatch({
-	// 				type: 'playerControl/saveProgress',
-	// 				payload: progress,
-	// 			});
-	
-	// 		});
-	
-	// 		filePlayer.addEventListener("ended", (e) => {
-	// 			dispatch({
-	// 				type: 'playerControl/playerPlayOrPause',
-	// 				payload: {},
-	// 			});
-	// 		});
-	
-	// 		filePlayer.addEventListener("play", e => {
-	// 			dispatch({
-	// 				type: 'playerControl/saveCommentDrawObj',
-	// 				payload: [],
-	// 			});
-	// 		});
-
-	// 	}, 500)
-		
-	// }
-
 	passwordChange = (e) => {
 		this.setState({
 			password: e.target.value
@@ -169,7 +121,7 @@ class FileContainer extends PureComponent {
 	}
 
 	render() {
-		const {commentClosed, isFilesShare, sharePass, containerShow, pageLoading, phoneAuthModalShow} = this.props;
+		const {commentClosed, isFilesShare, sharePass, containerShow, pageLoading, phoneAuthModalShow, effects} = this.props;
 		// is-share 判断是否为分享的样式
 		let classN = isFilesShare ? 'file-container is-share' : 'file-container';
 
@@ -191,7 +143,14 @@ class FileContainer extends PureComponent {
 					</div>
 				</div> : null}
 				<WatermarkModal {...this.props}/>
-				<Loading visible={pageLoading}/>
+				<Loading visible={
+					effects['comment/fetchCommentCommon'] ||  
+					effects['comment/fetchComments'] || 
+					effects['file/fetchFileInfo'] || 
+					effects['file/isLogined'] ||
+					effects['playerControl/getPlayerHeight'] ||
+					effects['playerControl/initVideoOffset'] 
+				}/>
 			</div>;
 
 		let phoneTemp = <PhoneAuth {...this.props}/>;

@@ -1205,7 +1205,6 @@ export class FileVersionsPannel extends PureComponent{
             return;
         }
 
-
         trigger(this.props.uploadInput3, 'click');
     }
 
@@ -1379,7 +1378,7 @@ export class FileVersionsPannel extends PureComponent{
                                             <div className="vc-img-block"><Image name="compress.svg"></Image></div>: null}
                                             {item.file_type == 'audio' ? 
                                             <div className="vc-img-block"><Image name="mp3.svg"></Image></div>: null}
-                                            {!['video','audio', 'image'].indexOf(item.file_type) > -1 && ['zip', '7z', 'rar'].indexOf(item.ext) == -1 ? 
+                                            {['video','audio', 'image'].indexOf(item.file_type) == -1 && ['zip', '7z', 'rar'].indexOf(item.ext) == -1 ? 
                                             <div className="vc-img-block vc-img-bg">{item.ext}</div>: null}
                                         </div>
                                         <p className="version-name">{item.name}</p>
