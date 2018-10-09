@@ -79,4 +79,51 @@
       opacity: 0.2;
     }
 }
+
+.loading-icon{
+  #path1{
+    stroke-dasharray: 376;
+    stroke-dashoffset: 376;
+    stroke: #fff;
+    stroke-linecap: round;
+    opacity: 0.5;
+    animation: dash2 3s ease-in infinite;
+  }
+
+  #path2{
+    stroke-dasharray: 200.8;
+    stroke-dashoffset: 2000;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.5;
+    transform-origin: 50% 50%; 
+    animation: dash3 3s linear infinite;
+  }
+}
+
+@keyframes dash2 {
+  0% {
+    stroke-dasharray: 376;
+    stroke-dashoffset: 376.3;
+  }
+
+  50%{
+    stroke-dashoffset:0;
+  }
+
+  100%{
+    stroke-dashoffset: -376.3;
+  }
+}
+
+@keyframes dash3 {
+  0% {
+    stroke-dashoffset: 300;
+  }
+
+  100%{
+    stroke-dashoffset: 0;
+  }
+}
   
