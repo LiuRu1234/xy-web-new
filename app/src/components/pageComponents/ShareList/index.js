@@ -1,6 +1,8 @@
 import React, { PureComponent }  from 'react';
-import Image from '@CC/Image';
 import { routerRedux } from 'dva/router';
+
+import Image from '@CC/Image';
+
 import {getLocalTime} from '@utils/utils';
 import './index.scss';
 

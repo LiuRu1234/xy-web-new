@@ -28,12 +28,9 @@ const handleProjectIsEmpty = (list) => {
 		let currentProject = list.find((item) => {
 			return item.id == project_id;
 		});
-		console.log(project_id,currentProject, 'project_id');
 		if (project_id && project_id != '' && !!currentProject) {
-			console.log(222);
 			return project_id;
 		} else {
-			console.log(333);
 			savePidDid(myProject.length > 0 ? myProject[0].id : memberProject[0].id, 0);
 			return myProject.length > 0 ? myProject[0].id : memberProject[0].id;
 		}

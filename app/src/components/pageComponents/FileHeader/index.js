@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
-import { UserPannel, UserNoticePannel }from '@CCP/TooltipPannel';
-import Image from '@CC/Image';
-import IconBlock from '@CC/IconBlock';
-import HeaderRight from '../HeaderRight';
 import { routerRedux } from 'dva/router';
 import {Input, Icon, Tooltip} from 'antd';
+
+import Image from '@CC/Image';
+import IconBlock from '@CC/IconBlock';
+
+import { UserPannel, UserNoticePannel }from '@CCP/TooltipPannel';
+
+import HeaderRight from '@CPC/HeaderRight';
+
 import './index.scss';
 
 class FileHeader extends PureComponent{

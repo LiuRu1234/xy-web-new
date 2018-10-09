@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
+import {message, notification, Icon} from 'antd';
+
 import Image from '@CC/Image';
 import Modal from '@CC/Modal';
 import ModalButton from '@CC/Button';
+
 import CheckSVG from '../CheckSVG';
-import {message, notification, Icon} from 'antd';
+
 import UploadOSS from '@utils/uploadOSS';
 import {getQuery} from '@utils/utils';
 import './index.scss';

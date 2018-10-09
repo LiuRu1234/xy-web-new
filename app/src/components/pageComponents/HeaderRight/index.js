@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
+import { Tooltip, message } from 'antd';
+import Dialog from 'rc-dialog';
+
 import Image from '@CC/Image';
 import ModalTwo from '@CC/ModalTwo';
 import { UserPannel, UserNoticePannel }from '@CCP/TooltipPannel';
-import { Tooltip, message } from 'antd';
-import Dialog from 'rc-dialog';
-import HelperView from '../HelperView';
-import PriceModal from '../PriceModal';
+
+import HelperView from '@CPC/HelperView';
+import PriceModal from '@CPC/PriceModal';
 import './index.scss';
 
 class HeaderRight extends PureComponent{

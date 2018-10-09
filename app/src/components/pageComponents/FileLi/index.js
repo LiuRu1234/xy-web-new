@@ -1,14 +1,18 @@
 import React, { PureComponent } from 'react';
 import {Row, Col, Progress, Tooltip, Icon, message} from 'antd';
+import { routerRedux } from 'dva/router';
+import LazyLoad from 'react-lazy-load';
+
 import Image from '@CC/Image';
 import IconBlock from '@CC/IconBlock';
-import {FILE_STATUS} from '../../../config/constants';
-import CheckSVG from '../CheckSVG';
-import { routerRedux } from 'dva/router';
 import { FileMorePannel, FolderMorePannel } from '@CCP/TooltipPannel';
+
+import CheckSVG from '../CheckSVG';
+
 import {getLocalTime, size2Str, trigger, isIE} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
-import LazyLoad from 'react-lazy-load';
+import {FILE_STATUS} from '@config/constants';
+
 import './index.scss';
 
 

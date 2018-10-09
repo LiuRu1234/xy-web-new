@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import {Tooltip} from 'antd';
+
 import Image from '@CC/Image';
 import IconBlock from '@CC/IconBlock';
+
 import {
 	FilePlayerCommentPannel,
 	PlayerTimePannel, 
@@ -10,6 +12,7 @@ import {
 	PlayerRatioPannel,
 	PlayerVolumePannel
 } from '@CCP/TooltipPannel';
+
 import './index.scss';
 
 

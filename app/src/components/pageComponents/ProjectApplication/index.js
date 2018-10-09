@@ -1,11 +1,15 @@
 import React, { PureComponent } from 'react';
+import {Input, Select, message} from 'antd';
+import Dialog from 'rc-dialog';
+
 import IconBlock from '@CC/IconBlock';
 import Image from '@CC/Image';
-import {USE_ICON, PR_FIELD} from '@config/constants';
 import Modal from '@CC/Modal';
-import Dialog from 'rc-dialog';
-import WatermarkModal from  '../WatermarkModal';
-import {Input, Select, message} from 'antd';
+
+import WatermarkModal from  '@CPC/WatermarkModal';
+
+import {USE_ICON, PR_FIELD} from '@config/constants';
+
 import './index.scss';
 
 const Option = Select.Option;

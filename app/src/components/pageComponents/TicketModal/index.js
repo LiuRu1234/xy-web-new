@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Row, Col, Modal, Carousel, Icon } from 'antd';
+
 import './index.scss';
 
 export default class TicketModal extends Component {

@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
-import TooltipPannel from '@CC/Tooltip';
-import IconBlock from '@CC/IconBlock';
-import { ProjectLabelPannel } from '@CCP/TooltipPannel';
-import Image from '@CC/Image';
 import {Input, Icon, Tooltip, Progress, Switch, List} from 'antd';
 import { routerRedux } from 'dva/router';
+
+import Image from '@CC/Image';
+import TooltipPannel from '@CC/Tooltip';
+import IconBlock from '@CC/IconBlock';
+
+import { ProjectLabelPannel } from '@CCP/TooltipPannel';
+
 import './index.scss';
 
 class ProjectSide extends PureComponent {

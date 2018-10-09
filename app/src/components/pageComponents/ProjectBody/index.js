@@ -1,19 +1,23 @@
 import React, { PureComponent } from 'react';
-import IconBlock from '@CC/IconBlock';
-import Image from '@CC/Image';
 import {Row, Col, Tooltip, message} from 'antd';
-import FileGrid from '../FileGrid';
-import FileLi from '../FileLi';
-import ProjectLink from '../ProjectLink';
-import ProjectLikeLink from '../ProjectLikeLink';
-// import ProjectNotice from '../ProjectNotice/ProjectNotice';
-import ProjectApplication from '../ProjectApplication';
-import SaveModal from '../SaveModal';
-import Modal from '@CC/Modal';
-import UploadOSS from '@utils/uploadOSS';
 import { routerRedux } from 'dva/router';
 import Clipboard from 'clipboard';
+
+import IconBlock from '@CC/IconBlock';
+import Image from '@CC/Image';
+import Modal from '@CC/Modal';
+
 import { ProjectSettingPannel, ProjectSortPannel } from '@CCP/TooltipPannel';
+
+import FileGrid from '@CPC/FileGrid';
+import FileLi from '@CPC/FileLi';
+import ProjectLink from '@CPC/ProjectLink';
+import ProjectLikeLink from '@CPC/ProjectLikeLink';
+import ProjectApplication from '@CPC/ProjectApplication';
+import SaveModal from '@CPC/SaveModal';
+
+import UploadOSS from '@utils/uploadOSS';
+
 import './index.scss';
 
 class ProjectBody extends PureComponent {

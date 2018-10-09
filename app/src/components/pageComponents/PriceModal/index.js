@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
+import {message} from 'antd';
+import Dialog from 'rc-dialog';
+
 import Image from '@CC/Image';
 import ModalTwo from '@CC/ModalTwo';
-import Dialog from 'rc-dialog';
+
 import TicketModal from '@CPC/TicketModal';
+
 import {getLocalTime, timeInt2Str} from '@utils/utils';
-import {message} from 'antd';
+
 import './index.scss';
 
 export default class PriceModal extends PureComponent{

@@ -1,13 +1,17 @@
 import React, { PureComponent } from 'react';
-import Image from '@CC/Image';
-import Modal from '@CC/Modal';
-import ComfirmModal from '@CC/ComfirmModal';
 import {Input, Icon, Tooltip, Switch, DatePicker, message} from 'antd';
-import {ts2Ti, getLocalTime} from '@utils/utils';
 import moment from 'moment';
 import Clipboard from 'clipboard';
 import 'moment/locale/zh-cn';
+
+import Image from '@CC/Image';
+import Modal from '@CC/Modal';
+import ComfirmModal from '@CC/ComfirmModal';
+
+import {ts2Ti, getLocalTime} from '@utils/utils';
+
 import './index.scss';
+
 moment.locale('zh-cn');
 
 const locale = {

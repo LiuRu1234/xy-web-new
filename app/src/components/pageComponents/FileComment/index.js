@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
+import {Input, Icon, Tooltip, Button} from 'antd';
+
 import IconBlock from '@CC/IconBlock';
 import Image from '@CC/Image';
 import ComfirmModal from '@CC/ComfirmModal';
 import {CommentSortPannel} from '@CCP/TooltipPannel';
-import {Input, Icon, Tooltip, Button} from 'antd';
+
 import {getLocalTime, size2Str, timeToMS, beforeTime, getTokenLocalstorage, trigger} from '@utils/utils';
 import DrawUtil from '@utils/draw-util';
 import {PRE_PAGE} from '@config/constants';
+
 import './index.scss';
 
 class FileComment extends PureComponent{

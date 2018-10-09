@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
+import {Input, Icon, Tooltip, Switch} from 'antd';
 import TooltipPannel from '@CC/Tooltip';
 import IconBlock from '@CC/IconBlock';
 import Image from '@CC/Image';
 import Modal from '@CC/Modal';
-import HeaderRight from '../HeaderRight';
-import ShareModal from '../ShareModal';
+
 import {MemberPannel} from '@CCP/TooltipPannel';
-import {Input, Icon, Tooltip, Switch} from 'antd';
+import HeaderRight from '@CPC/HeaderRight';
+import ShareModal from '@CPC/ShareModal';
+
 import {PROJECT_TABS} from '@config/constants';
 import {size2Str} from '@utils/utils';
 import './index.scss';

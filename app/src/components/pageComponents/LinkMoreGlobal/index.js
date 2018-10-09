@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+
 import Image from '@CC/Image';
 
 class LinkMoreGlobal extends PureComponent {

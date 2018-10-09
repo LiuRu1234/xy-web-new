@@ -1,13 +1,16 @@
 import React, { PureComponent } from 'react';
 import { Row, Col, Switch } from 'antd';
-import Image from '@CC/Image';
-import {LinkMorePannel} from '@CCP/TooltipPannel';
-import {getLocalTime} from '@utils/utils';
-import TooltipModal from '@CC/TooltipModal';
-import LinkMoreGlobal from '../LinkMoreGlobal';
 import LazyLoad from 'react-lazy-load';
-import './index.scss';
 
+import Image from '@CC/Image';
+import Loading from '@CC/Loading';
+import TooltipModal from '@CC/TooltipModal';
+
+import {LinkMorePannel} from '@CCP/TooltipPannel';
+import LinkMoreGlobal from '@CPC/LinkMoreGlobal';
+import {getLocalTime} from '@utils/utils';
+
+import './index.scss';
 
 class ProjectLink extends PureComponent {
 	constructor(props) {
@@ -51,28 +54,6 @@ class ProjectLink extends PureComponent {
             payload: linkMoreShow
         });
     }
-
-
-    // renderDo() {
-    //     return (
-    //         <div className="pl-link-more-body">
-    //             <ul style={{marginBottom: "0"}}>
-    //                 <li onClick={this.showProjectShare}>
-    //                     <Image name="link-set.svg"></Image>
-    //                     <p>设置</p>
-    //                 </li>
-    //                 <li onClick={this.showCreatedLinkModal}>
-    //                     <Image name="fm-link.svg"></Image>
-    //                     <p>查看分享</p>
-    //                 </li>
-    //                 <li onClick={this.showDeleteLinkModal}>
-    //                     <Image name="fm-delete.svg"></Image>
-    //                     <p>删除链接</p>
-    //                 </li>
-    //             </ul>  
-    //         </div>
-    //     );
-    // }
 
     renderLinkLi() {
         const {shareLinkList} = this.props;
@@ -146,10 +127,12 @@ class ProjectLink extends PureComponent {
     render() {
         const {tmPos} = this.state;
 
-        const {linkMoreShow} = this.props;
+        const {linkMoreShow, effects} = this.props;
 
         return (
             <div className="project-link-container">
+				<Loading visible={effects['link/fetchLink']}/>
+
                 <header className="pl-header">
                     <Row className="pl-type-list">
                         <Col span={7} className="pl-type-li">

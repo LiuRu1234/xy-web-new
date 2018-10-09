@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Row, Col, Switch } from 'antd';
-import Image from '../../common/Image/Image';
-import IconBlock from '../../common/IconBlock/IconBlock';
-import {LinkMorePannel} from '../../commonPannel/TooltipPannel/TooltipPannel';
-import {getLocalTime} from '../../../utils/utils';
 import Dialog from 'rc-dialog';
+
+import Image from '@CC/Image';
+import IconBlock from '@CC/IconBlock';
+
+import {LinkMorePannel} from '@CCP/TooltipPannel';
+import {getLocalTime} from '@utils/utils';
+
 import './ProjectNotice.scss';
 import './NoticeModal.scss';
 

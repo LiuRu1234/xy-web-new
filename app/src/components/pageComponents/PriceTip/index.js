@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Dialog from 'rc-dialog';
+
 import Image from '@CC/Image';
 import './index.scss';
 

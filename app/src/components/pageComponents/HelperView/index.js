@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
-import HelperDes from './HelperDes';
-import {HELP_ONE, HELP_TWO} from '@config/constants';
 import { routerRedux, History } from 'dva/router';
+
+import HelperDes from './HelperDes';
+
+import {HELP_ONE, HELP_TWO} from '@config/constants';
+
 import './index.scss';
 
 class HelperView extends PureComponent {

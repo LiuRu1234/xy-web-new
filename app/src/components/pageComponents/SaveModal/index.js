@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
+
 import Modal from '@CC/Modal';
 import Image from '@CC/Image';
+
 import './index.scss';
 
 class SaveModal extends PureComponent {

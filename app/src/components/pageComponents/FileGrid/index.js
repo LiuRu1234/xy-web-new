@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import LazyLoad from 'react-lazy-load';
 import {Row, Col, Progress, Tooltip, Icon, Input, message} from 'antd';
+import { routerRedux } from 'dva/router';
+
 import Image from '@CC/Image';
 import { FileMorePannel, FolderMorePannel } from '@CCP/TooltipPannel';
-import {size2Str, trigger, isIE, saveFid, getPidDid} from '@utils/utils';
-import { routerRedux } from 'dva/router';
+
 import CheckSVG from '../CheckSVG';
-// import FileGridClone from './FileGridClone';
+
+import {size2Str, trigger, isIE, saveFid, getPidDid} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
-import LazyLoad from 'react-lazy-load';
+
 import './index.scss';
 
 

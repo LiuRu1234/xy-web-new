@@ -1,8 +1,11 @@
 import React, { PureComponent } from 'react';
+import {message} from 'antd';
+
 import Image from '@CC/Image';
 import ComfirmModal from '@CC/ComfirmModal';
+
 import {EXP_PHONE} from '@config/constants';
-import {message} from 'antd';
+
 import './index.scss';
 
 class PhoneAuth extends PureComponent{

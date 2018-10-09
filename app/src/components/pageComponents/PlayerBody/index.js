@@ -1,7 +1,9 @@
 import React, {PureComponent} from 'react';
 import {Tooltip} from 'antd';
+
 import Image from '@CC/Image';
 import IconBlock from '@CC/IconBlock';
+
 import DrawUtil from '@utils/draw-util';
 import './index.scss';
 

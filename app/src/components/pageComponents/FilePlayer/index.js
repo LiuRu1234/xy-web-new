@@ -1,15 +1,20 @@
 import React, { PureComponent } from 'react';
 import {Tooltip, Checkbox, message} from 'antd';
+
 import Image from '@CC/Image';
 import IconBlock from '@CC/IconBlock';
-import PlayerBody from '../PlayerBody';
-import PlayerControl from '../PlayerControl';
-import ShareModal from '../ShareModal';
 import Modal from '@CC/Modal';
-import SaveModal from '../SaveModal';
+
 import {FileStatusPannel, FileVersionsPannel} from '@CCP/TooltipPannel';
+
+import PlayerBody from '@CPC/PlayerBody';
+import PlayerControl from '@CPC/PlayerControl';
+import ShareModal from '@CPC/ShareModal';
+import SaveModal from '@CPC/SaveModal';
+
 import {timeToMS, isIE} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
+
 import './index.scss';
 
 

@@ -1,19 +1,22 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
+import {notification, message} from 'antd';
+import withRouter from 'umi/withRouter';
+
+import ComfirmModal from '@CC/ComfirmModal';
+import Image from '@CC/Image';
+import Loading from '@CC/Loading';
+
+import {ProjectSettingModal} from '@CCP/ModalPanel';
+import NoticeModal from '@CCP/NoticeModal';
+
 import ProjectHeader from '@CPC/ProjectHeader';
 import ProjectSlide from '@CPC/ProjectSide';
 import ProjectBody from '@CPC/ProjectBody';
 import PhoneAuth from '@CPC/PhoneAuth';
 import PriceTip from '@CPC/PriceTip';
-import {ProjectSettingModal} from '@CCP/ModalPanel';
-import ComfirmModal from '@CC/ComfirmModal';
-import Image from '@CC/Image';
-import Loading from '@CC/Loading';
-// import {Linker} from '../../dev/Link';
-import NoticeModal from '@CCP/NoticeModal';
-import {notification, message} from 'antd';
-import withRouter from 'umi/withRouter';
+
 import { CURRENT_LOCATION } from '@config/constants';
 import './index.scss';
 
@@ -31,7 +34,8 @@ function mapStateToProps(state) {
     ...state.global,
     ...state.watermark,
 	...state.invite,
-	...state.price
+	...state.price,
+	...state.loading
   };
 }
 
@@ -204,7 +208,8 @@ class ProjectContainer extends PureComponent {
 			quitProjectModalShow,
 			phoneAuthModalShow,
 			userInfo,
-			isWarning
+			isWarning,
+			effects
 		} = this.props;
 
 		let deleteContent = (content, title) => {
@@ -254,7 +259,12 @@ class ProjectContainer extends PureComponent {
 				onClose={this.hideDeleteFile}
 				/>
 
-				<Loading visible={pageLoading}/>
+				<Loading visible={(effects && (
+					effects['project/fetchProjects'] ||  
+					effects['project/fetchFiles'] || 
+					effects['project/fetchMember'] || 
+					effects['project/isLogined']))
+				 }/>
 
 				{systemMessage ?
 				<NoticeModal visible={noticeModalShow}
