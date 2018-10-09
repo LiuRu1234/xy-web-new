@@ -26,10 +26,6 @@ class ProjectHeader extends PureComponent {
 				type: 'project/saveTabIndex',
 				payload: tabIndex	 
 			});
-			dispatch({
-				type: 'global/savePageLoading',
-				payload: true	 
-			});
 			if (tabIndex != 2) {
 				dispatch({
 					type: 'link/saveLikeLinkListAll',
@@ -95,11 +91,6 @@ class ProjectHeader extends PureComponent {
 					case 3: 
 						break;
 				}
-
-				dispatch({
-					type: 'global/savePageLoading',
-					payload: false	 
-				});
 			}, 500);
 		});
 	}

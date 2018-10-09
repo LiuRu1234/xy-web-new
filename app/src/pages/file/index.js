@@ -121,7 +121,7 @@ class FileContainer extends PureComponent {
 	}
 
 	render() {
-		const {commentClosed, isFilesShare, sharePass, containerShow, pageLoading, phoneAuthModalShow, effects} = this.props;
+		const {commentClosed, isFilesShare, sharePass, containerShow, phoneAuthModalShow, effects} = this.props;
 		// is-share 判断是否为分享的样式
 		let classN = isFilesShare ? 'file-container is-share' : 'file-container';
 

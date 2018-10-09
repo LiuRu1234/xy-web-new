@@ -248,7 +248,6 @@ export default {
 			const token = localStorage.getItem(TOKEN);
 			let user = yield select(state => state.user);
 			let global = yield select(state => state.global);
-			yield put({ type: 'global/savePageLoading', payload: true });
 			yield put({type: 'saveOtherClick', payload: false});
 			if (JSON.stringify(user.userInfo) == '{}') {
 				let json = yield call(get, '/user/info', {login_id: loginId, token});
@@ -267,7 +266,6 @@ export default {
 					} 
 					if (data.phone == '') {
 						yield put({type: 'global/savePhoneAuthModalShow', payload: true});
-						yield put({ type: 'global/savePageLoading', payload: false });
 						return;
 					}		
 					saveUser(data.realname, data.avatar, data.avatar_background_color);
@@ -281,7 +279,6 @@ export default {
 				}
 			}
 			yield put({type: 'fetchProjects', payload:{}});
-			yield put({ type: 'global/savePageLoading', payload: false });
 
 		},
 
@@ -323,18 +320,15 @@ export default {
 			yield put({ type: 'saveProjectActive', payload: project_id});
 			yield put({ type: 'fetchFiles', payload: {project_id, doc_id: 0}});
 			yield put({ type: 'fetchMember', payload: {project_id}});
-			yield put({ type: 'global/savePageLoading', payload: false });
 		},
 
 		// 文件夹点击处理
 		*toDoc({ payload: {project_id, doc_id}}, { call, put, select }) {
 			savePidDid(project_id, doc_id);
-			yield put({ type: 'global/savePageLoading', payload: true });
 			yield put({ type: 'fetchFiles', payload: {project_id, doc_id}});
 			yield put({ type: 'saveDocActive', payload: doc_id});
 			yield put({ type: 'saveProjectActive', payload: project_id});
 			// yield put({ type: 'fetchMember', payload: {project_id}});
-			yield put({ type: 'global/savePageLoading', payload: false });
 		},
 
 		// 获取项目文件列表

@@ -202,7 +202,6 @@ class ProjectContainer extends PureComponent {
 			deleteFile,
 			deleteProject,
 			quitProject,
-			pageLoading,
 			noticeModalShow,
 			systemMessage,
 			quitProjectModalShow,

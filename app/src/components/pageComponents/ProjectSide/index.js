@@ -52,11 +52,6 @@ class ProjectSide extends PureComponent {
 		if (otherClick) return; 
 
 		this.props.dispatch({
-			type: 'global/savePageLoading',
-			payload: true
-		});
-
-		this.props.dispatch({
 			type: 'price/handleWarning',
 			payload: {}
         });

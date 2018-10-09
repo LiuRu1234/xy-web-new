@@ -8,7 +8,6 @@ import {PRE_PAGE, NOTICE_TIME, EXP_PHONE, ALERT_NOTICE_TIME, COMMENT_RECORD_PREF
 export default {
 	namespace: 'global',
 	state: {
-		pageLoading: false,
 		notices: [],
 		helpShow: false,
 		noticeModalShow: false,
@@ -21,10 +20,6 @@ export default {
 		phoneAuthModalShow: false
 	},
 	reducers: {
-		savePageLoading(state, { payload: pageLoading}) {
-			return { ...state, pageLoading };
-		},
-
 		savePhoneAuthModalShow(state, { payload: phoneAuthModalShow}) {
 			return { ...state, phoneAuthModalShow };
 		},

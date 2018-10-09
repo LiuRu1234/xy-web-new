@@ -122,7 +122,6 @@ export default {
 						} 
 						if (json.data.data.phone == '') {
 							yield put({type: 'global/savePhoneAuthModalShow', payload: true});
-							yield put({ type: 'global/savePageLoading', payload: false });
 							return;
 						}		
 					} else {
@@ -155,8 +154,6 @@ export default {
 				yield put({type: 'comment/fetchComments', payload: {}});
 				yield put({type: 'project/fetchProjects2', payload: {}});
 			}
-
-			yield put({ type: 'global/savePageLoading', payload: false });
 		},
 
 		*fetchFileInfo({ payload: {project_id, doc_id}}, { call, put, select, take }) {
@@ -380,7 +377,6 @@ export default {
 		setup({ dispatch, history } ) {
 			return history.listen(({ pathname, search }, q) => {
 				if (pathname === '/file') {
-					dispatch({ type: 'global/savePageLoading', payload: true });
 					dispatch({ type: 'isLogined', payload: {} });
 				}
 			});

@@ -29,7 +29,6 @@ export default {
 			} else {
 				message.error(json.data.msg);
 			}
-			yield put({type: 'global/savePageLoading', payload: false});
 		},
 
 		*fetchFile({ payload: {}}, { call, put, select, take }) {
@@ -48,7 +47,6 @@ export default {
 		setup({ dispatch, history } ) {
 			return history.listen(({ pathname, search }, q) => {
 				if (pathname === '/file_compare') {
-					dispatch({ type: 'global/savePageLoading', payload: true });
 					dispatch({ type: 'fetchFile', payload: {} });
 				}
 			});

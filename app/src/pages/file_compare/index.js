@@ -255,7 +255,7 @@ class FileCompareContainer extends PureComponent {
 
 	render() {
 		const {videoWH, playerLoop, isPause, progress, progressWidth, volume1, timeMode, duration, fileInfo} = this.state;
-		const {fileInfoOne, fileInfoTwo, mutedId, pageLoading, effects} = this.props;
+		const {fileInfoOne, fileInfoTwo, mutedId, effects} = this.props;
 
 		let progressTime = progress * duration;
 		if (!fileInfoOne || !fileInfoTwo) return null;
