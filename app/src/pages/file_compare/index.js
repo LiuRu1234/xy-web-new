@@ -60,6 +60,7 @@ class FileCompareContainer extends PureComponent {
 
 	componentDidMount() {
 		setTimeout(() => {
+			console.log(this.video1);
 			this.setState({
 				videoWH: this.setVideoWH()
 			});
@@ -258,7 +259,6 @@ class FileCompareContainer extends PureComponent {
 		const {fileInfoOne, fileInfoTwo, mutedId, effects} = this.props;
 
 		let progressTime = progress * duration;
-		if (!fileInfoOne || !fileInfoTwo) return null;
 
 		return (
 			<div className="file-compare-container">

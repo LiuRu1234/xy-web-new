@@ -40,6 +40,22 @@ export function getFid() {
 }
 
 /**
+ * 获取对比文件id
+ */
+export function saveCid(cid) {
+  localStorage.setItem('_xy_cid', cid);
+}
+
+/**
+ * 获取对比文件id
+ */
+export function getCid() {
+  const version_id = localStorage.getItem('_xy_cid') || 0;
+  return version_id;
+}
+
+
+/**
  * 存储本地用户信息头像，名称等
  */
 export function saveUser(realname, avatar, avatarBg) {
@@ -87,11 +103,15 @@ export function getQuery(name){
   return null;
 }
 
-// export function getQuery(name) {
-//   var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-//   var r = window.location.search.substr(1).match(reg);
-//   if(r!=null)return  unescape(r[2]); return null;
-// }
+/**
+ * 获取url参数 （非hash url）
+ * @param {string} name  将要获取的参数名称
+ */
+export function getQuery2(name) {
+  var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+  var r = window.location.search.substr(1).match(reg);
+  if(r!=null)return  unescape(r[2]); return null;
+}
 
 /**
  * post请求

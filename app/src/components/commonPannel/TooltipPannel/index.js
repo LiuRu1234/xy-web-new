@@ -7,7 +7,7 @@ import { Tooltip, Input, Icon, Slider, Progress, message } from 'antd';
 import { routerRedux } from 'dva/router';
 import Clipboard from 'clipboard';
 import {PRE_PAGE, PRO_COLOR, NOTICE_TIME, EXP_EMAIL} from '@config/constants';
-import {beforeTime, timeToMS, formatTimecode, trigger, getTokenLocalstorage, getQuery, isIE} from '@utils/utils';
+import {beforeTime, timeToMS, formatTimecode, trigger, getTokenLocalstorage, getQuery, isIE, saveCid} from '@utils/utils';
 import './index.scss';
 
 // 文件操作
@@ -1318,9 +1318,9 @@ export class FileVersionsPannel extends PureComponent{
     toCompareVersion = (e, file) => {
         e.stopPropagation();
         const {fileInfo} = this.props;
+        saveCid(file.id);
         this.props.dispatch(routerRedux.push({
-            pathname: '/file_compare',
-            query: { v: file.id, f: fileInfo.id, p: this.props.projectActive },
+            pathname: '/file_compare'
         }));
     }
 

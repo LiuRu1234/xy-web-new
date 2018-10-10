@@ -758,7 +758,7 @@ export default {
 				let ps = projects.filter(item => exp.test(item.name));
 				yield put({type: 'saveProjectsList2', payload: ps});
 			} else {
-				yield put({type: 'saveProjectsList2', payload: projects});
+				yield put({type: 'saveProjectsList', payload: projects});
 			}
 		},
 
