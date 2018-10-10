@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
+import {Switch}from 'antd';
+
 import Modal from '@CC/Modal';
 import IconBlock from '@CC/IconBlock';
 import Image from '@CC/Image';
-import {Switch}from 'antd';
+
 import {PRO_COLOR} from '@config/constants';
 import styles from './index.css';
 

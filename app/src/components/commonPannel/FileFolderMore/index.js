@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
+import {Tooltip} from 'antd';
+
 import IconBlock from '@CC/IconBlock';
 import Image from '@CC/Image';
-import {Tooltip} from 'antd';
 import './index.scss';
 
 export class FileMoreBody extends PureComponent{

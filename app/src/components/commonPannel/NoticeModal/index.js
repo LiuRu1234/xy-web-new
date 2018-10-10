@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
-import Image from '@CC/Image';
 import Dialog from 'rc-dialog';
+
+import Image from '@CC/Image';
+
 import './index.scss';
 
 class NoticeModal extends PureComponent {
