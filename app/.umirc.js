@@ -48,7 +48,7 @@ export default {
   },
   "disableCSSModules": true,
   "hash": true,
-  // "outputPath": "../../xinyue2/public/testapp",
-  "outputPath": "./dist",
+  "outputPath": "../../xinyue2/public/xyapp",
+  // "outputPath": "./dist",
   "publicPath": "./",
 }

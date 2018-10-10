@@ -127,8 +127,8 @@ class ProjectBody extends PureComponent {
                 clientConfig,
                 objectKey,
                 successEvent(res) {
-                    let uploadedFiles = JSON.parse(JSON.stringify(_self.props.uploadedFiles));
-                    uploadedFiles.push(uploadFile.doc_id);
+					let uploadedFiles = JSON.parse(JSON.stringify(_self.props.uploadedFiles));
+					uploadedFiles.push(uploadFile.doc_id);
                     dispatch({type: 'upload/saveUploadedFiles', payload: uploadedFiles});
 
                     let t = setInterval(() => {
@@ -136,21 +136,19 @@ class ProjectBody extends PureComponent {
                     }, 1000);
                 },
                 progressEvent(progress, checkpoint, uploadClient){
-
-					// uploadClient.listUploads().then((b) => {
-					// 	console.log(progress, objectKey, b);
-					// });
-                    // console.log(progress, checkpoint, uploadClient, 'progress, checkpoint, uploadClient');
-                    let uf = JSON.parse(JSON.stringify(_self.props.uploadFiles));
+					// console.log(progress, checkpoint, uploadClient, 'progress, checkpoint, uploadClient');
+					// let uf = JSON.parse(JSON.stringify(_self.props.uploadFiles));
+					let uf = window.uploadFiles;
                     for (let k in uf) {
                         if (uf[k].object_key == objectKey) {
                             uf[k].progress = progress.toFixed(2) * 100;
                             uf[k].uploadClient = uploadClient;
                             uf[k].uploadId = checkpoint && checkpoint.uploadId;
                             uf[k].checkpoint = checkpoint;
-                            uf[k].failCount = 0;
+							uf[k].failCount = 0;
                         }
-                    }
+					}
+
                     dispatch({type: 'upload/saveUploadFiles', payload: uf});
                 },
 

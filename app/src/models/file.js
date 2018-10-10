@@ -28,7 +28,7 @@ export default {
 		init(state, { payload: {}}) {
 			return { ...state, ...{
 				downloadShow: false,	//下载modal是否显示
-				fileInfo: null,    		//当前文件信息
+				// fileInfo: null,    		//当前文件信息
 				uploadInput3: null,		//版本上传input
 				// shareDownload: 1,		//分享是否允许下载
 				// shareReview: 1,			//分享是否允许审阅

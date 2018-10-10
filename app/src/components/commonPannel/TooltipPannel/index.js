@@ -1370,6 +1370,7 @@ export class FileVersionsPannel extends PureComponent{
             }
         }
 
+        let r = getQuery('r');
 
         return (
             <div className="file-versions-body">
@@ -1444,6 +1445,7 @@ export class FileVersionsPannel extends PureComponent{
 
                     </ul>
                 </section>
+                { !!r ? null :
                 <footer className="file-versions-footer" onClick={(e) => this.selectUploadFiles(e)}>
                     <div className="versions-add">
                         <Image name="add-versions.svg"></Image>
@@ -1458,7 +1460,7 @@ export class FileVersionsPannel extends PureComponent{
 						onChange={this.props.onInputChange}
                         className="grid-ie-file-input"
                     /> : null}
-                </footer>
+                </footer>}
             </div>
         );
     }

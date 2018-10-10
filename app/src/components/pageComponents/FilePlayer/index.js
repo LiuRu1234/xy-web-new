@@ -256,8 +256,10 @@ class FilePlayer extends PureComponent{
 					}, 1000);
 				},
 				progressEvent(progress, checkpoint, uploadClient){
+
 					// console.log(progress, checkpoint, uploadClient, 'progress, checkpoint, uploadClient');
-					let uf = JSON.parse(JSON.stringify(_self.props.uploadFiles));
+					// let uf = JSON.parse(JSON.stringify(_self.props.uploadFiles));
+					let uf = window.uploadFiles;
 					for (let k in uf) {
 						if (uf[k].object_key == objectKey) {
 							uf[k].progress = progress.toFixed(2) * 100;

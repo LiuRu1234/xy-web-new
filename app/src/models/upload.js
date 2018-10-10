@@ -20,7 +20,6 @@ export default {
   effects: {
     // 开始添加文件
 	*addFiles({ payload: {files, top_id, handleUpload, baseId}}, { call, put, select }) {
-		// console.log(files, top_id, handleUpload, baseId, 'files, top_id, handleUpload');
 		const {projectActive, docActive} = yield select(state => state.project);
 		const {uploadFiles} = yield select(state => state.upload);
 		let uf = JSON.parse(JSON.stringify(uploadFiles));
@@ -47,11 +46,14 @@ export default {
 				uf.push(o);
 			}
 		}
+
+		window.uploadFiles = uf;
 		yield put({type: 'saveUploadFiles', payload: uf});
 		let ufs = yield select(state => state.upload.uploadFiles);
 		
 		let sizeAll = 0;
-		let uf1 = JSON.parse(JSON.stringify(uploadFiles));
+
+		let uf1 = JSON.parse(JSON.stringify(ufs));
 	
 		for (let k in uf1) {
 			if (uf1[k].file.size) {
@@ -62,7 +64,6 @@ export default {
 		const json = yield call(get, '/restage', {...getTokenLocalstorage(), file_size: sizeAll});
 
 		let udfs = yield select(state => state.upload.uploadedFiles);
-
 		if (json.data.status == 1) {
 
 			for (let k in ufs) {
@@ -88,9 +89,8 @@ export default {
 							signature:  json1.data.data.signature,
 						};
 						ufs[k] = Object.assign({}, ufs[k], json1.data.data, {uploading: true});
-
 						yield put({type: 'saveUploadFiles', payload: ufs});
-
+						
 						// let pb = document.getElementById('pb-body');
 						// if (pb) pb.scrollTop = pb.scrollHeight;
 
