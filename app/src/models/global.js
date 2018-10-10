@@ -2,8 +2,25 @@
 // 消息以及其他全局数据
 import {notification, message} from 'antd';
 import { routerRedux } from 'dva/router';
-import {openNotification, getTokenLocalstorage, get, post, getQuery, savePidDid, getPidDid, saveFid} from '@utils/utils';
-import {PRE_PAGE, NOTICE_TIME, EXP_PHONE, ALERT_NOTICE_TIME, COMMENT_RECORD_PREFIXER} from '@config/constants';
+import withRouter from 'umi/withRouter';
+import {
+	openNotification, 
+	getTokenLocalstorage, 
+	get, 
+	post, 
+	getQuery, 
+	savePidDid, 
+	getPidDid, 
+	saveFid
+} from '@utils/utils';
+import {
+	PRE_PAGE, 
+	NOTICE_TIME, 
+	EXP_PHONE, 
+	ALERT_NOTICE_TIME, 
+	COMMENT_RECORD_PREFIXER, 
+	ALL_PATH
+} from '@config/constants';
 
 export default {
 	namespace: 'global',
@@ -502,25 +519,6 @@ export default {
 				let nt = new Date().getTime() / 1000;
 				localStorage.setItem(NOTICE_TIME, nt);
 			}
-			
-			//消息触发点击效果
-			// let noticeClick = () => {
-			// 	let noticeContent = document.body.querySelector('.notice-content');
-			// 	noticeContent && noticeContent.addEventListener('click', (e) => {
-			// 		let newNotice = JSON.parse(e.target.dataset.notice);
-			// 		notification.close(newNotice.id);
-			// 		dispatch({
-			// 			type: 'toNotice',
-			// 			payload: newNotice
-			// 		});
-			// 	});
-			// };
-			
-		
-			// dispatch({ type: 'fetchNotice', payload: {noticeClick, isAjax: false} });
-			// setInterval(() => {
-			// 	dispatch({ type: 'fetchNotice', payload: {noticeClick, isAjax: true} });
-			// }, 5000);
 		}
 		
 	},
