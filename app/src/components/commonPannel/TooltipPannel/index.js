@@ -1309,8 +1309,8 @@ export class FileVersionsPannel extends PureComponent{
             doc_id: file.id,
             project_id: projectActive,
             page: 1,
-            sort: 0,
-            show_completed: 0,
+            sort: this.props.commentSort,
+            show_completed: this.props.commentShowCompleted,
             query: '',
             pre_page: PRE_PAGE
         }, url = '/comment';
@@ -1746,15 +1746,17 @@ export class PlayerDefinitionPannel extends PureComponent{
 
         resolution = resolution.filter(it => it.resolution == item.resolution)[0];
         filePlayer.src = resolution.src;
+
+        let progressTime = this.props.progressTime;
         
         if(paused) {
             setTimeout(() => {
-                filePlayer.currentTime = this.props.progressTime;
+                filePlayer.currentTime = progressTime;
                 filePlayer.pause();
             }, 500);
         } else {
             setTimeout(() => {
-                filePlayer.currentTime = this.props.progressTime - 1;
+                filePlayer.currentTime = progressTime - 1;
                 filePlayer.play();
             }, 500);
         }

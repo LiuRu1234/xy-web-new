@@ -26,6 +26,29 @@
         padding:0;
     }
 
+    .record-content{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background: #0345C7;
+        color:#fff;
+        padding: 0 10px;
+        height: 30px;
+        border-radius: 5px;
+        cursor: pointer;
+        max-width: 100%;
+
+        img{
+            width: auto;
+            height: 13px;
+            margin-right: 5px;
+        }
+
+        span{
+            line-height:20px; 
+        }
+    }
+
     .comment-show-btn{
         display: flex;
         justify-content: center;

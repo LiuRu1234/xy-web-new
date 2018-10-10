@@ -1,7 +1,7 @@
 import {LOGIN_ID, TOKEN} from '@config/constants';
 import { routerRedux } from 'dva/router';
 import {post, get, getTokenLocalstorage, getQuery, getFid, getPidDid} from '@utils/utils';
-import {PRE_PAGE} from '@config/constants';
+import {PRE_PAGE, COMMENT_RECORD_PREFIXER} from '@config/constants';
 import {message} from 'antd';
 
 export default {
@@ -24,11 +24,27 @@ export default {
 		isCommentPageAll: false,			//是否已经全部加载
 		isPageCommentLoading: false,		//评论分页加载中
 		fileInfoEditing: false,				//文件信息编辑中
-		fileDesContent: ''
+		fileDesContent: '',
+		//评论录音相关state
+		commentPlayId: 0,
+        commentPlayTimer: 0,
+        commentPlaying: false
 	},
 	reducers: {
 		saveCommentTabIndex(state, { payload: commenTabIndex}) {
 			return { ...state, commenTabIndex };
+		},
+
+		saveCommentPlayId(state, { payload: commentPlayId}) {
+			return { ...state, commentPlayId };
+		},
+
+		saveCommentPlayTimer(state, { payload: commentPlayTimer}) {
+			return { ...state, commentPlayTimer };
+		},
+
+		saveCommentPlaying(state, { payload: commentPlaying}) {
+			return { ...state, commentPlaying };
 		},
 
 		saveFileInfoEditing(state, { payload: fileInfoEditing}) {
@@ -102,8 +118,8 @@ export default {
 				callbackBlockShow: false,		//是否显示回复区
 				comments: [],					//评论列表
 				commentPage: 1,					//评论页码
-				commentSort: 1,					//评论排序
-				commentShowCompleted: 0,		//评论是否已完成
+				// commentSort: 1,					//评论排序
+				// commentShowCompleted: 0,		//评论是否已完成
 				commentQuery: '',				//评论搜索关键字
 				// code: '',						//分享code
 				callbackComment: null,			//当前回复的评论
@@ -156,25 +172,35 @@ export default {
 				query: comment.commentQuery,
 				code: getQuery('r'),
 				pre_page: PRE_PAGE
-      };
+      		};
 
 			yield put({ type: 'saveIsCommentPageAll', payload: false});
 
 			yield put({ type: 'fetchCommentCommon', payload: {url: '/sharecomment', param}});
 		},
 
+		// 获取评论
 		*fetchCommentCommon({ payload: {param, url}}, { call, put, select, take }) {
-      let json = yield call(get, url, param);
+			let json = yield call(get, url, param);
 			if (json.data.status == 1) {
-        yield put({ type: 'saveCommentsTotal', payload: json.data.data.total });
-				yield put({ type: 'saveComments', payload: json.data.data.list });
+				let commentList = json.data.data.list;
+				commentList = commentList.map(item => {
+					item.record = null;
+					if (item.content.indexOf(COMMENT_RECORD_PREFIXER) > -1) {
+						item.record = JSON.parse(JSON.parse(item.content)[COMMENT_RECORD_PREFIXER]);
+						item.content = '';
+					}
+					return item;
+				});
+				yield put({ type: 'saveCommentsTotal', payload: json.data.data.total });
+				yield put({ type: 'saveComments', payload: commentList });
 				if ( json.data.data.list.length < PRE_PAGE) {
 					yield put({type: 'saveIsCommentPageAll', payload: true});
 				}
 			} else {
 				message.error(json.data.msg);
 			}
-		},
+	  	},
 
 		*showCallback({ payload: id }, { call, put, select, take }) {
 			let comment = yield select(state => state.comment);
@@ -299,8 +325,8 @@ export default {
 					yield put({type: 'saveIsCommentPageAll', payload: true});
 				}
 				yield put({type: 'saveIsPageCommentLoading', payload: false});
-				comments = [...comments, ...json.data.data.list];
-				comments = comments.map(item => {
+				
+				let list = json.data.data.list.map(item => {
 					item.record = null;
 					if (item.content.indexOf(COMMENT_RECORD_PREFIXER) > -1) {
 						item.record = JSON.parse(JSON.parse(item.content)[COMMENT_RECORD_PREFIXER]);
@@ -308,6 +334,7 @@ export default {
 					}
 					return item;
 				});
+				comments = [...comments, ...list];
 				yield put({ type: 'saveComments', payload: comments });
 			} else {
 				message.error(json.data.msg);

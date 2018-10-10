@@ -8,7 +8,7 @@ import {CommentSortPannel} from '@CCP/TooltipPannel';
 
 import {getLocalTime, size2Str, timeToMS, beforeTime, getTokenLocalstorage, trigger} from '@utils/utils';
 import DrawUtil from '@utils/draw-util';
-import {PRE_PAGE} from '@config/constants';
+import {PRE_PAGE, COMMENT_RECORD_PREFIXER} from '@config/constants';
 
 import './index.scss';
 
@@ -459,7 +459,7 @@ class FileComment extends PureComponent{
 
 						<div className="other-do clearfix">
 
-							<Tooltip placement="left" title={commentShowCompleted == 1 ? "已完成的评论" : "未完成的评论"}>
+							<Tooltip placement="left" title={commentShowCompleted == 1 ? "所有评论" : "未完成的评论"}>
 								<div className="do-complete" onClick={() => this.toggleCommentCompleted()}>
 									{commentShowCompleted == 1 ?
 									<Image name="complete-active.svg"/>:
