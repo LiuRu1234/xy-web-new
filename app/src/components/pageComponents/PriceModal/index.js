@@ -174,7 +174,7 @@ export default class PriceModal extends PureComponent{
                     </div> */}
 
                     <div className="ticket-activity">
-                        <p>领取最高300元代金券，购买新月服务更省钱。</p>
+                        <p>领取最高300元代金券，购买新阅服务更省钱。</p>
                         <p onClick={() => this.toggleTicketShow(true)}>马上领取</p>
                     </div>
                     <TicketModal visible={this.state.ticketModalShow} toggleTicketShow={(show) => this.toggleTicketShow(show)}/>

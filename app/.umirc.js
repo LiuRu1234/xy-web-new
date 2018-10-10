@@ -3,8 +3,8 @@
 var path = require('path');
 
 export default {
-  // history: 'hash',
-  exportStatic: true,
+  "history": 'hash',
+  // "exportStatic": true,
   "plugins": [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
