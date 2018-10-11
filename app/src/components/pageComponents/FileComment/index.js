@@ -497,9 +497,11 @@ class FileComment extends PureComponent{
 													<Image name="draw-comment.svg" />
 												</div> : null}
 												<div className="cl-complete">
-													<Tooltip placement="left" title="标记完成">
+													<Tooltip placement="left" title={item.review == 1 ? '标记未完成' : '标记完成'}>
 														<div className="cl-complete-icon" onClick={(e) => {e.stopPropagation();this.labelComplete(e, item);}}>
-															<Image name="complete-comment.svg"/>
+														{item.review == 1 ? 
+														<Image name="complete-comment-active.svg"/>:
+														<Image name="complete-comment.svg"/>}
 														</div>
 													</Tooltip>
 												</div>

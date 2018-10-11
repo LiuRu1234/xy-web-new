@@ -13,13 +13,14 @@ class HelperView extends PureComponent {
         super(props);
         this.state = {
             activeHelp: 0,
-            helpIds: window.location.hash.indexOf('#/project?') > -1 ?  HELP_ONE : HELP_TWO
+            helpIds: window.location.hash.indexOf('project') > -1 ?  HELP_ONE : HELP_TWO
         };
     }
 
     setPosition = () => {
         let helpIds = JSON.parse(JSON.stringify(this.state.helpIds));
-        if(window.location.hash.indexOf('#/project?') > -1) {
+     
+        if(window.location.hash.indexOf('project') > -1) {
             helpIds.map((item, k) => {
                 let node = document.getElementById(item.id);
                 if (!node) return item;

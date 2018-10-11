@@ -7,7 +7,19 @@ class HelperDes extends PureComponent {
     }
 
     render() {
-        const {content, cancel, sure, title, left, top, arrowLeft, arrowDirection, cancelText, sureText, direction} = this.props;
+        const {
+            content, 
+            cancel, 
+            sure, 
+            title, 
+            left, 
+            top, 
+            arrowLeft, 
+            arrowDirection, 
+            cancelText, 
+            sureText, 
+            direction,
+        } = this.props;
         let arrowClass = 'help-arrow';
 
         if (arrowDirection == 'right') {
