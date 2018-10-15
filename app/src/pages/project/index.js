@@ -20,9 +20,6 @@ import PriceTip from '@CPC/PriceTip';
 import { CURRENT_LOCATION } from '@config/constants';
 import './index.scss';
 
-// function ProjectContainer(props) {
-//   return  <Project {...props}/>;
-// }
 
 function mapStateToProps(state) {
   return {
@@ -282,6 +279,3 @@ class ProjectContainer extends PureComponent {
 }
 
 export default ProjectContainer;
-
-
-// export default connect(mapStateToProps)(ProjectContainer);

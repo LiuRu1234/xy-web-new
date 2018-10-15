@@ -2,19 +2,23 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import {Button, notification} from 'antd';
+
+import Image from '@CC/Image';
+import Loading from '@CC/Loading';
+
 import FileHeader from '@CPC/FileHeader';
 import FileComment from '@CPC/FileComment';
 import FilePlayer from '@CPC/FilePlayer';
 import ShareList from '@CPC/ShareList';
 import PhoneAuth from '@CPC/PhoneAuth';
-import WatermarkModal from  '@CPC/WatermarkModal';
-import Image from '@CC/Image';
-import {Button, notification} from 'antd';
-import Loading from '@CC/Loading';
+import WatermarkModal from '@CPC/WatermarkModal';
+import MobileFile from '@CPC/MobileFile';
+
 import {getQuery} from '@utils/utils';
-// import {Linker} from '../../dev/Link';
 import withRouter from 'umi/withRouter';
 import { connect } from 'dva';
+
 import './index.scss';
 
 function mapStateToProps(state) {
@@ -159,4 +163,22 @@ class FileContainer extends PureComponent {
 	}
 }
 
-export default FileContainer;
+
+@withRouter
+@connect(mapStateToProps)
+class FileContainer2 extends PureComponent {
+	render () {
+		return (
+			<div><MobileFile {...this.props}></MobileFile></div>
+		);
+	}
+}
+
+
+let exportPage = FileContainer;
+
+if (/Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent)) {
+	exportPage = FileContainer2;
+} 
+
+export default exportPage;
