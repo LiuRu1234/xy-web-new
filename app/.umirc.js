@@ -44,7 +44,8 @@ export default {
       '@utils': path.resolve(__dirname, 'src/utils/'),
       '@services': path.resolve(__dirname, 'src/services/'),
       '@layouts': path.resolve(__dirname, 'src/layouts/'),
-      '@config': path.resolve(__dirname, 'src/config/')
+      '@config': path.resolve(__dirname, 'src/config/'),
+      '@APP_NODE': path.resolve(__dirname, 'src/application/node/')
   },
   "disableCSSModules": true,
   "hash": true,

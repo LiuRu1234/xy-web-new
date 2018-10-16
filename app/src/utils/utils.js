@@ -6,18 +6,8 @@ import { XY_API } from '@config/constants';
 import { notification } from 'antd';
 import {LOGIN_ID, TOKEN} from '../config/constants';
 
-console.log(Object, 'Object');
-console.log(Object.getOwnPropertyNames(global));
-console.log(this === window);
-console.log(window);
-// var fs = window.require('fs');
-// console.log(fs,9999)
-// var chokidar = window.require('chokidar');
-// console.log(chokidar,8888)
-
-// var os = window.require('os') // not be : var os = require('os')
-// console.log("got:",os.cpus())
-
+// const fileController = require('@APP_NODE/fileController');
+// console.log(fileController, 'fileController')
 
 /**
  * 存储当前的项目id，文件夹id
