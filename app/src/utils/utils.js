@@ -6,6 +6,18 @@ import { XY_API } from '@config/constants';
 import { notification } from 'antd';
 import {LOGIN_ID, TOKEN} from '../config/constants';
 
+console.log(Object, 'Object');
+console.log(Object.getOwnPropertyNames(global));
+console.log(this === window);
+console.log(window);
+// var fs = window.require('fs');
+// console.log(fs,9999)
+// var chokidar = window.require('chokidar');
+// console.log(chokidar,8888)
+
+// var os = window.require('os') // not be : var os = require('os')
+// console.log("got:",os.cpus())
+
 
 /**
  * 存储当前的项目id，文件夹id
@@ -606,4 +618,17 @@ export function Base64() {
    
 
  } 
+
+
+//  开发环境设置token
+function setToken() {
+  localStorage.setItem('TOKEN', 'NTVlYmNmNzk3OTY2MWMxYTQ2N2Y4OThkMjg5Nzc2ZDRlYjRhYjFlZjcyMDY0NWJlNmJmZWE2MjhiNzExMTgzNA==');
+  localStorage.setItem('LOGIN_ID', 210);
+}
+
+
+if (process.env.NODE_ENV !== 'production') {
+  setToken();
+}
+
 

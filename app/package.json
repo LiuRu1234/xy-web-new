@@ -16,6 +16,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "babel-preset-stage-2": "^6.24.1",
+    "chokidar": "^2.0.4",
     "eslint": "^5.4.0",
     "eslint-config-umi": "^0.1.5",
     "eslint-plugin-flowtype": "^2.50.0",
