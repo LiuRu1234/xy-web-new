@@ -612,13 +612,13 @@ export function Base64() {
 
 //  开发环境设置token
 function setToken() {
-  localStorage.setItem('TOKEN', 'NTVlYmNmNzk3OTY2MWMxYTQ2N2Y4OThkMjg5Nzc2ZDRlYjRhYjFlZjcyMDY0NWJlNmJmZWE2MjhiNzExMTgzNA==');
+  localStorage.setItem('TOKEN', 'MWJjZjRjOTU5ZTk2NzgzMjZiNGJkMjlhNzZjYzY5OTVkOTAzZTc3MzM2NjQzOGI5MGFlNDEyNTJlNWIwMDRkNg==');
   localStorage.setItem('LOGIN_ID', 210);
 }
 
-
-if (process.env.NODE_ENV !== 'production') {
-  setToken();
-}
+setToken();
+// if (process.env.NODE_ENV !== 'production') {
+//   setToken();
+// }
 
 
