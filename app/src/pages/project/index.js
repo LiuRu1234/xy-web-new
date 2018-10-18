@@ -44,8 +44,8 @@ class ProjectContainer extends PureComponent {
 	}
 
 	componentDidMount() {
-		
 		const _self = this;
+
 		let noticeClick = () => {
 			let noticeContent = document.body.querySelector('.notice-content');
 			noticeContent && noticeContent.addEventListener('click', (e) => {

@@ -11,7 +11,8 @@ import CheckSVG from '../CheckSVG';
 
 import {size2Str, trigger, isIE, saveFid, getPidDid} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
-
+import { recordPageStart, pageStayStorage } from '@APP_BRO/burying_point/local_record';
+import {PAGE_TYPES} from '@APP_BRO/burying_point/constants';
 import './index.scss';
 
 
@@ -345,6 +346,7 @@ class FileGrid extends PureComponent {
     }
 
     componentWillUnmount() {
+        pageStayStorage();
         this.props.dispatch({
             type: 'project/saveChangeNameFileId',
             payload: null
@@ -352,7 +354,7 @@ class FileGrid extends PureComponent {
 
         this.changeNameKeyup = false;
         this.changeName = '';
-
+   
         // this.props.dispatch({
         //     type: 'project/saveBreadFiles',
         //     payload: {breadcrumb: [], fileList: []}
@@ -360,6 +362,9 @@ class FileGrid extends PureComponent {
     }
     componentDidMount() {
         const _self = this;
+
+        recordPageStart(PAGE_TYPES[0]);
+
         _self.changeName = '';
         _self.changeNameKeyup = false;
         document.body.addEventListener('click', function(e) {
