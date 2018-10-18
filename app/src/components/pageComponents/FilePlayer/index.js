@@ -14,7 +14,7 @@ import SaveModal from '@CPC/SaveModal';
 
 import {timeToMS, isIE} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
-import { playStorage } from '@APP_BRO/burying_point/local_record';
+import { playStorage, clearStoragePlayTime } from '@APP_BRO/burying_point/local_record';
 import { FILE_PLAY_TIME } from '@APP_BRO/burying_point/constants';
 import './index.scss';
 
@@ -69,6 +69,8 @@ class FilePlayer extends PureComponent{
 	}
 
 	componentDidMount() {
+		clearStoragePlayTime();
+
 		this.setState({
 			videoShow: true
 		});
@@ -480,7 +482,7 @@ class FilePlayer extends PureComponent{
 			playerLoop,
 			downloadUrl
 		} = this.props;
-		
+
 		const {checked, videoShow} = this.state;
 
 		let playerBody = 

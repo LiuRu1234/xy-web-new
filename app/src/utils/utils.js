@@ -616,7 +616,7 @@ function setToken() {
   localStorage.setItem('LOGIN_ID', 210);
 }
 
-setToken();
+// setToken();
 // if (process.env.NODE_ENV !== 'production') {
 //   setToken();
 // }
