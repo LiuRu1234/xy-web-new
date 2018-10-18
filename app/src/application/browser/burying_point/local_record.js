@@ -108,6 +108,6 @@ function sendRecord() {
 
 window.recordTimer = setInterval(() => {
     sendRecord();
-}, 6000);
+}, 60000);
 
 
