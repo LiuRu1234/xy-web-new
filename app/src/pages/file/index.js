@@ -53,7 +53,11 @@ class FileContainer extends PureComponent {
 	componentDidMount() {
 		const _self = this;
 
-		recordPageStart(PAGE_TYPES[5]);
+		if (_self.props.history.location.query.r) {
+			recordPageStart(PAGE_TYPES[7]);
+		} else {
+			recordPageStart(PAGE_TYPES[5]);
+		}
 
 		let noticeClick = () => {
 			let noticeContent = document.body.querySelector('.notice-content');

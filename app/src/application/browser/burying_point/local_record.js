@@ -21,7 +21,6 @@ export function pageStayStorage() {
     recordPageEnd();
     let startTime = JSON.parse(localStorage.getItem(START_PAGE_TIME));
     let endTime = JSON.parse(localStorage.getItem(END_PAGE_TIME));
-    console.log(endTime, startTime);
     let o = {
         log_type: 'stayPage',
         user_id: localStorage.getItem(LOGIN_ID),
@@ -35,13 +34,30 @@ export function pageStayStorage() {
 }
 
 // 记录转发操作
-export function relayStorage() {
-
-} 
+export function relayStorage(trans_button, share_code) {
+    let o = {
+        log_type: 'relay',
+        user_id: localStorage.getItem(LOGIN_ID),
+        type: 'PC',
+        trans_button, // 项目页转发，内页转发
+        share_code,
+    };
+    recordAll(o);
+}
 
 // 记录播放时长
-export function playStorage() {
-
+// belong_id 项目id
+// doc_id 文件id
+export function playStorage(belong_id, doc_id, play_time) {
+    let o = {
+        log_type: 'play',
+        user_id: localStorage.getItem(LOGIN_ID),
+        type: 'PC',
+        belong_id,
+        doc_id,
+        play_time
+    };
+    recordAll(o);
 }
 
 // 记录页面停留的开始时间

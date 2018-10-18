@@ -9,6 +9,7 @@ import Modal from '@CC/Modal';
 import ComfirmModal from '@CC/ComfirmModal';
 
 import {ts2Ti, getLocalTime} from '@utils/utils';
+import { relayStorage } from '@APP_BRO/burying_point/local_record';
 
 import './index.scss';
 
@@ -131,7 +132,7 @@ class CreateLi extends PureComponent{
 
 export default class ShareModal extends PureComponent{
 	constructor(props) {
-		super(props);
+        super(props);
     }
 
     toggleProjectShare(projectLinkModalShow) {
@@ -201,7 +202,18 @@ export default class ShareModal extends PureComponent{
                 text: () => {
                     const { createdLinkModalData } = this.props;
                     let shareLink = '';
-
+                    
+                    // 埋点
+                    if (_self.props.history.location.pathname == '/project') {
+                        relayStorage('项目页转发');
+                    } else {
+                        if (_self.props.history.location.query.r) {
+                            relayStorage('分享内页转发');
+                        } else {
+                            relayStorage('内页转发');
+                        }
+                    }
+            
                     if(process.env.NODE_ENV === 'production') {
                         if (window.location.host.indexOf(':81') > -1) {
                             shareLink = 'http://' + window.location.host + '/xyapp/#/file?r=' + createdLinkModalData.code;

@@ -14,7 +14,8 @@ import SaveModal from '@CPC/SaveModal';
 
 import {timeToMS, isIE} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
-
+import { playStorage } from '@APP_BRO/burying_point/local_record';
+import { FILE_PLAY_TIME } from '@APP_BRO/burying_point/constants';
 import './index.scss';
 
 
@@ -39,6 +40,8 @@ class FilePlayer extends PureComponent{
 	}
 
 	componentWillUnmount() {
+		playStorage(this.props.fileInfo.project_id, this.props.fileInfo.id, localStorage.getItem(FILE_PLAY_TIME));
+
 		this.props.dispatch({
 			type: 'comment/saveCommentProp',
 			payload: {
@@ -422,6 +425,9 @@ class FilePlayer extends PureComponent{
 
 
 		filePlayer.addEventListener("timeupdate", (e) => {
+
+			localStorage.setItem(FILE_PLAY_TIME,  e.target.currentTime);
+
 			dispatch({
 				type: 'playerControl/saveProgressTime',
 				payload: e.target.currentTime,
@@ -474,7 +480,9 @@ class FilePlayer extends PureComponent{
 			playerLoop,
 			downloadUrl
 		} = this.props;
+		
 		const {checked, videoShow} = this.state;
+
 		let playerBody = 
 				<div className="fps-body"
 						style={{
