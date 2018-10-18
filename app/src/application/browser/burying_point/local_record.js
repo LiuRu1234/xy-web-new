@@ -103,7 +103,7 @@ function sendRecord() {
         if (res.data.status == 1) {
             localStorage.setItem(All_RECORD, '[]');
         }
-    }) ;
+    });
 }
 
 window.recordTimer = setInterval(() => {
