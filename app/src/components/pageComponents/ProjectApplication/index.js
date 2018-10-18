@@ -9,6 +9,8 @@ import Modal from '@CC/Modal';
 import WatermarkModal from  '@CPC/WatermarkModal';
 
 import {USE_ICON, PR_FIELD} from '@config/constants';
+import { recordPageStart, pageStayStorage } from '@APP_BRO/burying_point/local_record';
+import {PAGE_TYPES} from '@APP_BRO/burying_point/constants';
 
 import './index.scss';
 
@@ -146,6 +148,14 @@ class PrModal extends PureComponent {
 class ProjectApplication extends PureComponent {
 	constructor(props) {
 		super(props);
+    }
+
+    componentDidMount() {
+        recordPageStart(PAGE_TYPES[4]);
+    }
+
+    componentWillUnmount() {
+        pageStayStorage();
     }
 
     appClick = (item) => {

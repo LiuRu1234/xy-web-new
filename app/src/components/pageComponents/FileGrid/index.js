@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import LazyLoad from 'react-lazy-load';
 import {Row, Col, Progress, Tooltip, Icon, Input, message} from 'antd';
 import { routerRedux } from 'dva/router';
+import { traits } from 'traits-decorator';
 
 import Image from '@CC/Image';
 import { FileMorePannel, FolderMorePannel } from '@CCP/TooltipPannel';
@@ -29,6 +30,7 @@ function closest(el, selector) {
     }
     return el;
 }
+
 
 class FileGrid extends PureComponent {
 	constructor(props) {
@@ -354,12 +356,8 @@ class FileGrid extends PureComponent {
 
         this.changeNameKeyup = false;
         this.changeName = '';
-   
-        // this.props.dispatch({
-        //     type: 'project/saveBreadFiles',
-        //     payload: {breadcrumb: [], fileList: []}
-        // });
     }
+    
     componentDidMount() {
         const _self = this;
 

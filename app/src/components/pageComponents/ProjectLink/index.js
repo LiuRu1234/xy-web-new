@@ -9,6 +9,8 @@ import TooltipModal from '@CC/TooltipModal';
 import {LinkMorePannel} from '@CCP/TooltipPannel';
 import LinkMoreGlobal from '@CPC/LinkMoreGlobal';
 import {getLocalTime} from '@utils/utils';
+import { recordPageStart, pageStayStorage } from '@APP_BRO/burying_point/local_record';
+import {PAGE_TYPES} from '@APP_BRO/burying_point/constants';
 
 import './index.scss';
 
@@ -22,6 +24,14 @@ class ProjectLink extends PureComponent {
                 y: 0
             }
 		};
+    }
+
+    componentDidMount() {
+        recordPageStart(PAGE_TYPES[2]);
+    }
+
+    componentWillUnmount() {
+        pageStayStorage();
     }
 
     changeLinkStatus = (link, checked) => {

@@ -29,6 +29,7 @@
     "path": "^0.12.7",
     "sass": "^1.13.4",
     "sass-loader": "^7.1.0",
+    "traits-decorator": "^1.0.1",
     "umi": "^2.0.0-0",
     "umi-plugin-react": "^1.0.0-0",
     "webpack-chain": "^4.11.0"

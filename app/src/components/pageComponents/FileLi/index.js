@@ -12,7 +12,7 @@ import CheckSVG from '../CheckSVG';
 import {getLocalTime, size2Str, trigger, isIE} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
 import {FILE_STATUS} from '@config/constants';
-import {recordPageEnd} from '@APP_BRO/burying_point/local_record';
+import {recordPageStart, pageStayStorage} from '@APP_BRO/burying_point/local_record';
 import {PAGE_TYPES} from '@APP_BRO/burying_point/constants';
 
 import './index.scss';
@@ -143,9 +143,6 @@ class FileLi extends PureComponent {
 			payload: {}
         });
 
-        //埋点
-
-
         this.props.dispatch(routerRedux.push({
             pathname: '/file',
             query: {},
@@ -176,10 +173,7 @@ class FileLi extends PureComponent {
     }
 
     componentWillUnmount() {
-        // this.props.dispatch({
-        //     type: 'project/saveBreadFiles',
-        //     payload: {breadcrumb: [], fileList: []}
-        // });
+        pageStayStorage();
     }
 
     render() {

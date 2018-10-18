@@ -9,6 +9,8 @@ import {LinkLikeMorePannel} from '@CCP/TooltipPannel';
 
 import {getLocalTime} from '@utils/utils';
 import LinkMoreGlobal from '../LinkMoreGlobal';
+import { recordPageStart, pageStayStorage } from '@APP_BRO/burying_point/local_record';
+import {PAGE_TYPES} from '@APP_BRO/burying_point/constants';
 
 import './index.scss';
 
@@ -23,6 +25,14 @@ class ProjectLikeLink extends PureComponent {
                 y: 0
             }
 		};
+    }
+
+    componentDidMount() {
+        recordPageStart(PAGE_TYPES[3]);
+    }
+
+    componentWillUnmount() {
+        pageStayStorage();
     }
 
     loadMoreLike = () => {

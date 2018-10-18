@@ -3,6 +3,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {Button, notification} from 'antd';
+import withRouter from 'umi/withRouter';
+import { connect } from 'dva';
 
 import Image from '@CC/Image';
 import Loading from '@CC/Loading';
@@ -16,8 +18,8 @@ import WatermarkModal from '@CPC/WatermarkModal';
 import MobileFile from '@CPC/MobileFile';
 
 import {getQuery} from '@utils/utils';
-import withRouter from 'umi/withRouter';
-import { connect } from 'dva';
+import { recordPageStart, pageStayStorage } from '@APP_BRO/burying_point/local_record';
+import { PAGE_TYPES } from '@APP_BRO/burying_point/constants';
 
 import './index.scss';
 
@@ -50,6 +52,9 @@ class FileContainer extends PureComponent {
 
 	componentDidMount() {
 		const _self = this;
+
+		recordPageStart(PAGE_TYPES[5]);
+
 		let noticeClick = () => {
 			let noticeContent = document.body.querySelector('.notice-content');
 			noticeContent && noticeContent.addEventListener('click', (e) => {
@@ -107,6 +112,7 @@ class FileContainer extends PureComponent {
 	}
 
 	componentWillUnmount() {
+		pageStayStorage();
 		clearInterval(this.t);
 	}
 

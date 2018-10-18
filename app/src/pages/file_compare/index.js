@@ -14,6 +14,8 @@ import {
 } from '@CCP/TooltipPannel';
 
 import {beforeTime} from '@utils/utils';
+import { recordPageStart, pageStayStorage } from '@APP_BRO/burying_point/local_record';
+import { PAGE_TYPES } from '@APP_BRO/burying_point/constants';
 
 import './index.scss';
 
@@ -52,6 +54,7 @@ class FileCompareContainer extends PureComponent {
 	}
 
 	componentWillUnmount() {
+		pageStayStorage();
 		this.setState({
 			isPause: true
 		});
@@ -59,14 +62,15 @@ class FileCompareContainer extends PureComponent {
 	}
 
 	componentDidMount() {
+		recordPageStart(PAGE_TYPES[6]);
 		setTimeout(() => {
-			console.log(this.video1);
 			this.setState({
 				videoWH: this.setVideoWH()
 			});
 		}, 50);
 
 		window.addEventListener('resize', () => {
+			if (!this.video1) return;
 			this.setState({
 				videoWH: this.setVideoWH()
 			});
