@@ -14,7 +14,7 @@ export function recordAll(o) {
         allRecord = JSON.parse(allRecord);
     }
 
-    allRecord.push({...o, create_at: (new Date()).format("yyyy-MM-dd hh:mm:ss")});
+    allRecord.push({...o, created_at: (new Date()).format("yyyy-MM-dd hh:mm:ss")});
     localStorage.setItem(All_RECORD, JSON.stringify(allRecord));
 }
 
