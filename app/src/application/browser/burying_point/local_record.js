@@ -66,6 +66,10 @@ export function clearStoragePlayTime() {
     localStorage.setItem(FILE_PLAY_TIME, 0);
 }
 
+export function saveStoragePlayTime(time) {
+    localStorage.setItem(FILE_PLAY_TIME, time);
+}
+
 // 记录页面停留的开始时间
 export function recordPageStart(page_name) {
     let time = Date.parse(new Date());

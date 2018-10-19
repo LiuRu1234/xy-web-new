@@ -14,7 +14,7 @@ import SaveModal from '@CPC/SaveModal';
 
 import {timeToMS, isIE} from '@utils/utils';
 import UploadOSS from '@utils/uploadOSS';
-import { playStorage, clearStoragePlayTime } from '@APP_BRO/burying_point/local_record';
+import { playStorage, clearStoragePlayTime, saveStoragePlayTime } from '@APP_BRO/burying_point/local_record';
 import { FILE_PLAY_TIME } from '@APP_BRO/burying_point/constants';
 import './index.scss';
 
@@ -428,7 +428,7 @@ class FilePlayer extends PureComponent{
 
 		filePlayer.addEventListener("timeupdate", (e) => {
 
-			localStorage.setItem(FILE_PLAY_TIME,  e.target.currentTime);
+			saveStoragePlayTime(e.target.currentTime);
 
 			dispatch({
 				type: 'playerControl/saveProgressTime',
