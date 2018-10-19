@@ -50,14 +50,15 @@ export function relayStorage(trans_button, share_code) {
 // 记录播放时长
 // belong_id 项目id
 // doc_id 文件id
-export function playStorage(belong_id, doc_id, play_time) {
+export function playStorage(belong_id, doc_id, play_time, file_type) {
     let o = {
         log_type: 'play',
         user_id: localStorage.getItem(LOGIN_ID),
         type: 'PC',
         belong_id,
         doc_id,
-        play_time
+        play_time,
+        file_type
     };
     recordAll(o);
 }

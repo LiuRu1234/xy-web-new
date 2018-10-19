@@ -40,7 +40,13 @@ class FilePlayer extends PureComponent{
 	}
 
 	componentWillUnmount() {
-		playStorage(this.props.fileInfo.project_id, this.props.fileInfo.id, localStorage.getItem(FILE_PLAY_TIME));
+		const fileInfo = this.props.fileInfo;
+		playStorage(
+			fileInfo.project_id, 
+			fileInfo.id, 
+			localStorage.getItem(FILE_PLAY_TIME), 
+			fileInfo.file_type
+		);
 
 		this.props.dispatch({
 			type: 'comment/saveCommentProp',
