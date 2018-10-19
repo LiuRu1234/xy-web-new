@@ -7,6 +7,8 @@ import Image from '@CC/Image';
 
 import { getQuery, beforeTime, getTokenLocalstorage } from '@utils/utils';
 import {PRE_PAGE } from '@config/constants';
+import { playStorage, clearStoragePlayTime, saveStoragePlayTime, recordPageStart, pageStayStorage } from '@APP_BRO/burying_point/local_record';
+import { FILE_PLAY_TIME, PAGE_TYPES } from '@APP_BRO/burying_point/constants';
 
 import './index.scss';
 
@@ -28,7 +30,21 @@ class MobileFileInfo extends PureComponent {
       tsy: 0
 		};
   }
+
+  componentWillUnmount() {
+    pageStayStorage();
+    const fileInfo = this.props.fileInfo;
+		playStorage(
+			fileInfo.project_id, 
+			fileInfo.id, 
+			localStorage.getItem(FILE_PLAY_TIME), 
+			fileInfo.file_type
+		);
+  }
+
   componentDidMount() {
+    clearStoragePlayTime();
+    recordPageStart(PAGE_TYPES[9]);
 
     setTimeout(() => {
       this.setState({
@@ -63,6 +79,14 @@ class MobileFileInfo extends PureComponent {
           }
         };
       }
+      this.video = document.getElementById('videoInfo');
+
+      setTimeout(() => {
+        this.video.addEventListener('timeupdate', (e) => {
+          saveStoragePlayTime(e.target.currentTime);
+        });
+      }, 200);
+     
     }, 100);
   }
   status = [
@@ -356,8 +380,7 @@ class MobileFileInfo extends PureComponent {
   // }
   videoPlay = (e) => {
     e.stopPropagation();
-    let video = document.getElementById('videoInfo');
-    video.play();
+    this.video.play();
   }
 	render() {
     const { pageLoading, fileInfo, codeIsLike, comments, review, commentText, isCommentPageAll, isPageCommentLoading, commentsTotal, callbackText, callbackComment } = this.props;

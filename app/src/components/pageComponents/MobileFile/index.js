@@ -8,6 +8,8 @@ import Dialog from 'rc-dialog';
 import Image from '@CC/Image';
 
 import {getQuery, getLocalTime} from '@utils/utils';
+import { playStorage, clearStoragePlayTime, saveStoragePlayTime, recordPageStart, pageStayStorage, relayStorage } from '@APP_BRO/burying_point/local_record';
+import { FILE_PLAY_TIME, PAGE_TYPES } from '@APP_BRO/burying_point/constants';
 
 import './index.scss';
 
@@ -21,8 +23,10 @@ class MobileFile extends PureComponent {
       visible:  window.showModal==false? false:true
 		};
   }
+
   componentDidMount() {
     const _self = this;
+    recordPageStart(PAGE_TYPES[8]);
     if (!this.clipboard) {
         this.clipboard = new Clipboard('#copy-mobile-share-link', {
             text: () => {
@@ -36,6 +40,13 @@ class MobileFile extends PureComponent {
         });
         this.clipboard.on('success', (e) => {
             if (_self.copying) return;
+
+            // 埋点
+            if (_self.props.history.location.query.r) {
+                relayStorage('移动端分享内页转发');
+            } else {
+                relayStorage('移动端内页转发');
+            }
             message.success('复制链接成功');
             _self.copying = true;
             setTimeout(() => {
@@ -46,8 +57,10 @@ class MobileFile extends PureComponent {
   }
 
   componentWillUnmount() {
+    pageStayStorage();
     this.clipboard && this.clipboard.destroy();
   }
+
   showPreModal = () => {
     this.setState({
       preVisible: true,
