@@ -30,7 +30,7 @@ export default {
   ],
   "proxy": {
     "/api": {
-      "target": "http://10.255.1.23:7777/api",
+      "target": "http://www.uxinyue.com:81/api",
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
     }
@@ -50,8 +50,8 @@ export default {
   },
   "disableCSSModules": true,
   "hash": true,
-  // "outputPath": "../../xinyue2/public/xyapp",
-  "outputPath": "./dist",
+  "outputPath": "../../xinyue2/public/xyapp",
+  // "outputPath": "./dist",
   // "outputPath": "/Users/bll/Documents/test/electron-quick-start/dist",
   "publicPath": "./",
 }
