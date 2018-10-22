@@ -3,11 +3,10 @@
 
     module.exports = factory(
         window.require('chokidar'),
+        window.require('electron').remote,
         window.require('os') 
     );
 
-})(function (chokidar, os) {
-    return {chokidar, os};
+})(function (chokidar, dialog, os) {
+
 });
-
-
